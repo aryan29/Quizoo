@@ -9,6 +9,13 @@ Hello {{request.user}}
 <br>
 <button>Create New Quiz</button>
 <br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{{errors}}
+<br>
 <button>Edit Quiz</button>
 <br>
 <button>Completed Quiz</button>
