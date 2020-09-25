@@ -22,21 +22,46 @@ Correct Options:-
 {% endfor %}
 <br>
 {% endfor %}
-<button onclick="create()">Add Questions</button>
-<div id="questions_list">
+<button onclick="createquestions()">Add Questions</button>
+<div>
+<ol  id="questions_list">
+</ol>
 </div>
 <body>
 <html>
 <script>
-function create(){
+function createquestions(){
+   // alert("ok");
     var d=document.createElement('div')
+    d.className="question"
     var text=document.createElement('textarea')
+    var opt=document.createElement('ol')
+    opt.class="options"
     text.style.height="200px"
     text.style.width="30%"
     text.style.fontSize="10pt";
-
+    var button1=document.createElement("button")
+    var button2=document.createElement("button")
+    button.innerHTML="Add Options"
+    button2.innerHTML="Submit"
     d.appendChild(text)
-    var li=document.getElementById("questions_list")
-    li.appendChild(d)
+    d.appendChild(opt)
+    d.appendChild(button1)
+    var list=document.getElementById("questions_list")
+    var elem=document.createElement("LI");
+    elem.appendChild(d);
+    list.appendChild(elem);
+    button1.addEventListener("click",function(e){
+       var sel= d.getElementsByTagName("ol")
+       var elem=document.createElement("li");
+       var text=document.createElement('textarea');
+        text.style.height="50px"
+        text.style.width="20%"
+        elem.appendChild(text)
+        sel[0].appendChild(elem)
+
+    })
 }
+
+
 </script>
