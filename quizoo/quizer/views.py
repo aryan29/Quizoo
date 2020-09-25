@@ -29,7 +29,7 @@ def ShowAllQuizToBeHeld(request):
 
 def EditQuiz(request,id):
     quiz=Quiz.objects.get(pk=id)
-    if(quiz.user==reques.user):
+    if(quiz.admin==request.user):
         #Get All questions of this quiz
         questions=quiz.questions_set.all()
         li=[]

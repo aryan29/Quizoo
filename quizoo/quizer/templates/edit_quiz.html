@@ -1,0 +1,29 @@
+<html>
+<head>
+<head>
+
+<body>
+<br>
+Hello {{request.user}}
+<br>
+<br>
+{% for x in list %}
+{{x.question.question_text}}
+
+Options:- 
+
+{% for op in x.options%}
+{{op.options}}
+{% endfor %}
+
+Correct Options:-
+{% for op in x.correct_options%}
+{{op.options}}
+{% endfor %}
+<br>
+{% endfor %}
+<button>Add Questions</button>
+
+
+<body>
+<html>
