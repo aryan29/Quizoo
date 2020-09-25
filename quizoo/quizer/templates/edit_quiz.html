@@ -22,8 +22,21 @@ Correct Options:-
 {% endfor %}
 <br>
 {% endfor %}
-<button>Add Questions</button>
-
-
+<button onclick="create()">Add Questions</button>
+<div id="questions_list">
+</div>
 <body>
 <html>
+<script>
+function create(){
+    var d=document.createElement('div')
+    var text=document.createElement('textarea')
+    text.style.height="200px"
+    text.style.width="30%"
+    text.style.fontSize="10pt";
+
+    d.appendChild(text)
+    var li=document.getElementById("questions_list")
+    li.appendChild(d)
+}
+</script>
