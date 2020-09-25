@@ -13,7 +13,7 @@ class Quiz(models.Model):
 
 class Questions(models.Model):
     # To which quiz this question belongs too
-    quiz = ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=500)  # Question Text
 
 
