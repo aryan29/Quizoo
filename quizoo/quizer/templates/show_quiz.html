@@ -9,7 +9,7 @@ Hello {{request.user}}
 <br>
 {% for x in list %}
 {{x.quiz_name}}
-<button>Edit This Quiz</button>
+<button onclick="location.href='/edit/{{x.id}}';">Edit This Quiz</button>
 <br>
 {% endfor %}
 <body>
