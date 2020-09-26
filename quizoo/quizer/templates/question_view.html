@@ -1,20 +1,76 @@
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<form action="" method="post">
 {% csrf_token %}
-{{question_text}}
+<h2 id="question_text">{{question_text}}</h2>
 <br>
 <br>
 Options
 <br>
 <br>
+<div id="all_options">
 {% for x in options%}
-{{x}}
-<br>
+<div class="option">
+<h3>{{x}}</h3>
+<input type="checkbox" class="check_box"/>
+</div>
 {% endfor %}
-<input type="submit" value="Next"/>
-</form>
+</div>
+<button onclick="get_next_question()">Next</button>
 </body>
 </html>
+<script>
+function get_next_question(){
+var x=document.getElementsByClassName("option")
+li=[]
+for(let i=0;i<x.length;i++)
+{
+    //console.log(x[i].getElementsByClassName("check_box")[0])
+    if(x[i].getElementsByClassName("check_box")[0].checked==true)
+    {
+        console.log(x[i])
+        li.push(x[i].getElementsByTagName("h3")[0].textContent)
+    }
+}
+//Send this question reponse to the server
+$.ajax({
+    type:'POST',
+    url:"",
+    data:{
+        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+        "response":li
+    },
+    success:function(res){
+        if(res=="500")
+            location.reload();
+        else
+        {
+        console.log("Data Successfully posted")
+        console.log(res)
+        document.getElementById("question_text").innerText=res['question']
+        var z=document.getElementById("all_options");
+        z.innerHTML="";
+        for(let i=0;i<res['options'].length;i++)
+        {
+            let d=document.createElement("div");
+            d.className="option";
+            let opt=document.createElement("h3");
+            opt.innerText=res['options'][i];
+            let ch=document.createElement("input");
+            ch.type="checkbox";
+            ch.className="check_box";
+            d.appendChild(opt);
+            d.appendChild(ch);
+            z.appendChild(d);
+        }
+        }
+    },
+    failure:function(res){
+        alert("Something went wrong try again")
+    }
+})
+console.log(li);
+}
+</script>

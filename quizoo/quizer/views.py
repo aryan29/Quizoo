@@ -95,15 +95,19 @@ def QuizStart(request,id):
         shuffle(questions)
         
         q=','.join([str(i.id) for i in questions])
-        if(UsersGivingTest.objects.filter(quiz=quiz,user=request.user).count()==0):
-            #If this user is not already giving this quiz create a new object
-            UsersGivingTest.objects.create(
-                quiz=quiz,
-                user=request.user,
-                score=0,
-                questions_not_attempted=q
-            )
-        return redirect(f'/quiz/start/{id}')
+        print(q)
+        try:
+            if(UsersGivingTest.objects.filter(quiz=quiz,user=request.user).count()==0):
+                #If this user is not already giving this quiz create a new object
+                UsersGivingTest.objects.create(
+                    quiz=quiz,
+                    user=request.user,
+                    score=0,
+                    questions_not_attempted=q
+                )
+            return redirect(f'/quiz/start/{id}')
+        except Exception as e:
+            print(e)
     else:
         return render(request,'start-quiz.html')
         
@@ -112,9 +116,12 @@ def GetQuestions(request,id):
     quiz=Quiz.objects.get(pk=id)
     obj=UsersGivingTest.objects.filter(quiz=quiz,user=request.user)[0]
     #Show 1 st question in question list
-    li=obj.questions_not_attempted.split(",")
-    if(len(li)==0):
+    st=obj.questions_not_attempted
+    if(st==""):
         return render(request,'end_quiz.html')
+    li=st.split(",")
+    print(len(li))
+    print(li[0])
     if(request.method=="GET"):
         #person is just reloading the url
         display_question=Questions.objects.get(id=int(li[0]))
@@ -128,20 +135,38 @@ def GetQuestions(request,id):
         #person is submitting the question
         #check for his response remove start ques from lst
         res=request.POST
+        print(res)
         display_question=Questions.objects.get(id=int(li[0]))
         # increase score of this person if correct res
-        checkResponse(res,display_question.correctoptions_set.all())
+        x=checkResponse(res.getlist('response[]'),list(display_question.correctoptions_set.values_list("option",flat=True)))
         new_li=li[1:]
         s=','.join([str(i) for i in new_li])
         obj.questions_not_attempted=s
+        obj.score+=x
         obj.save()
         #change not attempted questions in db for this person for this quiz
-        return JsonResponse({
-            
-        })
+        if(len(new_li)>0):
+            new_ques=Questions.objects.get(id=int(new_li[0]))
+            new_opt=list(new_ques.options_set.values_list("option",flat=True))
+            return JsonResponse({
+                "question":new_ques.question_text,
+                "options":new_opt
+            })
+        else:
+            return HttpResponse(500)
 def checkResponse(r1,r2):
-    print(r1)
-    print(r2)
+    print("Coming to check reponses")
+    print(r1) #User Response 
+    print(r2) #Actual Response
+    score=1
+    for res in r2:
+        if res not in r1: #If user didnt marked this reponse in his answers
+            score=0
+    print("Score ",score)
+    return score
+
+            
+    
     
     
         

@@ -31,7 +31,7 @@ class CorrectOptions(models.Model):
 
 class UsersGivingTest(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.SmallIntegerField()
     questions_not_attempted = models.CharField(
         max_length=2000,
