@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
-from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz
+from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz,QuizStart,GetQuestions
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('create/', CreateQuizView, name='create-quiz'),
     path('show/', ShowAllQuizToBeHeld, name='list-quizes'),
     path('edit/<int:id>', EditQuiz, name='edit-quiz'),
+    path('quiz/<int:id>', QuizStart, name='quiz-start'),
+    path('quiz/start/<int:id>', GetQuestions, name='get-questions'),
 ]

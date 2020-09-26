@@ -33,7 +33,8 @@ class UsersGivingTest(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     score = models.SmallIntegerField()
-    question_not_attempted = models.CharField(
+    questions_not_attempted = models.CharField(
+        max_length=2000,
         verbose_name="question_list",
         validators=[validate_comma_separated_integer_list]
         

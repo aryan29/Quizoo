@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm
 from .models import Quiz,Questions,Options,CorrectOptions, UsersGivingTest
@@ -85,18 +85,27 @@ def EditQuiz(request,id):
     
 @login_required(login_url='/accounts/login/')
 def QuizStart(request,id):
-    quiz=Quiz.objects.get(pk=id)
-    questions=list(Quiz.questions_set.all())
-    questions=shuffle(questions)
-    q=','.join([str(i) for i in questions])
-    if(UsersGivingTest.objects.filter(quiz=quiz,user=request.user).count()==0):
-        #If this user is not already giving this quiz create a new object
-        UsersGivingTest.objects.create(
-            quiz=quiz,
-            user=request.user,
-            score=0,
-            questions_not_attempted=q
-        )
+    quiz=Quiz.objects.get(id=id)
+    if(request.method=="POST"):
+        print(quiz)
+        questions=quiz.questions_set.all()
+        print(questions)
+        questions=list(questions)
+        print(questions)
+        shuffle(questions)
+        
+        q=','.join([str(i.id) for i in questions])
+        if(UsersGivingTest.objects.filter(quiz=quiz,user=request.user).count()==0):
+            #If this user is not already giving this quiz create a new object
+            UsersGivingTest.objects.create(
+                quiz=quiz,
+                user=request.user,
+                score=0,
+                questions_not_attempted=q
+            )
+        return redirect(f'/quiz/start/{id}')
+    else:
+        return render(request,'start-quiz.html')
         
 @login_required(login_url='/accounts/login/')
 def GetQuestions(request,id):
@@ -108,15 +117,20 @@ def GetQuestions(request,id):
         return render(request,'end_quiz.html')
     if(request.method=="GET"):
         #person is just reloading the url
-        display_question=li[0]
-        return render(request,'question_view.html',{})
+        display_question=Questions.objects.get(id=int(li[0]))
+        
+        opt=display_question.options_set.values_list("option",flat=True)
+        return render(request,'question_view.html',{
+            "question_text":display_question.question_text,
+            "options":opt
+        })
     elif(request.method=="POST"):
         #person is submitting the question
         #check for his response remove start ques from lst
         res=request.POST
-        display_question=li[0]
+        display_question=Questions.objects.get(id=int(li[0]))
         # increase score of this person if correct res
-        
+        checkResponse(res,display_question.correctoptions_set.all())
         new_li=li[1:]
         s=','.join([str(i) for i in new_li])
         obj.questions_not_attempted=s
@@ -125,6 +139,11 @@ def GetQuestions(request,id):
         return JsonResponse({
             
         })
+def checkResponse(r1,r2):
+    print(r1)
+    print(r2)
+    
+    
         
         
         

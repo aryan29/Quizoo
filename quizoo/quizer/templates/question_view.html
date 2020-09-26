@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body>
+<form action="" method="post">
+{% csrf_token %}
+{{question_text}}
+<br>
+<br>
+Options
+<br>
+<br>
+{% for x in options%}
+{{x}}
+<br>
+{% endfor %}
+<input type="submit" value="Next"/>
+</form>
+</body>
+</html>
