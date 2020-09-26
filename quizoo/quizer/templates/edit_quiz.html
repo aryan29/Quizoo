@@ -42,27 +42,43 @@ function createquestions(){
     text.style.fontSize="10pt";
     var button1=document.createElement("button")
     var button2=document.createElement("button")
-    button.innerHTML="Add Options"
+    button1.innerHTML="Add Options"
     button2.innerHTML="Submit"
     d.appendChild(text)
     d.appendChild(opt)
     d.appendChild(button1)
+    d.appendChild(button2)
     var list=document.getElementById("questions_list")
     var elem=document.createElement("LI");
     elem.appendChild(d);
     list.appendChild(elem);
     button1.addEventListener("click",function(e){
        var sel= d.getElementsByTagName("ol")
-       var elem=document.createElement("li");
+       var elemli=document.createElement("li");
+       elemli.className="wrong";
        var text=document.createElement('textarea');
+       var ch=document.createElement('input');
+       ch.type="checkbox";
+       ch.addEventListener("click",function(e1){
+           if(ch.checked==true)
+           {
+               elemli.className="correct";
+           }
+           else
+           {
+               elemli.className="wrong";
+           }
+       });
+    
         text.style.height="50px"
         text.style.width="20%"
-        elem.appendChild(text)
-        sel[0].appendChild(elem)
+        elemli.appendChild(text)
+        elemli.appendChild(ch)
+        sel[0].appendChild(elemli)
 
     })
     button2.addEventListener("click",function(e){
-        validateAndAdd()
+        validateAndAdd(d);
     })
 }
 function validateAndAdd(obj){
@@ -71,6 +87,37 @@ function validateAndAdd(obj){
 //Atleast 1 options is selected for correct response
 //If all these things holds good make an ajax post request
 //and refresh page using ajax
+var question_text=obj.getElementsByTagName("textarea")[0].value
+if(question_text.length>=10) //Question Minimum length
+{
+var li=obj.getElementsByTagName("ol")[0].getElementsByTagName("li");
+var corr=obj.getElementsByTagName("ol")[0].getElementsByClassName("correct");
+if(li.length>=2 && corr.length>=1) //Minimum number of options & min number of correct options
+{
+ //Now check if no options is empty if thats true we can make an ajax request
+ fl=0;
+ for(let x=0;x<li.length;x++)
+ {
+     console.log(li[x].getElementsByTagName("textarea")[0]);
+     if(li[x].getElementsByTagName("textarea")[0].value=="")
+     {
+         fl=1;
+         break;
+     }
+ }
+ if(fl==0)
+ {
+     //Make an ajax request
+     console.log("Making an ajax request");
+ }
+ else
+ alert("Options can't be empty");
+}
+else
+alert("Add Atleast 2 options and atleast 1 correct answer");
+}
+else
+alert("Question must be atleast of length 10");
 
 }
 
