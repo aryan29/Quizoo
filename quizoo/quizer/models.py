@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import validate_comma_separated_integer_list
 # Create your models here.
 
 
@@ -32,4 +33,8 @@ class UsersGivingTest(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     score = models.SmallIntegerField()
-    question_attempted = models.ManyToManyField(Questions)
+    question_not_attempted = models.CharField(
+        verbose_name="question_list",
+        validators=[validate_comma_separated_integer_list]
+        
+    )

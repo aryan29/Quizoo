@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm
-from .models import Quiz,Questions,Options,CorrectOptions
-from django.http import HttpResponse
+from .models import Quiz,Questions,Options,CorrectOptions, UsersGivingTest
+from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
+from random import shuffle
 # Create your views here.
 
 
@@ -28,6 +30,7 @@ def ShowAllQuizToBeHeld(request):
     print(li)
     return render(request,'show_quiz.html',{"list":li})
 
+@login_required(login_url='/accounts/login/')
 @csrf_exempt
 def EditQuiz(request,id):
     quiz=Quiz.objects.get(pk=id)
@@ -76,17 +79,67 @@ def EditQuiz(request,id):
                 return HttpResponse(200)
             except Exception as e:
                 print(e)
-                return HttpResponse(500)
-            
-                
-            
-            
+                return HttpResponse(500)   
     else:
         return HttpResponse(400)
-    #Check if this person can edit this quiz or not
+    
+@login_required(login_url='/accounts/login/')
+def QuizStart(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    questions=list(Quiz.questions_set.all())
+    questions=shuffle(questions)
+    q=','.join([str(i) for i in questions])
+    if(UsersGivingTest.objects.filter(quiz=quiz,user=request.user).count()==0):
+        #If this user is not already giving this quiz create a new object
+        UsersGivingTest.objects.create(
+            quiz=quiz,
+            user=request.user,
+            score=0,
+            questions_not_attempted=q
+        )
+        
+@login_required(login_url='/accounts/login/')
+def GetQuestions(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    obj=UsersGivingTest.objects.filter(quiz=quiz,user=request.user)[0]
+    #Show 1 st question in question list
+    li=obj.questions_not_attempted.split(",")
+    if(len(li)==0):
+        return render(request,'end_quiz.html')
+    if(request.method=="GET"):
+        #person is just reloading the url
+        display_question=li[0]
+        return render(request,'question_view.html',{})
+    elif(request.method=="POST"):
+        #person is submitting the question
+        #check for his response remove start ques from lst
+        res=request.POST
+        display_question=li[0]
+        # increase score of this person if correct res
+        
+        new_li=li[1:]
+        s=','.join([str(i) for i in new_li])
+        obj.questions_not_attempted=s
+        obj.save()
+        #change not attempted questions in db for this person for this quiz
+        return JsonResponse({
+            
+        })
+        
+        
+        
+        
+        
     
     
-    #Show all questions + options in this quiz
+
     
-    #Show a button to add a question
     
+    
+    
+    
+    
+    
+    
+    
+        
