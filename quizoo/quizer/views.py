@@ -87,11 +87,16 @@ def EditQuiz(request,id):
 def QuizStart(request,id):
     quiz=Quiz.objects.get(id=id)
     if(request.method=="POST"):
-        print(quiz)
-        questions=quiz.questions_set.all()
-        print(questions)
-        questions=list(questions)
-        print(questions)
+        questions=cache.get(f'quiz{quiz}')
+        if questions is None:
+            print("Storing in cache")
+            questions=list(quiz.questions_set.all())
+            cache.set(
+                f"quiz{quiz}",
+                questions,
+                60*60*3
+            )
+        #Setting all questions for particular quiz in cache for 3hours
         shuffle(questions)
         
         q=','.join([str(i.id) for i in questions])
