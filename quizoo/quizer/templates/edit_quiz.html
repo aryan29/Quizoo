@@ -1,5 +1,6 @@
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
 
 <body>
@@ -9,17 +10,23 @@ Hello {{request.user}}
 <br>
 {% for x in list %}
 {{x.question.question_text}}
-
+<br>
 Options:- 
 
 {% for op in x.options%}
-{{op.options}}
+<br>
+{{op.option}}
 {% endfor %}
-
+<br>
+<br>
 Correct Options:-
 {% for op in x.correct_options%}
-{{op.options}}
+<br>
+{{op.option}}
+<br>
 {% endfor %}
+<br>
+<br>
 <br>
 {% endfor %}
 <button onclick="createquestions()">Add Questions</button>
@@ -96,18 +103,44 @@ if(li.length>=2 && corr.length>=1) //Minimum number of options & min number of c
 {
  //Now check if no options is empty if thats true we can make an ajax request
  fl=0;
+ l1=[]
+ l2=[]
  for(let x=0;x<li.length;x++)
  {
      console.log(li[x].getElementsByTagName("textarea")[0]);
      if(li[x].getElementsByTagName("textarea")[0].value=="")
      {
          fl=1;
-         break;
      }
+     l1.push(li[x].getElementsByTagName("textarea")[0].value)
  }
+ for(let x=0;x<corr.length;x++)
+ {
+    l2.push(corr[x].getElementsByTagName("textarea")[0].value)
+ }
+
  if(fl==0)
  {
      //Make an ajax request
+     $.post(
+    "",
+     {
+         "question_text":question_text,
+         "options":l1,
+         "correct_options":l2
+     },
+     function(data,status){
+         console.log("Data Added in DB");
+        if(data==200 && status=="success")
+        {
+            console.log("Add it dynamically here as it is added in db");
+        }
+        else{
+            console.log("Something went wrong");
+        }
+     }
+     
+     )
      console.log("Making an ajax request");
  }
  else
