@@ -123,7 +123,6 @@ def QuizStart(request,id):
 @login_required(login_url='/accounts/login/')
 def GetQuestions(request,id):
     quiz=Quiz.objects.get(pk=id)
-    
     obj=UsersGivingTest.objects.filter(quiz=quiz,user=request.user)
     #Show 1 st question in question list
     if(obj.count()==0):
