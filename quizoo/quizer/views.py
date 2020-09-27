@@ -6,6 +6,8 @@ from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from random import shuffle
+from django.db.models import Q
+from django.utils import timezone
 # Create your views here.
 
 
@@ -159,16 +161,38 @@ def GetQuestions(request,id):
             })
         else:
             return HttpResponse(500)
+        
 def checkResponse(r1,r2):
     print("Coming to check reponses")
     print(r1) #User Response 
     print(r2) #Actual Response
     score=1
-    for res in r2:
-        if res not in r1: #If user didnt marked this reponse in his answers
-            score=0
+    if(r1.sort()==r2.sort()): #If both are same
+        score=1
     print("Score ",score)
     return score
+
+@login_required(login_url='/accounts/login/')
+def SeeCompletedQuiz(request):
+    obj=Quiz.objects.filter(end_time__lt=timezone.now(),admin=request.user).order_by('-end_time')
+    print(obj)
+    return render(request,'completed_quiz.html',{"list":obj})
+    #List of completed quizes
+    pass
+
+@login_required(login_url='/accounts/login/')
+def SeeAnalytics(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    if(quiz.admin==request.user):
+        #He can view analytics for this quiz
+        li=quiz.usersgivingtest_set.all()
+        #List of all users who gave this quiz
+        return render(request,'quiz_results.html',{"list":li})
+        pass
+    else:
+        return HttpResponse(400)
+    
+
 
             
     
