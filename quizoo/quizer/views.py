@@ -6,6 +6,8 @@ from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from random import shuffle
+from django.db.models import Q
+from django.utils import timezone
 # Create your views here.
 
 
@@ -26,15 +28,15 @@ def CreateQuizView(request):
         return render(request, 'create_quiz.html',{'form':CreatingQuizForm()})
 
 def ShowAllQuizToBeHeld(request):
-    li=Quiz.objects.filter(admin=request.user)
-    print(li)
+    li=Quiz.objects.filter(admin=request.user,start_time__sm=timezone.now()) #Quiz hasnt started yet
     return render(request,'show_quiz.html',{"list":li})
 
 @login_required(login_url='/accounts/login/')
 @csrf_exempt
 def EditQuiz(request,id):
     quiz=Quiz.objects.get(pk=id)
-    if(quiz.admin==request.user):
+    #Quiz belongs to this user and it hasnt started yet
+    if(quiz.admin==request.user and quiz.start_time>timezone.now()):
         #Get All questions of this quiz
         if(request.method=="GET"):
             questions=quiz.questions_set.all()
@@ -86,7 +88,9 @@ def EditQuiz(request,id):
 @login_required(login_url='/accounts/login/')
 def QuizStart(request,id):
     quiz=Quiz.objects.get(id=id)
-    if(request.method=="POST"):
+    if(request.method=="POST" and quiz.start_time>timezone.now() and quiz.end_time<timezone.now()):
+        #If this quiz has started and hasnt ended than only we can make entry in db 
+        #for user giving particular test
         questions=cache.get(f'quiz{quiz}')
         if questions is None:
             print("Storing in cache")
@@ -119,8 +123,12 @@ def QuizStart(request,id):
 @login_required(login_url='/accounts/login/')
 def GetQuestions(request,id):
     quiz=Quiz.objects.get(pk=id)
-    obj=UsersGivingTest.objects.filter(quiz=quiz,user=request.user)[0]
+    obj=UsersGivingTest.objects.filter(quiz=quiz,user=request.user)
     #Show 1 st question in question list
+    if(obj.count()==0):
+        return HttpResponse(400) #This person hasn't clicked on start test and is trying something unusual to start test
+    else:
+        obj=obj[0]
     st=obj.questions_not_attempted
     if(st==""):
         return render(request,'end_quiz.html')
@@ -159,16 +167,38 @@ def GetQuestions(request,id):
             })
         else:
             return HttpResponse(500)
+        
 def checkResponse(r1,r2):
     print("Coming to check reponses")
     print(r1) #User Response 
     print(r2) #Actual Response
     score=1
-    for res in r2:
-        if res not in r1: #If user didnt marked this reponse in his answers
-            score=0
+    if(r1.sort()==r2.sort()): #If both are same
+        score=1
     print("Score ",score)
     return score
+
+@login_required(login_url='/accounts/login/')
+def SeeCompletedQuiz(request):
+    obj=Quiz.objects.filter(end_time__lt=timezone.now(),admin=request.user).order_by('-end_time')
+    print(obj)
+    return render(request,'completed_quiz.html',{"list":obj})
+    #List of completed quizes
+    pass
+
+@login_required(login_url='/accounts/login/')
+def SeeAnalytics(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    if(quiz.admin==request.user):
+        #He can view analytics for this quiz
+        li=quiz.usersgivingtest_set.all()
+        #List of all users who gave this quiz
+        return render(request,'quiz_results.html',{"list":li})
+        pass
+    else:
+        return HttpResponse(400)
+    
+
 
             
     
