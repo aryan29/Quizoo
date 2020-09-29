@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm
@@ -120,7 +121,9 @@ def QuizStart(request,id):
         except Exception as e:
             print(e)
     else:
-        return render(request,'start-quiz.html')
+        
+        print((quiz.start_time.timestamp()))
+        return render(request,'start-quiz.html',{"start":quiz.start_time.timestamp()})
         
 @login_required(login_url='/accounts/login/')
 def GetQuestions(request,id):
