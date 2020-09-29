@@ -1,23 +1,56 @@
 <html>
 <head>
-Create Quiz
+<title>Create Quiz</title>
+<style>
+body{
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+.btn{
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+    margin: auto 
+}
+    h1{
+        text-align: center;
+        color: snow;
+        font-family: 'Cinzel', serif;
+    }
+    .btn-container{
+        text-align: center;
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
 <head>
 
 <body>
 <br>
-Hello {{request.user}}
+<h1>Hello {{request.user}}</h1>
 <br>
-<button>Create New Quiz</button>
+    <div class="btn-container">
+<button class="btn">Create New Quiz</button>
+    </div>
 <br>
-<form action="" method="post">
+<form action="" method="post" style="text-align: center;">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Submit">
+        <div class="btn-container" style="padding-top: 30px;">
+    <input type="submit" value="Submit" class="btn">
+    </div>
 </form>
 {{errors}}
-<br>
-<button>Edit Quiz</button>
-<br>
-<button>Completed Quiz</button>
+<p style="padding-bottom: 40px;"></p>
+<div class="btn-container">
+<button class="btn">Edit Quiz</button>
+<button class="btn">Completed Quiz</button>
+</div>
 <body>
 <html>
