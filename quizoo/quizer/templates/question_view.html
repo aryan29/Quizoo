@@ -1,19 +1,28 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.question-text{
+    font-size:20px
+}
+.option{
+    font-size:15px;
+    margin-top:5px
+}
+</style>
 </head>
 <body>
 {% csrf_token %}
-<h2 id="question_text">{{question_text}}</h2>
+<span class="badge badge-info question-text" id="question_text">{{question_text}}</span>
 <br>
-<br>
-Options
+
 <br>
 <br>
 <div id="all_options">
 {% for x in options%}
 <div class="option">
-<h3>{{x}}</h3>
+<h3 class='badge badge-warning'>{{x}}</h3>
 <input type="checkbox" class="check_box"/>
 </div>
 {% endfor %}
@@ -58,6 +67,7 @@ $.ajax({
             d.className="option";
             let opt=document.createElement("h3");
             opt.innerText=res['options'][i];
+            opt.className="badge badge-warning";
             let ch=document.createElement("input");
             ch.type="checkbox";
             ch.className="check_box";

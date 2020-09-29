@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from random import shuffle
 from django.db.models import Q
+
 from django.utils import timezone
 # Create your views here.
 
@@ -39,6 +40,7 @@ def ShowAllQuizToBeHeld(request):
 def EditQuiz(request,id):
     quiz=Quiz.objects.get(pk=id)
     #Quiz belongs to this user and it hasnt started yet
+
     if(quiz.admin==request.user and quiz.start_time>timezone.now()):
         #Get All questions of this quiz
         if(request.method=="GET"):
@@ -91,9 +93,13 @@ def EditQuiz(request,id):
 @login_required(login_url='/accounts/login/')
 def QuizStart(request,id):
     quiz=Quiz.objects.get(id=id)
-    if(request.method=="POST" and quiz.start_time>timezone.now() and quiz.end_time<timezone.now()):
+    print(quiz.start_time)
+    print(timezone.now())
+    print(quiz.start_time<timezone.now())
+    if(request.method=="POST" and quiz.start_time<timezone.now() and quiz.end_time>timezone.now()):
         #If this quiz has started and hasnt ended than only we can make entry in db 
         #for user giving particular test
+        print("Allowing user to give test")
         questions=cache.get(f'quiz{quiz}')
         if questions is None:
             print("Storing in cache")
