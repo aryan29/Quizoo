@@ -141,7 +141,7 @@ def GetQuestions(request,id):
     else:
         obj=obj[0]
     st=obj.questions_not_attempted
-    if(st==""):
+    if(st=="" or quiz.end_time<timezone.now()):
         return render(request,'end_quiz.html')
     li=st.split(",")
     print(len(li))
@@ -153,7 +153,8 @@ def GetQuestions(request,id):
         opt=display_question.options_set.values_list("option",flat=True)
         return render(request,'question_view.html',{
             "question_text":display_question.question_text,
-            "options":opt
+            "options":opt,
+            "end_time":quiz.end_time.timestamp()
         })
     elif(request.method=="POST"):
         #person is submitting the question
