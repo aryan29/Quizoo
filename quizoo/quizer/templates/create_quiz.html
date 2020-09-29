@@ -1,9 +1,11 @@
 <html>
 <head>
 <title>Create Quiz</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
+
 body{
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background-color: grey
 }
 .btn{
   background-color: #4CAF50; 
@@ -29,6 +31,7 @@ body{
     }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
 <head>
 
 <body>
@@ -36,21 +39,35 @@ body{
 <h1>Hello {{request.user}}</h1>
 <br>
     <div class="btn-container">
-<button class="btn">Create New Quiz</button>
+<button class="btn" onclick="toggle()">Create New Quiz</button>
     </div>
 <br>
-<form action="" method="post" style="text-align: center;">
+<div id="form" style="display: none">
+<form action="" method="post" style="text-align: center;width:50%;margin:auto">
     {% csrf_token %}
     {{ form }}
         <div class="btn-container" style="padding-top: 30px;">
     <input type="submit" value="Submit" class="btn">
     </div>
 </form>
+</div>
 {{errors}}
 <p style="padding-bottom: 40px;"></p>
 <div class="btn-container">
-<button class="btn">Edit Quiz</button>
-<button class="btn">Completed Quiz</button>
+<button class="btn" onclick="window.location='/show'">Edit Quiz</button>
+<br/><br/>
+<button class="btn" onclick="window.location='/completed'">Completed Quiz</button>
 </div>
 <body>
 <html>
+
+<script>
+function toggle(){
+    f=document.getElementById("form");
+    if(f.style.display=="none")
+    f.style.display="block";
+    else
+    f.style.display="none";
+
+}
+</script>

@@ -6,7 +6,7 @@ from django.core.validators import validate_comma_separated_integer_list
 
 class Quiz(models.Model):
     # User who created this quiz
-    admin = models.OneToOneField(User, on_delete=models.CASCADE)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
     quiz_name = models.CharField(max_length=50)  # Quiz Name
     start_time = models.DateTimeField()  # Quiz Start Time
     end_time = models.DateTimeField()  # Quiz End Time

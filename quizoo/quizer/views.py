@@ -28,7 +28,7 @@ def CreateQuizView(request):
         return render(request, 'create_quiz.html',{'form':CreatingQuizForm()})
 
 def ShowAllQuizToBeHeld(request):
-    li=Quiz.objects.filter(admin=request.user,start_time__sm=timezone.now()) #Quiz hasnt started yet
+    li=Quiz.objects.filter(admin=request.user,start_time__gt=timezone.now()) #Quiz hasnt started yet
     return render(request,'show_quiz.html',{"list":li})
 
 @login_required(login_url='/accounts/login/')
