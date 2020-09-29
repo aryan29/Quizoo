@@ -56,7 +56,7 @@ def EditQuiz(request,id):
                 }
                 li.append(di)
             
-            return render(request,'edit_quiz.html',{"list":li})
+            return render(request,'edit_quiz.html',{"list":li,"name":quiz.quiz_name})
         elif(request.method=="POST"):
             data=request.POST
             print(data)
