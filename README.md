@@ -18,6 +18,7 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
   * Can a student reattempt test after its end time
   * Allow admin to retake a previous quiz
   * Allowing multiple admins for a quiz
+  * Camera On mode or not
  * A nice good looking and user friendly frontend is must
  
 
