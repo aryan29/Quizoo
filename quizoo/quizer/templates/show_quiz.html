@@ -1,5 +1,6 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 
 <body>
@@ -7,11 +8,14 @@
 Hello {{request.user}}
 <br>
 <br>
+<ul class="list-group">
 {% for x in list %}
+<li class="list-group-item d-flex justify-content-between">
 {{x.quiz_name}}
-<button onclick="location.href='/edit/{{x.id}}';">Edit This Quiz</button>
-<br>
+<button class="btn-success" onclick="location.href='/edit/{{x.id}}';">Edit This Quiz</button>
+</li>
 {% endfor %}
+</ul>
 <body>
 <html>
 
