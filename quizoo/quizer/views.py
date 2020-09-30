@@ -18,12 +18,17 @@ def GiveQuiz(request):
 @login_required(login_url='/accounts/login/')
 def CheckValid(request):
     if(request.method=='POST'):
-        data=int(request.POST['quiz_no'])
-        
-        if(Quiz.objects.filter(pk=data).count()>0):
-            return HttpResponse(200)
-        else:
+        try:
+            data=int(request.POST['quiz_no'])
+            if(Quiz.objects.filter(pk=data).count()>0):
+                return HttpResponse(200)
+            else:
+                return HttpResponse(400)
+        except Exception as e:
+            print(e)
             return HttpResponse(400)
+    else:
+        return HttpResponse(400)
         
     
 
