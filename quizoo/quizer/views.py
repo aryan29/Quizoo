@@ -8,8 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
 from random import shuffle
 from django.db.models import Q
-
 from django.utils import timezone
+import xlwt
 # Create your views here.
 
 
@@ -210,6 +210,41 @@ def SeeAnalytics(request,id):
     else:
         return HttpResponse(400)
     
+@login_required(login_url='/accounts/login/')
+def export_users_xls(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    if(quiz.admin==request.user):
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="users.xls"'
+
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet('Users')
+        row_num = 0
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        columns = ['Userame', 'Email', 'Score']
+
+        for col_num in range(len(columns)):
+            ws.write(row_num, col_num, columns[col_num], font_style)
+        font_style = xlwt.XFStyle()
+
+        rows = quiz.usersgivingtest_set.all()
+        
+        print(rows)
+        for x in rows:
+            print(x.user.username)
+            print(x.user.email)
+            print(x.score)
+        for row in rows:
+            row_num += 1
+            elem=[row.user.username,row.user.email,row.score]
+            for i,x in enumerate(elem):
+                ws.write(row_num, i,x,font_style)
+
+        wb.save(response)
+        return response
 
 
             
