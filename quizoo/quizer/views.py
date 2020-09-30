@@ -205,7 +205,7 @@ def SeeAnalytics(request,id):
         #He can view analytics for this quiz
         li=quiz.usersgivingtest_set.all()
         #List of all users who gave this quiz
-        return render(request,'quiz_results.html',{"list":li})
+        return render(request,'quiz_results.html',{"list":li,"id":id})
         pass
     else:
         return HttpResponse(400)

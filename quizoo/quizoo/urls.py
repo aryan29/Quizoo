@@ -29,5 +29,5 @@ urlpatterns = [
     path('quiz/start/<int:id>', GetQuestions, name='get-questions'),
     path('completed/',SeeCompletedQuiz,name='completed-quizes'),
     path('analytics/<int:id>',SeeAnalytics, name='analytics'),
-    path('export/<int:id>',export_users_xls, name='download-excel-sheet'),
+    path('analytics/download/<int:id>',export_users_xls, name='download-excel-sheet'),
 ]
