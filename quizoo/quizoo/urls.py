@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
-from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz,QuizStart,GetQuestions,SeeCompletedQuiz,SeeAnalytics,export_users_xls
+from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz,QuizStart,GetQuestions,SeeCompletedQuiz,SeeAnalytics,export_users_xls,DeleteQuestion
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('completed/',SeeCompletedQuiz,name='completed-quizes'),
     path('analytics/<int:id>',SeeAnalytics, name='analytics'),
     path('analytics/download/<int:id>',export_users_xls, name='download-excel-sheet'),
+    path('delete/<int:id>',DeleteQuestion, name='deleting question'),
 ]

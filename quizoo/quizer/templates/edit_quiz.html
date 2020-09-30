@@ -1,211 +1,239 @@
 <html>
-<head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-body{
-    text-align:center
-}
-.question{
-    margin-top:40px
-}
-li{
-    margin-top:10px
-}
-.question-text{
-    font-size:20px;
-        white-space:pre-line;
-}
-.options-text{
-    font-size:15px;
-    margin-top:5px;
-        white-space:pre-line;
-}
-.already-made-questions{
-    width:80%;
-    margin:auto;
-    text-align:center;
-    border: 1px solid black;
-    padding-top:5px
-    
-}
-.question{
-    margin:auto;
-    text-align:center
-}
-
-
-
-</style>
 
 <head>
-
-<body>
-<br>
-<h1>{{name}}</h1>
-<br>
-<br>
-<div id="all">
-{% for x in list %}
-<div class="already-made-questions">
-{{forloop.counter}}
-<span class="badge badge-info question-text">{{x.question.question_text}}</span>
-<br>
-{% for op in x.options%}
-<br>
-{{forloop.counter}}
-<span class="badge badge-warning options-text">{{op.option}}</span>
-{% endfor %}
-<br>
-<br>
-{% for op in x.correct_options%}
-<br>
-{{forloop.counter}}
-<span class="badge badge-success options-text">{{op.option}}</span>
-{% endfor %}
-<br>
-<br>
-</div>
-{% endfor %}
-</div>
-<br>
-<br>
-<button onclick="createquestions()" class="btn btn-primary">Add Questions</button>
-<div>
-<ol  id="questions_list">
-</ol>
-</div>
-<body>
-<html>
-<script>
-function createquestions(){
-   // alert("ok");
-    var d=document.createElement('div')
-    d.className="question"
-    var text=document.createElement('textarea')
-    var opt=document.createElement('ol')
-    opt.class="options"
-    text.style.height="200px"
-    text.style.fontSize="10pt";
-    text.style.width="50%"
-    text.style.display="inline";
-    text.className="form-control"
-    var button1=document.createElement("button")
-    var button2=document.createElement("button")
-    button1.innerHTML="Add Options"
-    button1.className="btn btn-info"
-    button2.innerHTML="Submit"
-    button2.className="btn btn-success"
-    d.appendChild(text)
-    d.appendChild(opt)
-    d.appendChild(document.createElement("br"))
-    d.appendChild(button1)
-    d.appendChild(button2)
-    var list=document.getElementById("questions_list")
-    var elem=document.createElement("LI");
-    elem.appendChild(d);
-    list.appendChild(elem);
-    button1.addEventListener("click",function(e){
-       var sel= d.getElementsByTagName("ol")
-       var elemli=document.createElement("li");
-       elemli.className="wrong";
-       var text=document.createElement('textarea');
-       text.className="form-control";
-       text.style.width="50%";
-       var ch=document.createElement('input');
-       ch.type="checkbox";
-       ch.addEventListener("click",function(e1){
-           if(ch.checked==true)
-           {
-               elemli.className="correct";
-           }
-           else
-           {
-               elemli.className="wrong";
-           }
-       });
-    
-        text.style.height="50px"
-        text.style.width="20%"
-        text.style.display="inline-block";
-        text.style.marginRight="20px";
-
-        elemli.appendChild(text)
-        elemli.appendChild(ch)
-        sel[0].appendChild(elemli)
-
-    })
-    button2.addEventListener("click",function(e){
-        validateAndAdd(d);
-    })
-}
-function validateAndAdd(obj){
-//Check if question is not empty
-//Atleast 2 options are added in total
-//Atleast 1 options is selected for correct response
-//If all these things holds good make an ajax post request
-//and refresh page using ajax
-var question_text=obj.getElementsByTagName("textarea")[0].value
-if(question_text.length>=10) //Question Minimum length
-{
-var li=obj.getElementsByTagName("ol")[0].getElementsByTagName("li");
-var corr=obj.getElementsByTagName("ol")[0].getElementsByClassName("correct");
-if(li.length>=2 && corr.length>=1) //Minimum number of options & min number of correct options
-{
- //Now check if no options is empty if thats true we can make an ajax request
- fl=0;
- l1=[]
- l2=[]
- for(let x=0;x<li.length;x++)
- {
-     console.log(li[x].getElementsByTagName("textarea")[0]);
-     if(li[x].getElementsByTagName("textarea")[0].value=="")
-     {
-         fl=1;
-     }
-     l1.push(li[x].getElementsByTagName("textarea")[0].value)
- }
- for(let x=0;x<corr.length;x++)
- {
-    l2.push(corr[x].getElementsByTagName("textarea")[0].value)
- }
-
- if(fl==0)
- {
-     //Make an ajax request
-     $.post(
-    "",
-     {
-         "question_text":question_text,
-         "options":l1,
-         "correct_options":l2
-     },
-     function(data,status){
-         console.log("Data Added in DB");
-        if(data==200 && status=="success")
-        {
-            location.reload();
-            //console.log("Add it dynamically here as it is added in db");
-            //appenddata(question_text,l1,l2)
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            text-align: center
         }
-        else{
-            console.log("Something went wrong");
+
+        .question {
+            margin-top: 40px
         }
-     }
-     
-     )
-     console.log("Making an ajax request");
- }
- else
- alert("Options can't be empty");
-}
-else
-alert("Add Atleast 2 options and atleast 1 correct answer");
-}
-else
-alert("Question must be atleast of length 10");
 
-}
+        li {
+            margin-top: 10px
+        }
+
+        .question-text {
+            font-size: 20px;
+            white-space: pre-line;
+        }
+
+        .options-text {
+            font-size: 15px;
+            margin-top: 5px;
+            white-space: pre-line;
+        }
+
+        .already-made-questions {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            border: 1px solid black;
+            padding-top: 5px
+        }
+
+        .question {
+            margin: auto;
+            text-align: center
+        }
+
+        #close {
+            display: block;
+            float: right;
+            width: 30px;
+            height: 29px;
+            background: url(https://web.archive.org/web/20110126035650/http://digitalsbykobke.com/images/close.png) no-repeat center center;
+        }
+    </style>
+
+    <head>
+
+    <body>
+        <br>
+        <h1>{{name}}</h1>
+        <br>
+        <br>
+        <div id="all">
+
+            {% for x in list %}
+            <div class="already-made-questions">
+                <span id="close" onclick="deleteobj({{x.question.id}})"></span>
+
+                {{forloop.counter}}
+                <span class="badge badge-info question-text">{{x.question.question_text}}</span>
+                <br>
+                {% for op in x.options%}
+                <br>
+                {{forloop.counter}}
+                <span class="badge badge-warning options-text">{{op.option}}</span>
+                {% endfor %}
+                <br>
+                <br>
+                {% for op in x.correct_options%}
+                <br>
+                {{forloop.counter}}
+                <span class="badge badge-success options-text">{{op.option}}</span>
+                {% endfor %}
+                <br>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <br />
+        <button onclick="createquestions()" class="btn btn-primary">Add Questions</button>
+        <div>
+            <ol id="questions_list">
+            </ol>
+        </div>
+    </body>
+    <html>
+    <script>
+        function createquestions() {
+            // alert("ok");
+            var d = document.createElement('div')
+            d.className = "question"
+            var text = document.createElement('textarea')
+            var opt = document.createElement('ol')
+            opt.class = "options"
+            text.style.height = "200px"
+            text.style.fontSize = "10pt";
+            text.style.width = "50%"
+            text.style.display = "inline";
+            text.className = "form-control"
+            var button1 = document.createElement("button")
+            var button2 = document.createElement("button")
+            button1.innerHTML = "Add Options"
+            button1.className = "btn btn-info"
+            button2.innerHTML = "Submit"
+            button2.className = "btn btn-success"
+            d.appendChild(text)
+            d.appendChild(opt)
+            d.appendChild(document.createElement("br"))
+            d.appendChild(button1)
+            d.appendChild(button2)
+            var list = document.getElementById("questions_list")
+            var elem = document.createElement("LI");
+            elem.appendChild(d);
+            list.appendChild(elem);
+            button1.addEventListener("click", function (e) {
+                var sel = d.getElementsByTagName("ol")
+                var elemli = document.createElement("li");
+                elemli.className = "wrong";
+                var text = document.createElement('textarea');
+                text.className = "form-control";
+                text.style.width = "50%";
+                var ch = document.createElement('input');
+                ch.type = "checkbox";
+                ch.addEventListener("click", function (e1) {
+                    if (ch.checked == true) {
+                        elemli.className = "correct";
+                    }
+                    else {
+                        elemli.className = "wrong";
+                    }
+                });
+
+                text.style.height = "50px"
+                text.style.width = "20%"
+                text.style.display = "inline-block";
+                text.style.marginRight = "20px";
+
+                elemli.appendChild(text)
+                elemli.appendChild(ch)
+                sel[0].appendChild(elemli)
+
+            })
+            button2.addEventListener("click", function (e) {
+                validateAndAdd(d);
+            })
+        }
+        function deleteobj(id) {
+            console.log('{{csrf_token}}')
+            console.log(id);
+            $.ajax({
+                type: 'DELETE',
+                url: "/delete/" + id,
+                headers: {
+                    "X-CSRFToken": '{{ csrf_token }}'
+                },
+                data: {
+                    //csrfmiddlewaretoken: '{{ csrf_token }}',
+                    id: id,
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res == 200)
+                        location.reload();
+                }
+            })
+
+        }
+        function validateAndAdd(obj) {
+            //Check if question is not empty
+            //Atleast 2 options are added in total
+            //Atleast 1 options is selected for correct response
+            //If all these things holds good make an ajax post request
+            //and refresh page using ajax
+            var question_text = obj.getElementsByTagName("textarea")[0].value
+            if (question_text.length >= 10) //Question Minimum length
+            {
+                var li = obj.getElementsByTagName("ol")[0].getElementsByTagName("li");
+                var corr = obj.getElementsByTagName("ol")[0].getElementsByClassName("correct");
+                if (li.length >= 2 && corr.length >= 1) //Minimum number of options & min number of correct options
+                {
+                    //Now check if no options is empty if thats true we can make an ajax request
+                    fl = 0;
+                    l1 = []
+                    l2 = []
+                    for (let x = 0; x < li.length; x++) {
+                        console.log(li[x].getElementsByTagName("textarea")[0]);
+                        if (li[x].getElementsByTagName("textarea")[0].value == "") {
+                            fl = 1;
+                        }
+                        l1.push(li[x].getElementsByTagName("textarea")[0].value)
+                    }
+                    for (let x = 0; x < corr.length; x++) {
+                        l2.push(corr[x].getElementsByTagName("textarea")[0].value)
+                    }
+
+                    if (fl == 0) {
+                        //Make an ajax request
+                        $.post(
+                            "",
+                            {
+                                "question_text": question_text,
+                                "options": l1,
+                                "correct_options": l2
+                            },
+                            function (data, status) {
+                                console.log("Data Added in DB");
+                                if (data == 200 && status == "success") {
+                                    location.reload();
+                                    //console.log("Add it dynamically here as it is added in db");
+                                    //appenddata(question_text,l1,l2)
+                                }
+                                else {
+                                    console.log("Something went wrong");
+                                }
+                            }
+
+                        )
+                        console.log("Making an ajax request");
+                    }
+                    else
+                        alert("Options can't be empty");
+                }
+                else
+                    alert("Add Atleast 2 options and atleast 1 correct answer");
+            }
+            else
+                alert("Question must be atleast of length 10");
+
+        }
 
 
-</script>
+    </script>

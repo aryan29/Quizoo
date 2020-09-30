@@ -179,7 +179,17 @@ def GetQuestions(request,id):
             })
         else:
             return HttpResponse(500)
-        
+      
+def DeleteQuestion(request,id):
+    print(request)
+    if(request.method=='DELETE'):
+    # Delete this question from database
+        print("donw")
+        Questions.objects.filter(pk=id).delete()
+        return HttpResponse(200)
+    else:
+        return HttpResponse(400)
+    
 def checkResponse(r1,r2):
     print("Coming to check reponses")
     print(r1) #User Response 
