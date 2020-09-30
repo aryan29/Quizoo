@@ -6,6 +6,16 @@
 
 body{
     background-color: white;
+    text-align:center
+}
+#all{
+    position:absolute;
+    margin:0;
+    top:35%;
+    left:50%;
+    height:100px;
+    width:50%;
+    transform:translate(-50%,-50%)
 }
 .btn{
   background-color: #4CAF50; 
@@ -19,6 +29,7 @@ body{
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 30px;
+  margin-bottom:10px
     margin: auto 
 }
     h1{
@@ -38,7 +49,8 @@ body{
 <br>
 <h1>Hello {{request.user}}</h1>
 <br>
-    <div class="btn-container">
+<div id="all">
+<div class="btn-container">
 <button class="btn" onclick="toggle()">Create New Quiz</button>
     </div>
 <br>
@@ -57,6 +69,7 @@ body{
 <br/><br/>
 <button class="btn" onclick="window.location='/completed'">Completed Quiz</button>
 </div>
+<div>
 <body>
 <html>
 
