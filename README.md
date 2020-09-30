@@ -19,6 +19,9 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
   * Allow admin to retake a previous quiz
   * Allowing multiple admins for a quiz
   * Camera On mode or not
+  * Generating a Random Quiz from Previously owned question set 
+  * Give x amount of questions to each user from a pool of n questions
+
  * A nice good looking and user friendly frontend is must
  
 
