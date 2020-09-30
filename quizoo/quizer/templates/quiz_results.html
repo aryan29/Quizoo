@@ -1,9 +1,47 @@
 <html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 <body>
-{% for x in list%}
-{{x.user.username}}
-{{x.score}}
-<br></br>
-{% endfor %}
+<table class="badge badge-success table">
+<tr>
+<td>Students Giving Test:-</td>
+<td>{{list|length}}</td>
+</tr>
+<tr>
+<td>Avg Score</td>
+<td id="avg"></td>
+</tr>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in list%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{x.user.username}}</td>
+      <td>{{x.user.email}}</td>
+      <td>{{x.score}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 </body>
 </html>
+<script>
+let sum=0;
+{% for x in list%}
+sum+={{x.score}};
+{% endfor %}
+console.log(sum)
+let avgScore=sum/("{{list|length}}");
+document.getElementById("avg").innerText=avgScore
+
+</script>
