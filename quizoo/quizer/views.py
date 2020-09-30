@@ -11,7 +11,21 @@ from django.db.models import Q
 from django.utils import timezone
 import xlwt
 # Create your views here.
+@login_required(login_url='/accounts/login/')
+def GiveQuiz(request):
+    return render(request,'give_quiz.html')
 
+@login_required(login_url='/accounts/login/')
+def CheckValid(request):
+    if(request.method=='POST'):
+        data=int(request.POST['quiz_no'])
+        
+        if(Quiz.objects.filter(pk=data).count()>0):
+            return HttpResponse(200)
+        else:
+            return HttpResponse(400)
+        
+    
 
 @login_required(login_url='/accounts/login/')
 def CreateQuizView(request):
@@ -189,6 +203,8 @@ def DeleteQuestion(request,id):
         return HttpResponse(200)
     else:
         return HttpResponse(400)
+    
+
     
 def checkResponse(r1,r2):
     print("Coming to check reponses")

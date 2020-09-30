@@ -1,57 +1,8 @@
-<html>
-<head>
-<title>Create Quiz</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<style>
-
-body{
-    background-color: white;
-    text-align:center
-}
-#all{
-    position:absolute;
-    margin:0;
-    top:35%;
-    left:50%;
-    height:100px;
-    width:50%;
-    transform:translate(-50%,-50%)
-}
-.btn{
-  background-color: #4CAF50; 
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 30px;
-  margin-bottom:10px
-    margin: auto 
-}
-    h1{
-        text-align: center;
-        color: snow;
-        font-family: 'Cinzel', serif;
-    }
-    .btn-container{
-        text-align: center;
-    }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
-
-<head>
-
-<body>
-<br>
-<h1>Hello {{request.user}}</h1>
-<br>
+{% extends "base.html"%}
+{% block all%}
 <div id="all">
 <div class="btn-container">
-<button class="btn" onclick="toggle()">Create New Quiz</button>
+<button class="btn" onclick="toggle()" id="toggler">Create New Quiz</button>
     </div>
 <br>
 <div id="form" style="display: none">
@@ -70,16 +21,4 @@ body{
 <button class="btn" onclick="window.location='/completed'">Completed Quiz</button>
 </div>
 <div>
-<body>
-<html>
-
-<script>
-function toggle(){
-    f=document.getElementById("form");
-    if(f.style.display=="none")
-    f.style.display="block";
-    else
-    f.style.display="none";
-
-}
-</script>
+{% endblock %}

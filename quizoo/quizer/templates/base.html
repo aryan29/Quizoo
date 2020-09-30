@@ -1,0 +1,89 @@
+{% load static %}
+<html>
+<head>
+<title>Create Quiz</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+
+.background-image{
+    position:fixed;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    background-image: url('{%static "images/bg3.jpg" %}');
+      background-repeat: no-repeat;
+    background-size:cover;
+    overflow: hidden;   /*  hide scrollbars */
+    filter:blur(3px);
+    text-align:center
+}
+body{
+    text-align:center;
+}
+#all{
+    position:absolute;
+    margin:0;
+    top:35%;
+    left:50%;
+    height:100px;
+    width:50%;
+    transform:translate(-50%,-50%)
+}
+.btn{
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+  margin-bottom:10px
+    margin: auto 
+}
+    h1{
+        text-align: center;
+        color: snow;
+        font-family: 'Cinzel', serif;
+    }
+    .btn-container{
+        text-align: center;
+    }
+            .navbar-nav { 
+            margin-left: auto; 
+        } 
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
+<head>
+{% include "navbar.html"%}
+<body>
+<div class="background-image"></div>
+<br>
+
+<br>
+{% block all%}
+{% endblock %}
+<body>
+<html>
+
+<script>
+{% block scripts%}
+{% endblock %}
+function toggle(){
+    f=document.getElementById("form");
+    if(f.style.display=="none")
+    f.style.display="block";
+    else
+    f.style.display="none";
+    document.getElementById("toggler").style.display="none";
+
+}
+</script>

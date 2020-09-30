@@ -139,6 +139,6 @@ TIME_ZONE = 'Asia/Kolkata'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'proj/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'quizer/static/')
 MEDIA_ROOT = BASE_DIR
 

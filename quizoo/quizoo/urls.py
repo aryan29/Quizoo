@@ -16,16 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
-from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz,QuizStart,GetQuestions,SeeCompletedQuiz,SeeAnalytics,export_users_xls,DeleteQuestion
+from quizer.views import CreateQuizView,ShowAllQuizToBeHeld,EditQuiz,QuizStart,GetQuestions,SeeCompletedQuiz,SeeAnalytics,export_users_xls,DeleteQuestion,GiveQuiz,CheckValid
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('login/', LoginView.as_view(), name='login-view'),
     path('create/', CreateQuizView, name='create-quiz'),
+    path('checkValid/', CheckValid,name='check-valid-quiz-code'),
     path('show/', ShowAllQuizToBeHeld, name='list-quizes'),
     path('edit/<int:id>', EditQuiz, name='edit-quiz'),
     path('quiz/<int:id>', QuizStart, name='quiz-start'),
+    path('give-quiz/',GiveQuiz,name='give quiz'),
     path('quiz/start/<int:id>', GetQuestions, name='get-questions'),
     path('completed/',SeeCompletedQuiz,name='completed-quizes'),
     path('analytics/<int:id>',SeeAnalytics, name='analytics'),
