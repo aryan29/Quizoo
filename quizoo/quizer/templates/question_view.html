@@ -4,15 +4,36 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .question-text{
-    font-size:20px
+    font-size:20px;
+    white-space:pre-line;
 }
-.option{
+.option-text{
+    margin-top:5px;
     font-size:15px;
-    margin-top:5px
+    white-space:pre-line;
+}
+#whole{
+    width:80%;
+    position:absolute;
+    border: 3px solid black;
+    padding:5px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+#timer{
+    margin:40px 0;
+    font-size:25px;
+    font-weight:bold;
+    text-align:center;
 }
 </style>
 </head>
 <body>
+<div id="timer">
+<p id="demo"></p>
+</div>
+<div id="whole">
 {% csrf_token %}
 <span class="badge badge-info question-text" id="question_text">{{question_text}}</span>
 <br>
@@ -21,16 +42,17 @@
 <br>
 <div id="all_options">
 {% for x in options%}
-<div class="option">
-<h3 class='badge badge-warning'>{{x}}</h3>
+<div>
+<h3 class='badge badge-warning option-text'>{{x}}</h3>
 <input type="checkbox" class="check_box"/>
 </div>
 {% endfor %}
 </div>
 <div id="timer">
-<p id="demo"></p>
+
 </div>
 <button onclick="get_next_question()">Next</button>
+</div>
 </body>
 </html>
 <script>
@@ -83,10 +105,9 @@ $.ajax({
         for(let i=0;i<res['options'].length;i++)
         {
             let d=document.createElement("div");
-            d.className="option";
             let opt=document.createElement("h3");
             opt.innerText=res['options'][i];
-            opt.className="badge badge-warning";
+            opt.className="badge badge-warning option-text";
             let ch=document.createElement("input");
             ch.type="checkbox";
             ch.className="check_box";

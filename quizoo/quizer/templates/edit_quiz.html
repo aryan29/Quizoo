@@ -13,14 +13,16 @@ li{
     margin-top:10px
 }
 .question-text{
-    font-size:20px
+    font-size:20px;
+        white-space:pre-line;
 }
 .options-text{
     font-size:15px;
-    margin-top:5px
+    margin-top:5px;
+        white-space:pre-line;
 }
 .already-made-questions{
-    width:50%;
+    width:80%;
     margin:auto;
     text-align:center;
     border: 1px solid black;
@@ -125,6 +127,9 @@ function createquestions(){
     
         text.style.height="50px"
         text.style.width="20%"
+        text.style.display="inline-block";
+        text.style.marginRight="20px";
+
         elemli.appendChild(text)
         elemli.appendChild(ch)
         sel[0].appendChild(elemli)
