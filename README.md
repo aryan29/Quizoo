@@ -1,4 +1,4 @@
-# Quizoo
+# Quizoo :green_book::closed_book:
 Free Online Quiz Platform for conducting quizes with lots of security features to avoid cheating and completely free   
 
 <img src="ReadmeAssets/1.png">
