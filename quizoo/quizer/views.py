@@ -10,6 +10,7 @@ from random import shuffle
 from django.db.models import Q
 from django.utils import timezone
 import xlwt
+import json
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def GiveQuiz(request):
@@ -59,11 +60,30 @@ def QuizSettings(request,id):
     quiz=Quiz.objects.get(pk=id)
     if(quiz.admin==request.user):
         if(request.method=='GET'):
-            return render(request,'settings.html')
+            return render(request,'settings.html',{"quiz":quiz})
         elif(request.method=='POST'):
-            ne=request.POST
+            try:
+                print(request.POST)
+                ne=request.POST.getlist("list[]")
+                ne=[True if x =='true' else False for x in ne]
+                print(ne)
+                quiz.randomizer=ne[0]
+                quiz.one_question_per_page=ne[1]
+                quiz.resume_later=ne[2]
+                quiz.email_result_creator=ne[3]
+                quiz.email_result_testtaker=ne[4]
+                quiz.show_score_after_test=ne[5]
+                quiz.reveal_answers_after_test=ne[6]
+                quiz.view_after_test=ne[7]
+                quiz.strict_mode=ne[8]
+                quiz.camera_mode=ne[9]
+                quiz.record_responses=ne[10]
+                quiz.save()
             #Update Settings for this quiz
-            return redirect(f'/seetings/{id}')
+                return HttpResponse(200)
+            except Exception as e:
+                print(e)
+                return HttpResponse(400)
 
 @login_required(login_url='/accounts/login/')
 @csrf_exempt
