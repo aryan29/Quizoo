@@ -28,6 +28,26 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
 
  * A nice good looking and user friendly frontend is must
  
+### :camera: Screenshots
+Enter Quiz Code to Start Quiz    
+<img src="ReadmeAssets/2.png">
+</img>      
+         
+Edit Quiz In your pannel   
+<img src="ReadmeAssets/3.png">
+</img>    
+         
+Detailed Analysis after test is over     
+<img src="ReadmeAssets/4.png">
+</img>      
+       
+         
+Quiz Settings Page
+<img src="ReadmeAssets/5.png">
+</img> 
+
+
+ 
 
 
 
