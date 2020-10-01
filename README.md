@@ -30,25 +30,25 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
  
 ### :camera: Screenshots
 Enter Quiz Code to Start Quiz    
+<kbd>
 <img src="ReadmeAssets/2.png">
-</img>      
+</kbd>
          
-Edit Quiz In your pannel   
+Edit Quiz In your pannel  
+<kbd>
 <img src="ReadmeAssets/3.png">
-</img>    
+</kbd>
          
-Detailed Analysis after test is over     
-<img src="ReadmeAssets/4.png">
-</img>      
+Detailed Analysis after test is over       
+<kbd>
+<img src="ReadmeAssets/4.png">    
+</kbd>
        
          
-Quiz Settings Page
+Quiz Settings Page      
+<kbd>
 <img src="ReadmeAssets/5.png">
-</img> 
-
-
- 
-
+</kbd>
 
 
 ### Contribution
