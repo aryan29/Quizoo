@@ -58,8 +58,20 @@
             height: 29px;
             background: url(https://web.archive.org/web/20110126035650/http://digitalsbykobke.com/images/close.png) no-repeat center center;
         }
-        h1{
+
+        h1 {
             font-family: 'Courier New', Courier, monospace;
+        }
+
+        ol {
+            list-style-type: none;
+
+        }
+
+        #settings-button {
+            position: absolute;
+            right: 20px;
+            top: 10px;
         }
     </style>
 
@@ -67,6 +79,7 @@
 
     <body>
         <div class="background-image"></div>
+        <div id="settings-button"><button class="btn btn-info" onclick="window.location='/settings/{{id}}'">Settings</button></div>
         <br>
         <h1>{{name}}</h1>
         <br>
@@ -115,9 +128,10 @@
             var opt = document.createElement('ol')
             opt.class = "options"
             text.style.height = "200px"
-            text.style.fontSize = "10pt";
+            text.style.fontSize = "15px";
             text.style.width = "50%"
             text.style.display = "inline";
+            text.placeholder = "Question here";
             text.className = "form-control"
             var button1 = document.createElement("button")
             var button2 = document.createElement("button")
@@ -141,6 +155,7 @@
                 var text = document.createElement('textarea');
                 text.className = "form-control";
                 text.style.width = "50%";
+                text.placeholder = "Option";
                 var ch = document.createElement('input');
                 ch.type = "checkbox";
                 ch.addEventListener("click", function (e1) {

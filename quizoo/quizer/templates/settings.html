@@ -1,0 +1,184 @@
+      <html>
+      <head>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+body {
+  background-color: #F2F2F2;
+  display: flex;
+  font-family: 'Arial';
+  justify-content: center;
+  padding: 4rem;
+}
+.content {
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  width: 400px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #6E6E6E;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #1849AB;
+}
+input:focus + .slider {
+  box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.7);
+  outline: none;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+#save{
+    position: absolute;
+    width: 100px;
+    bottom: 30px;
+    height: 30px;
+    right: 50px;
+}
+
+    </style>
+      </head>
+      <body>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Switch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Randomizer</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>One question per page</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Resume Later</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Email Result to Creator</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Email Result to Test Taker</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Show Score After test is over</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Reveal Correct Answers after test</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+    <tr>
+        <td>Can be viewed after it is over</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+        <td>Strict Mode</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+        <td>Switch On Camera before test</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+      </tr>
+    </tbody>
+  </table>
+<div id="save">
+  <button class="btn btn-success">Save</button>
+</div>
+
+      </body>

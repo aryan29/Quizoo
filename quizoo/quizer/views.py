@@ -55,6 +55,17 @@ def ShowAllQuizToBeHeld(request):
     return render(request,'show_quiz.html',{"list":li})
 
 @login_required(login_url='/accounts/login/')
+def QuizSettings(request,id):
+    quiz=Quiz.objects.get(pk=id)
+    if(quiz.admin==request.user):
+        if(request.method=='GET'):
+            return render(request,'settings.html')
+        elif(request.method=='POST'):
+            ne=request.POST
+            #Update Settings for this quiz
+            return redirect(f'/seetings/{id}')
+
+@login_required(login_url='/accounts/login/')
 @csrf_exempt
 def EditQuiz(request,id):
     quiz=Quiz.objects.get(pk=id)
@@ -78,7 +89,7 @@ def EditQuiz(request,id):
                 }
                 li.append(di)
             
-            return render(request,'edit_quiz.html',{"list":li,"name":quiz.quiz_name})
+            return render(request,'edit_quiz.html',{"list":li,"name":quiz.quiz_name,"id":quiz.id})
         elif(request.method=="POST"):
             data=request.POST
             print(data)
