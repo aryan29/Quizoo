@@ -173,13 +173,15 @@ def QuizStart(request,id):
                     score=0,
                     questions_not_attempted=q
                 )
-            return redirect(f'/quiz/start/{id}')
+            return HttpResponse(200)
         except Exception as e:
             print(e)
+            return HttpResponse(400)
+    elif(request.method=='POST'):
+        return HttpResponse(400)
     else:
-        
         print((quiz.start_time.timestamp()))
-        return render(request,'start-quiz.html',{"start":quiz.start_time.timestamp()})
+        return render(request,'start-quiz.html',{"quiz":quiz,"start":quiz.start_time.timestamp()})
         
 @login_required(login_url='/accounts/login/')
 def GetQuestions(request,id):
@@ -202,6 +204,7 @@ def GetQuestions(request,id):
         
         opt=display_question.options_set.values_list("option",flat=True)
         return render(request,'question_view.html',{
+            "quiz":quiz,
             "question_text":display_question.question_text,
             "options":opt,
             "end_time":quiz.end_time.timestamp()
