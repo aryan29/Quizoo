@@ -32,4 +32,4 @@
 
 
 ### Contribution
-Don't be lazy :smile: clone this repo ad start contributing
+Don't be lazy:smile: clone this repo ad start contributing
