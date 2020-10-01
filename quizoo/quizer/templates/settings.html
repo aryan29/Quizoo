@@ -188,6 +188,18 @@ table{
 
 </html>
 <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+   document.addEventListener('dblclick', () => {
+var params = [
+    'height='+screen.height,
+    'width='+screen.width,
+    'fullscreen=yes' // only works in IE, but here for completeness
+].join(',');
+
+
+var popup = window.open(document.URL, 'popup_window', params); 
+popup.moveTo(0,0);
+   });
 console.log("{{quiz.strict_mode|yesno:'true,false'}}");
 let li=document.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 console.log("{{quiz.strict_mode}}");
