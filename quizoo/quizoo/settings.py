@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'django_crontab',
+    
 ]
 SITE_ID = 1
 
@@ -137,8 +139,18 @@ TIME_ZONE = 'Asia/Kolkata'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+CRONJOBS = [
+    ('*/1 * * * *', 'quizer.cron.my_scheduled_job','>> /home/aryan/Documents/online-quiz-maker(quizooo)/quizoo/file.log')
+]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'quizer/static/')
 MEDIA_ROOT = BASE_DIR
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = "ctrlaltelitesih2020@gmail.com"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# Put your password here and ensure no double verification on gmail account & less secured apps allowed
+EMAIL_HOST_PASSWORD = "passwordispassword"
 

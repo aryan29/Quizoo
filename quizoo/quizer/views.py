@@ -35,7 +35,8 @@ def CheckValid(request):
 
 @login_required(login_url='/accounts/login/')
 def CreateQuizView(request):
-    print(request.method)
+    print(z)
+    # print(request.method)
     if(request.method=='POST'):
         form=CreatingQuizForm(request.POST)
         if(form.is_valid()):

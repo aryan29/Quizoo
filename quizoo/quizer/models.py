@@ -23,6 +23,8 @@ class Quiz(models.Model):
     strict_mode=models.BooleanField(default=False)
     camera_mode=models.BooleanField(default=False)
     record_responses=models.BooleanField(default=False)
+    #Whether quiz is over or not cron will detect quiz is over and send email to the users required if needed
+    expired=models.BooleanField(default=False) 
 
 
 class Questions(models.Model):
