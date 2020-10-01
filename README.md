@@ -1,6 +1,10 @@
 # Quizoo
-Free Online Quiz Platform for conducting quizes with lots of security features to avoid cheating and completely free
+#### Free Online Quiz Platform for conducting quizes with lots of security features to avoid cheating and completely free   
 
+<img src="ReadmeAssets/1.png">
+</img>    
+      
+      
 ### Detailed List of Features it should have 
 * Allow Creation of Quiz
 * Allow People to give quiz by simple google sign in
