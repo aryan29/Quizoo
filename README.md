@@ -4,7 +4,7 @@
 <img src="ReadmeAssets/1.png">
 </img>    
       
-      
+
 ### Detailed List of Features it should have 
 * Allow Creation of Quiz
 * Allow People to give quiz by simple google sign in
@@ -32,4 +32,4 @@
 
 
 ### Contribution
-Feel free to contribute on this repo , you can also contribute some features which I can add to it to make this even better
+Don't be lazy :smile: clone this repo ad start contributing
