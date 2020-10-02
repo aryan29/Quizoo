@@ -2,8 +2,12 @@
 <html>
 <head>
 <title>Create Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 
 .background-image{
@@ -62,9 +66,52 @@ body{
         .footer-text{
             width:100%;
             color:white;
+            font-size: 2em;
             font-weight:bold;
-            font-family:fantasy;
+            font-family: 'Sansita Swashed', cursive;
         }
+    .icon-list{
+        text-decoration: none;
+    }
+    .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  margin-left: auto;
+  margin-right: auto;
+    }
+    .fa:hover {
+    color: white;
+        text-decoration: none;
+}
+
+.fa-facebook {
+
+  color: white;
+}
+
+.fa-instagram{
+color: white;
+    }
+.fa-github{
+  color: white;
+    } 
+.margin{
+      
+        margin-left: 43%;
+    }
+@media only screen and (max-width: 600px) {
+    .margin{
+       
+        margin-left: 20%;
+        padding-top: 10%;
+    }
+    }
+}
+
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
@@ -78,9 +125,16 @@ body{
 <br>
 {% block all %}
 {% endblock %}
+
     <footer class="navbar fixed-bottom">
+        <div class="margin">
+    <a href="" class="fa fa-facebook"  ></a>
+    <a href="" class="fa fa-github" ></a>
+    <a href="" class="fa fa-instagram" ></a>
+    </div>
         <span class="text-muted footer-text">Made by Aryan Khandelwal</span>
     </footer>
+     
 <body>
 <html>
 
