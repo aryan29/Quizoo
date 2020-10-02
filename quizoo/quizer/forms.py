@@ -9,4 +9,10 @@ class CreatingQuizForm(ModelForm):
             'start_time',
             'end_time'
         ]
+        widgets = {
+            'quiz_name': forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex:- Quiz Name"}),
+            'start_time': forms.DateTimeInput(attrs={"class": "form-control", "placeholder": "Start Time",'type': 'datetime-local'}),
+            'end_time': forms.DateTimeInput(attrs={"class": "form-control", "placeholder": "End Time",'type': 'datetime-local'})
+        }
+
 

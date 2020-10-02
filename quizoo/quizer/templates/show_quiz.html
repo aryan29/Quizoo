@@ -1,20 +1,36 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <head>
 
 <body>
 <br>
-Hello {{request.user}}
+
 <br>
 <br>
+<ul class="list-group">
 {% for x in list %}
+<li class="list-group-item d-flex justify-content-between">
 {{x.quiz_name}}
-<button onclick="location.href='/edit/{{x.id}}';">Edit This Quiz</button>
-<br>
+<span>
+<button class="btn-success" onclick="location.href='/edit/{{x.id}}';">Edit This Quiz</button>
+<button class="btn-warning" onclick="copyToClipboard('http://localhost:8000/quiz/{{x.id}}');">Copy Share Link</button>
+<span>
+</li>
 {% endfor %}
+</ul>
 <body>
 <html>
 
-<scirpt>
-
+<script>
+  function copyToClipboard(text) {
+      console.log("Comign in here")
+    var input = document.createElement('input');
+    input.setAttribute('value', text);
+    document.body.appendChild(input);
+    input.select();
+    var result = document.execCommand('copy');
+    document.body.removeChild(input);
+    return result;
+  }
 </script>

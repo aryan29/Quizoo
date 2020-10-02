@@ -1,10 +1,77 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+body{
+    margin:200px auto;
+    text-align:center;
+
+}
+input{
+    width:300px;
+    height:60px
+}
+</style>
 </head>
 <body>
-<form action="" method="post">
-{% csrf_token %}
-<input type="submit" value="Start-Quiz"/>
-</form>
+<p id="demo"></p>
+<input class="btn btn-dark" type="button"  id="start" value="Start-Quiz"/>
 </body>
 </html>
+<script>
+$('#start').click(()=>{
+  $.ajax({
+    type:"POST",
+    url:"",
+    headers: {
+    "X-CSRFToken": '{{ csrf_token }}'
+        },
+      data:{},
+    success:function(res)
+    {
+       let v1="{{quiz.strict_mode}}";
+       console.log(res);
+       
+        if(res==200 && v1=="True")
+        {
+          var params = [
+              'height='+screen.height,
+              'width='+screen.width,
+              'fullscreen=yes' // only works in IE, but here for completeness
+          ].join(',');
+
+          var popup = window.open('/quiz/start/{{quiz.id}}', 'popup_window', params); 
+          popup.moveTo(0,0);
+        }
+        else if(res==200)
+        {
+          window.location='/quiz/start/{{quiz.id}}';
+        }
+        else
+        {
+          console.log("Do Nothing");
+        }
+    }
+});
+}); 
+var countDownDate = "{{start}}"*1000//To get international standard time
+  console.log(countDownDate)
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  console.log(now);
+
+  var distance = countDownDate - now;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "Started";
+    document.getElementById("start").value = "Enter";
+  }
+}, 1000);
+</script>

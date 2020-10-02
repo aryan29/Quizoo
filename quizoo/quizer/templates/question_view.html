@@ -1,27 +1,84 @@
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.question-text{
+    font-size:20px;
+    white-space:pre-line;
+}
+.option-text{
+    margin-top:5px;
+    font-size:15px;
+    white-space:pre-line;
+}
+#whole{
+    width:80%;
+    position:absolute;
+    border: 3px solid black;
+    padding:5px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+#timer{
+    margin:40px 0;
+    font-size:25px;
+    font-weight:bold;
+    text-align:center;
+}
+</style>
 </head>
 <body>
+<div id="timer">
+<p id="demo"></p>
+</div>
+<div id="whole">
 {% csrf_token %}
-<h2 id="question_text">{{question_text}}</h2>
+<span class="badge badge-info question-text" id="question_text">{{question_text}}</span>
 <br>
-<br>
-Options
+
 <br>
 <br>
 <div id="all_options">
 {% for x in options%}
-<div class="option">
-<h3>{{x}}</h3>
+<div>
+<h3 class='badge badge-warning option-text'>{{x}}</h3>
 <input type="checkbox" class="check_box"/>
 </div>
 {% endfor %}
 </div>
+<div id="timer">
+
+</div>
 <button onclick="get_next_question()">Next</button>
+</div>
 </body>
 </html>
 <script>
+var mode="{{quiz.strict_mode}}";
+if(mode=="True")
+{
+    //Turn off right click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+}
+var countDownDate = "{{end_time}}"*1000//To get international standard time
+  console.log(countDownDate)
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+  if (distance < 0) {
+    clearInterval(x);
+    location.reload();
+  }
+}, 1000);
 function get_next_question(){
 var x=document.getElementsByClassName("option")
 li=[]
@@ -55,9 +112,9 @@ $.ajax({
         for(let i=0;i<res['options'].length;i++)
         {
             let d=document.createElement("div");
-            d.className="option";
             let opt=document.createElement("h3");
             opt.innerText=res['options'][i];
+            opt.className="badge badge-warning option-text";
             let ch=document.createElement("input");
             ch.type="checkbox";
             ch.className="check_box";

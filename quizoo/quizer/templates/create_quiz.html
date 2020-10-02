@@ -1,56 +1,24 @@
-<html>
-<head>
-<title>Create Quiz</title>
-<style>
-body{
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-}
-.btn{
-  background-color: #4CAF50; 
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 30px;
-    margin: auto 
-}
-    h1{
-        text-align: center;
-        color: snow;
-        font-family: 'Cinzel', serif;
-    }
-    .btn-container{
-        text-align: center;
-    }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
-<head>
-
-<body>
-<br>
-<h1>Hello {{request.user}}</h1>
-<br>
-    <div class="btn-container">
-<button class="btn">Create New Quiz</button>
+{% extends "base.html"%}
+{% block all%}
+<div id="all">
+<div class="btn-container">
+<button class="btn" onclick="toggle()" id="toggler">Create New Quiz</button>
     </div>
 <br>
-<form action="" method="post" style="text-align: center;">
+<div id="form" style="display: none">
+<form action="" method="post" style="text-align: center;width:50%;margin:auto">
     {% csrf_token %}
     {{ form }}
         <div class="btn-container" style="padding-top: 30px;">
     <input type="submit" value="Submit" class="btn">
     </div>
 </form>
-{{errors}}
-<p style="padding-bottom: 40px;"></p>
-<div class="btn-container">
-<button class="btn">Edit Quiz</button>
-<button class="btn">Completed Quiz</button>
 </div>
-<body>
-<html>
+{{errors}}
+<div class="btn-container">
+<button class="btn" onclick="window.location='/show'">Edit Quiz</button>
+<br/><br/>
+<button class="btn" onclick="window.location='/completed'">Completed Quiz</button>
+</div>
+</div>
+{% endblock %}

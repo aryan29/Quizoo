@@ -1,0 +1,232 @@
+      <html>
+      <head>
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+body {
+  background-color: #F2F2F2;
+  font-family: 'Arial';
+  justify-content: center;
+  padding: 4rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #6E6E6E;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #1849AB;
+}
+input:focus + .slider {
+  box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.7);
+  outline: none;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+table{
+    position:relative;
+    width:100%;
+    height:90%;
+    top:0;
+    left:0;
+}
+#saving{
+    position:absolute;
+    padding:20px;
+    right:70px;
+}
+
+    </style>
+      </head>
+      <body>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Switch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Randomizer</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>One question per page</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Resume Later</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Email Result to Creator</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Email Result to Test Taker</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Show Score After test is over</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Reveal Correct Answers after test</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+    <tr>
+        <td>Can be viewed after it is over</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+        <td>Strict Mode</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+        <td>Switch On Camera before test</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+        <tr>
+        <td>Record Reponses</td>
+        <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+  <div id="saving"><button onclick="update()" class="btn btn-success">Save</button></div>
+</body>
+
+</html>
+<script>
+console.log("{{quiz.strict_mode|yesno:'true,false'}}");
+let li=document.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+console.log("{{quiz.strict_mode}}");
+li[0].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.randomizer|yesno:'true,false'}};
+li[1].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.one_question_per_page|yesno:'true,false'}};
+li[2].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.resume_later|yesno:'true,false'}};
+li[3].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.email_result_creator|yesno:'true,false'}};
+li[4].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.email_result_testtaker|yesno:'true,false'}};
+li[5].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.show_score_after_test|yesno:'true,false'}};
+li[6].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.reveal_answers_after_test|yesno:'true,false'}};
+li[7].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.view_after_test|yesno:'true,false'}};
+li[8].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.strict_mode|yesno:'true,false'}};
+li[9].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.camera_mode|yesno:'true,false'}};
+li[10].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.record_responses|yesno:'true,false'}};
+
+function update(){
+l1=[]
+let l=document.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+for(let i=0;i<l.length;i++)
+{
+    l1.push(li[i].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked);
+}
+
+$.ajax({
+    type:"POST",
+    url:"",
+    headers: {
+    "X-CSRFToken": '{{ csrf_token }}'
+        },
+    data:{
+        list:l1
+    },
+    success:function(res)
+    {
+        if(res==200)
+        console.log("Settings Updated")
+    }
+}) 
+//Grab Values of whole settings and update them
+
+}
+</script>

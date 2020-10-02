@@ -1,0 +1,43 @@
+{% extends "base.html"%}
+{% block all%}
+<div id="all">
+<div class="btn-container">
+<button class="btn" onclick="toggle()" id="toggler">Give Quiz</button>
+    </div>
+<br>
+<div id="form" style="display: none">
+<input class="form-control" placeholder="Enter Quiz Code" id="quiz-code"></input>
+<br>
+<button class="btn" onclick="checkAndRedirect()">Submit</button>
+</div>
+{{errors}}
+</div>
+{% endblock %}
+
+{% block scripts%}
+function checkAndRedirect(){
+    let val=document.getElementById("quiz-code").value;
+$.ajax({
+    type:"post",
+    url:"/checkValid/",
+    headers: {
+        "X-CSRFToken": '{{ csrf_token }}'
+                },
+    data:{
+        "quiz_no":val
+    },
+    
+    success:function(res){
+        if(res==200)
+        {
+            //Quiz Exist
+            window.location="/quiz/"+val;
+        }
+        else{
+            //Quiz doesnt exist
+            alert("No Such Quiz Exist");
+        }
+    }
+});
+}
+{% endblock %}
