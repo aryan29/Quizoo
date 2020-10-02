@@ -1,6 +1,90 @@
 {% load socialaccount %}
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+a{
+  color: white;
+    text-decoration: none;
+ }
+body{
+background-image: url('https://img.freepik.com/free-vector/quiz-neon-sign_1262-19629.jpg?size=626&ext=jpg');
+    opacity: 0.9;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+h3{
+  text-align: center;
+  font-size: 2em;
+  text-decoration: none;
+  color: white;
+    }
+.centre
+    {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+    }
+   
+    .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  margin-left: auto;
+  margin-right: auto;
+        border-radius: 60px;
+    }
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-instagram{
+background: #f09433; 
+background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+color: white;
+    }
+.fa-github{
+  background: black;
+  color: white;
+    } 
+.margin{
+        padding-top:13%;
+        margin-left: 40%;
+    }
+@media only screen and (max-width: 600px) {
+    .margin{
+        padding-top: 35%;
+        margin-left: 10%;
+    }
+    body{
+    background-image: url('https://img.freepik.com/free-vector/quiz-neon-sign_1262-19629.jpg?size=626&ext=jpg');
+    opacity: 0.9;
+    background-attachment: fixed;
+    background-size: cover;
+    }
+    }
+}
+</style>    
+</head>
 <body>
-<a href="{% provider_login_url 'google' process="login" %}">Connect a Google account</a>
+<img src="https://www.freepngimg.com/thumb/google/66903-google-pay-gboard-platform-logo-cloud.png" alt="" style="height: 200px;height: 200px;align-content: center;" class="centre">
+<h3><a href="{% provider_login_url 'google' process="login" %}">Connect a Google account to Get Started</a></h3>
+    
+   
+    <div class="margin">
+    <a href="" class="fa fa-facebook"  ></a>
+    <a href="" class="fa fa-instagram" ></a>
+    <a href="" class="fa fa-github" ></a>
+    </div>
+    <h3>Connect With Us</h3>
 </body>
 <html>
