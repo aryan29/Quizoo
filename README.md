@@ -1,4 +1,4 @@
-# Quizoo
+# Quizoo :green_book::closed_book:
 Free Online Quiz Platform for conducting quizes with lots of security features to avoid cheating and completely free   
 
 <img src="ReadmeAssets/1.png">
@@ -28,7 +28,27 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
 
  * A nice good looking and user friendly frontend is must
  
-
+### :camera: Screenshots
+Enter Quiz Code to Start Quiz    
+<kbd>
+<img src="ReadmeAssets/2.png">
+</kbd>
+         
+Edit Quiz In your pannel  
+<kbd>
+<img src="ReadmeAssets/3.png">
+</kbd>
+         
+Detailed Analysis after test is over       
+<kbd>
+<img src="ReadmeAssets/4.png">    
+</kbd>
+       
+         
+Quiz Settings Page      
+<kbd>
+<img src="ReadmeAssets/5.png">
+</kbd>
 
 
 ### Contribution

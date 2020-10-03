@@ -69,11 +69,26 @@ table{
     padding:20px;
     right:70px;
 }
-
+        .table-striped table-hover{
+            margin-top: 5%;
+        }
+@media only screen and (max-width: 600px) {
+    .savings{
+        display: none;
+/*        padding-bottom: 5%;*/
+         }
+     .table-striped table-hover
+    {
+        margin-top: 10%;
+    }
+        }
+    
     </style>
       </head>
       <body>
-  <table class="table table-striped table-hover">
+    <h3 style="align-content: center;display: inline-block;text-decoration: underline;">Quiz Settings</h3>
+  <div id="saving" class="savings"><button onclick="update()" class="btn btn-success">Save</button></div>
+  <table class="table table-striped table-hover" style="margin-top: 10%;">
     <thead>
       <tr>
         <th>Setting</th>
