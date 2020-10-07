@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_crontab',
+    'django_extensions',
 
 ]
 SITE_ID = 1
@@ -140,8 +141,8 @@ TIME_ZONE = 'Asia/Kolkata'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 CRONJOBS = [
-    ('*/1 * * * *', 'quizer.cron.my_scheduled_job',
-     '>> /home/aryan/Documents/quizooo/quizoo/file.log')
+    ('*/10 * * * *', 'quizer.cron.my_scheduled_job',
+     '>> /home/aryan/Documents/quizooo/quizoo/file.log')  # Run this cron job every 10 minutes
 ]
 CRONTAB_COMMAND_SUFFIX = '2>&1'
 STATIC_URL = '/static/'

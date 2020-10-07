@@ -1,0 +1,1444 @@
+{
+    "created_at": "2020-10-02 05:15",
+    "cli_options": "-a -o model.json --json",
+    "disable_fields": false,
+    "disable_abstract_fields": false,
+    "use_subgraph": false,
+    "graphs": [
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"django.contrib.admin\"",
+            "app_name": "django.contrib.admin",
+            "cluster_app_name": "cluster_django_contrib_admin",
+            "models": [
+                {
+                    "app_name": "django_contrib_admin_models",
+                    "name": "LogEntry",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "content_type",
+                            "label": "content_type",
+                            "type": "ForeignKey (id)",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "user",
+                            "label": "user",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "action_flag",
+                            "label": "action_flag",
+                            "type": "PositiveSmallIntegerField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "action_time",
+                            "label": "action_time",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "change_message",
+                            "label": "change_message",
+                            "type": "TextField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "object_id",
+                            "label": "object_id",
+                            "type": "TextField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "object_repr",
+                            "label": "object_repr",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "User",
+                            "type": "ForeignKey",
+                            "name": "user",
+                            "label": "user (logentry)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        },
+                        {
+                            "target_app": "django_contrib_contenttypes_models",
+                            "target": "ContentType",
+                            "type": "ForeignKey",
+                            "name": "content_type",
+                            "label": "content_type (logentry)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "LogEntry"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"django.contrib.auth\"",
+            "app_name": "django.contrib.auth",
+            "cluster_app_name": "cluster_django_contrib_auth",
+            "models": [
+                {
+                    "app_name": "django_contrib_auth_models",
+                    "name": "AbstractUser",
+                    "abstracts": [
+                        "AbstractBaseUser",
+                        "PermissionsMixin"
+                    ],
+                    "fields": [
+                        {
+                            "name": "date_joined",
+                            "label": "date_joined",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "email",
+                            "label": "email",
+                            "type": "EmailField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "first_name",
+                            "label": "first_name",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_active",
+                            "label": "is_active",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_staff",
+                            "label": "is_staff",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_superuser",
+                            "label": "is_superuser",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "last_login",
+                            "label": "last_login",
+                            "type": "DateTimeField",
+                            "blank": true,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "last_name",
+                            "label": "last_name",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "password",
+                            "label": "password",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "username",
+                            "label": "username",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_base_user",
+                            "target": "AbstractBaseUser",
+                            "type": "inheritance",
+                            "name": "inheritance",
+                            "label": "abstract\\ninheritance",
+                            "arrows": "[arrowhead=empty, arrowtail=none, dir=both]",
+                            "needs_node": true
+                        },
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "PermissionsMixin",
+                            "type": "inheritance",
+                            "name": "inheritance",
+                            "label": "abstract\\ninheritance",
+                            "arrows": "[arrowhead=empty, arrowtail=none, dir=both]",
+                            "needs_node": true
+                        }
+                    ],
+                    "label": "AbstractUser"
+                },
+                {
+                    "app_name": "django_contrib_auth_models",
+                    "name": "Permission",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "content_type",
+                            "label": "content_type",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "codename",
+                            "label": "codename",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "name",
+                            "label": "name",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_contenttypes_models",
+                            "target": "ContentType",
+                            "type": "ForeignKey",
+                            "name": "content_type",
+                            "label": "content_type (permission)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Permission"
+                },
+                {
+                    "app_name": "django_contrib_auth_models",
+                    "name": "Group",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "name",
+                            "label": "name",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "Permission",
+                            "type": "ManyToManyField",
+                            "name": "permissions",
+                            "label": "permissions (group)",
+                            "arrows": "[arrowhead=dot arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Group"
+                },
+                {
+                    "app_name": "django_contrib_auth_models",
+                    "name": "User",
+                    "abstracts": [
+                        "AbstractUser"
+                    ],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "date_joined",
+                            "label": "date_joined",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "email",
+                            "label": "email",
+                            "type": "EmailField",
+                            "blank": true,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "first_name",
+                            "label": "first_name",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_active",
+                            "label": "is_active",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_staff",
+                            "label": "is_staff",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "is_superuser",
+                            "label": "is_superuser",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "last_login",
+                            "label": "last_login",
+                            "type": "DateTimeField",
+                            "blank": true,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "last_name",
+                            "label": "last_name",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "password",
+                            "label": "password",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "username",
+                            "label": "username",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "Group",
+                            "type": "ManyToManyField",
+                            "name": "groups",
+                            "label": "groups (user)",
+                            "arrows": "[arrowhead=dot arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        },
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "Permission",
+                            "type": "ManyToManyField",
+                            "name": "user_permissions",
+                            "label": "user_permissions (user)",
+                            "arrows": "[arrowhead=dot arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        },
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "AbstractUser",
+                            "type": "inheritance",
+                            "name": "inheritance",
+                            "label": "abstract\\ninheritance",
+                            "arrows": "[arrowhead=empty, arrowtail=none, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "User"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"django.contrib.contenttypes\"",
+            "app_name": "django.contrib.contenttypes",
+            "cluster_app_name": "cluster_django_contrib_contenttypes",
+            "models": [
+                {
+                    "app_name": "django_contrib_contenttypes_models",
+                    "name": "ContentType",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "app_label",
+                            "label": "app_label",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "model",
+                            "label": "model",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [],
+                    "label": "ContentType"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"django.contrib.sessions\"",
+            "app_name": "django.contrib.sessions",
+            "cluster_app_name": "cluster_django_contrib_sessions",
+            "models": [
+                {
+                    "app_name": "django_contrib_sessions_base_session",
+                    "name": "AbstractBaseSession",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "expire_date",
+                            "label": "expire_date",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "session_data",
+                            "label": "session_data",
+                            "type": "TextField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [],
+                    "label": "AbstractBaseSession"
+                },
+                {
+                    "app_name": "django_contrib_sessions_models",
+                    "name": "Session",
+                    "abstracts": [
+                        "AbstractBaseSession"
+                    ],
+                    "fields": [
+                        {
+                            "name": "session_key",
+                            "label": "session_key",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "expire_date",
+                            "label": "expire_date",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "session_data",
+                            "label": "session_data",
+                            "type": "TextField",
+                            "blank": false,
+                            "abstract": true,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_sessions_base_session",
+                            "target": "AbstractBaseSession",
+                            "type": "inheritance",
+                            "name": "inheritance",
+                            "label": "abstract\\ninheritance",
+                            "arrows": "[arrowhead=empty, arrowtail=none, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Session"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"django.contrib.sites\"",
+            "app_name": "django.contrib.sites",
+            "cluster_app_name": "cluster_django_contrib_sites",
+            "models": [
+                {
+                    "app_name": "django_contrib_sites_models",
+                    "name": "Site",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "domain",
+                            "label": "domain",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "name",
+                            "label": "name",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [],
+                    "label": "Site"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"quizer\"",
+            "app_name": "quizer",
+            "cluster_app_name": "cluster_quizer",
+            "models": [
+                {
+                    "app_name": "quizer_models",
+                    "name": "Quiz",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "admin",
+                            "label": "admin",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "camera_mode",
+                            "label": "camera_mode",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "email_result_creator",
+                            "label": "email_result_creator",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "email_result_testtaker",
+                            "label": "email_result_testtaker",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "end_time",
+                            "label": "end_time",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "expired",
+                            "label": "expired",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "one_question_per_page",
+                            "label": "one_question_per_page",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "quiz_instructions",
+                            "label": "quiz_instructions",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "quiz_name",
+                            "label": "quiz_name",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "randomizer",
+                            "label": "randomizer",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "record_responses",
+                            "label": "record_responses",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "resume_later",
+                            "label": "resume_later",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "reveal_answers_after_test",
+                            "label": "reveal_answers_after_test",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "show_score_after_test",
+                            "label": "show_score_after_test",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "start_time",
+                            "label": "start_time",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "strict_mode",
+                            "label": "strict_mode",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "view_after_test",
+                            "label": "view_after_test",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "User",
+                            "type": "ForeignKey",
+                            "name": "admin",
+                            "label": "admin (quiz)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Quiz"
+                },
+                {
+                    "app_name": "quizer_models",
+                    "name": "Questions",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quiz",
+                            "label": "quiz",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "question_text",
+                            "label": "question_text",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "quizer_models",
+                            "target": "Quiz",
+                            "type": "ForeignKey",
+                            "name": "quiz",
+                            "label": "quiz (questions)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Questions"
+                },
+                {
+                    "app_name": "quizer_models",
+                    "name": "Options",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "question",
+                            "label": "question",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "option",
+                            "label": "option",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "quizer_models",
+                            "target": "Questions",
+                            "type": "ForeignKey",
+                            "name": "question",
+                            "label": "question (options)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "Options"
+                },
+                {
+                    "app_name": "quizer_models",
+                    "name": "CorrectOptions",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "question",
+                            "label": "question",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "option",
+                            "label": "option",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "quizer_models",
+                            "target": "Questions",
+                            "type": "ForeignKey",
+                            "name": "question",
+                            "label": "question (correctoptions)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "CorrectOptions"
+                },
+                {
+                    "app_name": "quizer_models",
+                    "name": "UsersGivingTest",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "quiz",
+                            "label": "quiz",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "user",
+                            "label": "user",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "questions_not_attempted",
+                            "label": "questions_not_attempted",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "score",
+                            "label": "score",
+                            "type": "SmallIntegerField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "quizer_models",
+                            "target": "Quiz",
+                            "type": "ForeignKey",
+                            "name": "quiz",
+                            "label": "quiz (usersgivingtest)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        },
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "User",
+                            "type": "ForeignKey",
+                            "name": "user",
+                            "label": "user (usersgivingtest)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "UsersGivingTest"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"allauth.account\"",
+            "app_name": "allauth.account",
+            "cluster_app_name": "cluster_allauth_account",
+            "models": [
+                {
+                    "app_name": "allauth_account_models",
+                    "name": "EmailAddress",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "user",
+                            "label": "user",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "email",
+                            "label": "email",
+                            "type": "EmailField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "primary",
+                            "label": "primary",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "verified",
+                            "label": "verified",
+                            "type": "BooleanField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "User",
+                            "type": "ForeignKey",
+                            "name": "user",
+                            "label": "user (emailaddress)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "EmailAddress"
+                },
+                {
+                    "app_name": "allauth_account_models",
+                    "name": "EmailConfirmation",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "email_address",
+                            "label": "email_address",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "created",
+                            "label": "created",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "key",
+                            "label": "key",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "sent",
+                            "label": "sent",
+                            "type": "DateTimeField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "allauth_account_models",
+                            "target": "EmailAddress",
+                            "type": "ForeignKey",
+                            "name": "email_address",
+                            "label": "email_address (emailconfirmation)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "EmailConfirmation"
+                }
+            ]
+        },
+        {
+            "True": true,
+            "False": false,
+            "None": null,
+            "name": "\"allauth.socialaccount\"",
+            "app_name": "allauth.socialaccount",
+            "cluster_app_name": "cluster_allauth_socialaccount",
+            "models": [
+                {
+                    "app_name": "allauth_socialaccount_models",
+                    "name": "SocialApp",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "client_id",
+                            "label": "client_id",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "key",
+                            "label": "key",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "name",
+                            "label": "name",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "provider",
+                            "label": "provider",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "secret",
+                            "label": "secret",
+                            "type": "CharField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_sites_models",
+                            "target": "Site",
+                            "type": "ManyToManyField",
+                            "name": "sites",
+                            "label": "sites (socialapp)",
+                            "arrows": "[arrowhead=dot arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "SocialApp"
+                },
+                {
+                    "app_name": "allauth_socialaccount_models",
+                    "name": "SocialAccount",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "user",
+                            "label": "user",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "date_joined",
+                            "label": "date_joined",
+                            "type": "DateTimeField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "extra_data",
+                            "label": "extra_data",
+                            "type": "JSONField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "last_login",
+                            "label": "last_login",
+                            "type": "DateTimeField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "provider",
+                            "label": "provider",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "uid",
+                            "label": "uid",
+                            "type": "CharField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "django_contrib_auth_models",
+                            "target": "User",
+                            "type": "ForeignKey",
+                            "name": "user",
+                            "label": "user (socialaccount)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "SocialAccount"
+                },
+                {
+                    "app_name": "allauth_socialaccount_models",
+                    "name": "SocialToken",
+                    "abstracts": [],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "label": "id",
+                            "type": "AutoField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": true
+                        },
+                        {
+                            "name": "account",
+                            "label": "account",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "app",
+                            "label": "app",
+                            "type": "ForeignKey (id)",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": true,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "expires_at",
+                            "label": "expires_at",
+                            "type": "DateTimeField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "token",
+                            "label": "token",
+                            "type": "TextField",
+                            "blank": false,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        },
+                        {
+                            "name": "token_secret",
+                            "label": "token_secret",
+                            "type": "TextField",
+                            "blank": true,
+                            "abstract": false,
+                            "relation": false,
+                            "primary_key": false
+                        }
+                    ],
+                    "relations": [
+                        {
+                            "target_app": "allauth_socialaccount_models",
+                            "target": "SocialApp",
+                            "type": "ForeignKey",
+                            "name": "app",
+                            "label": "app (socialtoken)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        },
+                        {
+                            "target_app": "allauth_socialaccount_models",
+                            "target": "SocialAccount",
+                            "type": "ForeignKey",
+                            "name": "account",
+                            "label": "account (socialtoken)",
+                            "arrows": "[arrowhead=none, arrowtail=dot, dir=both]",
+                            "needs_node": false
+                        }
+                    ],
+                    "label": "SocialToken"
+                }
+            ]
+        }
+    ]
+}

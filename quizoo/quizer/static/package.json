@@ -1,0 +1,23 @@
+{
+  "name": "fnon",
+  "version": "1.0.0",
+  "description": "Fnon is a client-side JavaScript library for models, loading indicators, notifications, and alerts which makes your web projects much better.",
+  "main": "fnon.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/superawdi/Fnon.get)"
+  },
+  "keywords": [
+    "Fnon",
+    "Hint",
+    "Ask",
+    "Confrim",
+    "Dialouge",
+    "Loading"
+  ],
+  "author": "Adel Alawdy",
+  "license": "MIT"
+}

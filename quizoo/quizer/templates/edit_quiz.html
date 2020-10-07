@@ -4,6 +4,8 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <style>
         body {
             text-align: center;
@@ -120,11 +122,14 @@
     </body>
     <html>
     <script>
+
         function createquestions() {
+
             // alert("ok");
             var d = document.createElement('div')
             d.className = "question"
-            var text = document.createElement('textarea')
+            var text = document.createElement('textarea');
+            
             var opt = document.createElement('ol')
             opt.class = "options"
             text.style.height = "200px"
@@ -255,13 +260,16 @@
                         console.log("Making an ajax request");
                     }
                     else
-                        alert("Options can't be empty");
+                        //Fnon.Alert.Light("Options can't be empty",'Alert Title','Submit',()=>{});
+                        Swal.fire("Options can't be empty")
                 }
                 else
-                    alert("Add Atleast 2 options and atleast 1 correct answer");
+                    //Fnon.Alert.Light('Add Atleast 2 options and atleast 1 correct answer','Alert Title','Submit',()=>{});
+                    Swal.fire("Add Atleast 2 options and atleast 1 correct answer")
             }
             else
-                alert("Question must be atleast of length 10");
+                //Fnon.Alert.Light('Question must be atleast of length 10','Alert Title','Submit',()=>{});
+                Swal.fire("Question must be atleast of length 10")
 
         }
 
