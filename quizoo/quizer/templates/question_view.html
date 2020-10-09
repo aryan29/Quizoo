@@ -63,6 +63,22 @@ if(mode=="True")
     //Turn off right click
     document.addEventListener('contextmenu', event => event.preventDefault());
 
+window.onblur = function() {
+    console.log("You are caught doing tab changes quiz epired");
+    $.ajax({
+    type:'POST',
+    url:"",
+    data:{
+        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+        "cheating":true
+    },
+    success:function(res){
+    location.reload();
+        }
+    });
+
+
+};
 }
 var countDownDate = "{{end_time}}"*1000//To get international standard time
   console.log(countDownDate)

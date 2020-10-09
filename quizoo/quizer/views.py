@@ -216,7 +216,7 @@ def GetQuestions(request, id):
     print(len(li))
     print(li[0])
     if(request.method == "GET"):
-        # person is just reloading the url
+        # person is just reloading the url show topmost question in list
         display_question = Questions.objects.get(id=int(li[0]))
 
         opt = display_question.options_set.values_list("option", flat=True)
@@ -228,13 +228,24 @@ def GetQuestions(request, id):
         })
     elif(request.method == "POST"):
         # person is submitting the question
-        # check for his response remove start ques from lst
+        # check for his response remove start ques from list
         res = request.POST
         print(res)
+        try:
+            if(res['cheating'] == 'true'):
+                obj.questions_not_attempted = ""
+                obj.save()
+                return HttpResponse(200)
+        except:
+            pass
+        print("Here we are")
         display_question = Questions.objects.get(id=int(li[0]))
         # increase score of this person if correct res
+        print(res.getlist('response[]'))
+        print(list(display_question.correctoptions_set.values_list("option", flat=True)))
         x = checkResponse(res.getlist('response[]'), list(
             display_question.correctoptions_set.values_list("option", flat=True)))
+        print("Done till here")
         new_li = li[1:]
         s = ','.join([str(i) for i in new_li])
         obj.questions_not_attempted = s
@@ -253,6 +264,7 @@ def GetQuestions(request, id):
             return HttpResponse(500)
 
 
+@login_required(login_url='/accounts/login/')
 def DeleteQuestion(request, id):
     print(request)
     if(request.method == 'DELETE'):
@@ -274,6 +286,7 @@ def checkResponse(r1, r2):
     if(r1 == r2):  # If both are same
         score = 1
     print("Score ", score)
+    # print("Score checked")
     return score
 
 
