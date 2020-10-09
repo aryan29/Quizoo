@@ -196,7 +196,7 @@ def QuizStart(request, id):
         return HttpResponse(400)
     else:
         print((quiz.start_time.timestamp()))
-        return render(request, 'start-quiz.html', {"quiz": quiz, "start": quiz.start_time.timestamp()})
+        return render(request, 'start-quiz.html', {"quiz": quiz, "start": quiz.start_time.timestamp(), "end":  quiz.end_time.timestamp()})
 
 
 @login_required(login_url='/accounts/login/')

@@ -55,8 +55,8 @@ $('#start').click(()=>{
     }
 });
 }); 
-var countDownDate = "{{start}}"*1000//To get international standard time
-  console.log(countDownDate)
+var countDownDate = "{{start}}"*1000//To get time in milliseconds
+var endTime="{{end}}"*1000;
 var x = setInterval(function() {
   var now = new Date().getTime();
   console.log(now);
@@ -73,5 +73,13 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = "Started";
     document.getElementById("start").value = "Enter";
   }
+  if(now>endTime){
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "Ended";
+    document.getElementById("start").value = "Locked";
+  }
+
 }, 1000);
+
+
 </script>
