@@ -14,7 +14,6 @@ import json
 from django.core.mail import send_mass_mail
 
 
-
 # Create your views here.
 
 
@@ -45,13 +44,14 @@ def CreateQuizView(request):
     # print(request.method)
     if(request.method == 'POST'):
         form = CreatingQuizForm(request.POST)
+        print(form.is_valid())
         if(form.is_valid()):
             obj = form.save(commit=False)
             obj.admin = request.user
             obj.save()
             return redirect('/create')
         else:
-            print("Getting Errors Dude")
+            print("Getting Errors Dude", form.errors)
             return render(request, 'create_quiz.html', {'form': form, 'errors': form.errors})
     else:
         return render(request, 'create_quiz.html', {'form': CreatingQuizForm()})
