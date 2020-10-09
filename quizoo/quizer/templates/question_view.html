@@ -43,7 +43,7 @@
 <br>
 <div id="all_options">
 {% for x in options%}
-<div>
+<div class="option">
 <h3 class='badge badge-warning option-text'>{{x}}</h3>
 <input type="checkbox" class="check_box"/>
 </div>
@@ -113,6 +113,7 @@ $.ajax({
         for(let i=0;i<res['options'].length;i++)
         {
             let d=document.createElement("div");
+            d.className='option';
             let opt=document.createElement("h3");
             opt.innerText=res['options'][i];
             opt.className="badge badge-warning option-text";

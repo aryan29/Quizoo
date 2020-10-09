@@ -162,6 +162,7 @@ def QuizStart(request, id):
         # If this quiz has started and hasnt ended than only we can make entry in db
         # for user giving particular test
         print("Allowing user to give test")
+        # Setting all questions for particular quiz in cache for 3hours
         questions = cache.get(f'quiz{quiz}')
         if questions is None:
             print("Storing in cache")
@@ -171,8 +172,10 @@ def QuizStart(request, id):
                 questions,
                 60*60*3
             )
-        # Setting all questions for particular quiz in cache for 3hours
-        shuffle(questions)
+
+        # If randomizer is on shuffle questions
+        if(quiz.randomizer):
+            shuffle(questions)
 
         q = ','.join([str(i.id) for i in questions])
         print(q)
@@ -265,8 +268,10 @@ def checkResponse(r1, r2):
     print("Coming to check reponses")
     print(r1)  # User Response
     print(r2)  # Actual Response
-    score = 1
-    if(r1.sort() == r2.sort()):  # If both are same
+    score = 0
+    r1.sort()
+    r2.sort()
+    if(r1 == r2):  # If both are same
         score = 1
     print("Score ", score)
     return score
