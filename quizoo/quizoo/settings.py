@@ -26,7 +26,7 @@ SECRET_KEY = '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['quizoo.pythonanywhere.com']
 
 
 # Application definition
@@ -155,6 +155,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
 EMAIL_HOST_PASSWORD = "passwordispassword"
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
