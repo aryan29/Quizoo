@@ -243,9 +243,10 @@ $.ajax({
     success:function(res)
     {
         if(res==200)
+        Swal.fire("Settings saved");
         console.log("Settings Updated")
         else
-        Swal.fire("Something went wrong settings cant be updated");
+        Swal.fire("Inavlid Settings");
     }
 }) 
 //Grab Values of whole settings and update them
