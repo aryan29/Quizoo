@@ -12,11 +12,36 @@ input{
     width:300px;
     height:60px
 }
+#style{
+  width: 90%;
+    max-width: 1240px;
+    margin: 0 auto;
+      margin-top:10%;
+      text-align:left
+}
+#style h2{
+  text-transform: uppercase;
+    text-align: left;
+    margin: 10px 0 10px 22px;
+    color: #2ec866;
+    font-weight:bold;
+    line-height: 1.333333333333333em;
+
+}
+#style pre{
+  font-size: 1em;
+    line-height: 1.5em;
+}
 </style>
 </head>
 <body>
 <p id="demo"></p>
 <input class="btn btn-dark" type="button"  id="start" value="Start-Quiz"/>
+<div id="style">
+<h2>Instructions</h2>
+<hr></hr>
+<pre>{{instructions}}</pre>
+</div>
 </body>
 </html>
 <script>
