@@ -11,7 +11,6 @@ from django.db.models import Q
 from django.utils import timezone
 import xlwt
 import json
-from django.core.mail import send_mass_mail
 
 
 # Create your views here.
