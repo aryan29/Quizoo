@@ -75,6 +75,7 @@ def QuizSettings(request, id):
             try:
                 print(request.POST)
                 ne = request.POST.getlist("list[]")
+                quiz.quiz_instructions = ne[11]
                 ne = [True if x == 'true' else False for x in ne]
                 print(ne)
                 quiz.randomizer = ne[0]
@@ -89,6 +90,7 @@ def QuizSettings(request, id):
                 quiz.camera_mode = ne[9]
                 quiz.record_responses = ne[10]
                 quiz.save()
+                print("Done new settings saved")
             # Update Settings for this quiz
                 return HttpResponse(200)
             except Exception as e:
