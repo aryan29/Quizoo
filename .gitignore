@@ -1,0 +1,4 @@
+venv/
+.vscode/
+.VSCodeCounter
+__pycache__/
