@@ -13,7 +13,7 @@ Hello {{request.user}}
 {% for x in list %}
 <li class="list-group-item d-flex justify-content-between">
 {{x.quiz_name}}
-<button class="btn-success" onclick="location.href='/analytics/{{x.id}}';">See Analytics</button>
+<button class="btn-success" onclick="location.href='/analytics/{{x.id}}/';">See Analytics</button>
 <br>
 </li>
 {% endfor %}
