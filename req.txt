@@ -2,9 +2,7 @@ absl-py==0.9.0
 aiodns==2.0.0
 aiohttp==3.6.2
 aiosqlite==0.11.0
-apparmor==2.12
 appdirs==1.4.3
-apturl==0.5.2
 asgiref==3.2.10
 asn1crypto==0.24.0
 astor==0.8.1
