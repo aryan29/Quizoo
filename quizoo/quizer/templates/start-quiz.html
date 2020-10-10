@@ -65,12 +65,12 @@ $('#start').click(()=>{
               'fullscreen=yes' // only works in IE, but here for completeness
           ].join(',');
 
-          var popup = window.open('/quiz/start/{{quiz.id}}', 'popup_window', params); 
+          var popup = window.open('/quiz/start/{{quiz.id}}/', 'popup_window', params); 
           popup.moveTo(0,0);
         }
         else if(res==200)
         {
-          window.location='/quiz/start/{{quiz.id}}';
+          window.location='/quiz/start/{{quiz.id}}/';
         }
         else
         {
