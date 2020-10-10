@@ -210,8 +210,17 @@ def GetQuestions(request, id):
     else:
         obj = obj[0]
     st = obj.questions_not_attempted
+    score = -1
+    print(quiz.show_score_after_test)
+    if(quiz.show_score_after_test):
+        score = obj.score
+
     if(st == "" or quiz.end_time < timezone.now()):
-        return render(request, 'end_quiz.html')
+        if(score != -1):
+            return render(request, 'end_quiz.html', {"score": score, "show": True})
+        else:
+            return render(request, 'end_quiz.html', {"score": score, "show": False})
+
     li = st.split(",")
     print(len(li))
     print(li[0])

@@ -31,8 +31,7 @@ $('#start').click(()=>{
     success:function(res)
     {
        let v1="{{quiz.strict_mode}}";
-       console.log(res);
-       
+       console.log(v1)
         if(res==200 && v1=="True")
         {
           var params = [
