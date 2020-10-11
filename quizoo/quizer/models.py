@@ -12,19 +12,19 @@ class Quiz(models.Model):
     quiz_instructions = models.CharField(max_length=1000, default="")
     start_time = models.DateTimeField()  # Quiz Start Time
     end_time = models.DateTimeField()  # Quiz End Time
-    randomizer = models.BooleanField(default=True)
-    one_question_per_page = models.BooleanField(default=True)
-    resume_later = models.BooleanField(default=False)
-    email_result_creator = models.BooleanField(default=False)
-    email_result_testtaker = models.BooleanField(default=False)
-    show_score_after_test = models.BooleanField(default=False)
-    reveal_answers_after_test = models.BooleanField(default=False)
-    view_after_test = models.BooleanField(default=False)
-    strict_mode = models.BooleanField(default=False)
-    camera_mode = models.BooleanField(default=False)
-    record_responses = models.BooleanField(default=False)
+    randomizer = models.BooleanField(default=True)  # Done
+    one_question_per_page = models.BooleanField(default=True)  # Not Done
+    resume_later = models.BooleanField(default=False)  # Useless
+    email_result_creator = models.BooleanField(default=False)  # Done
+    email_result_testtaker = models.BooleanField(default=False)  # Done
+    show_score_after_test = models.BooleanField(default=False)  # Done
+    reveal_answers_after_test = models.BooleanField(default=False)  # Not Done
+    view_after_test = models.BooleanField(default=False)  # Not Done
+    strict_mode = models.BooleanField(default=False)  # Done
+    camera_mode = models.BooleanField(default=False)  # Not Done
+    record_responses = models.BooleanField(default=False)  # Done
     # Whether quiz is over or not cron will detect quiz is over and send email to the users required if needed
-    expired = models.BooleanField(default=False)
+    expired = models.BooleanField(default=False)  # Done
 
 
 class Questions(models.Model):

@@ -347,6 +347,7 @@ def CompareResponses(request, id):
     # From that get a list of questions in that quiz
     # From that get a list of correct responses
     quiz = obj.quiz
+    #Only 2 db hit because  prefetching all correctoptions_set
     li = quiz.questions_set.prefetch_related('correctoptions_set')
     q = []
     r2 = []
@@ -354,6 +355,7 @@ def CompareResponses(request, id):
         q.append(question.question_text)
         z = [x.option for x in question.correctoptions_set.all()]
         r2.append(z)
+    
     print(q)
     print(r1)
     print(r2)
