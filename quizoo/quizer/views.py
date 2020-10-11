@@ -2,7 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm
-from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest
+from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest, RecordedResponses
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
@@ -255,6 +255,17 @@ def GetQuestions(request, id):
         print(list(display_question.correctoptions_set.values_list("option", flat=True)))
         x = checkResponse(res.getlist('response[]'), list(
             display_question.correctoptions_set.values_list("option", flat=True)))
+
+        if(quiz.record_responses):
+            # Recording responses if record response setting is true
+            RecordedResponses.objects.create(
+                whom=obj,
+                question_num=int(li[0]),
+                responses=res.getlist('response[]')
+            )
+            # Now we can access responses of this particular user
+            # obj.recordresponses_set.all().order_by('question_num')
+            # We will get a list of all questions with the reponse he marked for them
         print("Done till here")
         new_li = li[1:]
         s = ','.join([str(i) for i in new_li])
@@ -315,9 +326,22 @@ def SeeAnalytics(request, id):
     quiz = Quiz.objects.get(pk=id)
     if(quiz.admin == request.user):
         # He can view analytics for this quiz
-        li = quiz.usersgivingtest_set.all()
-        # List of all users who gave this quiz
-        return render(request, 'quiz_results.html', {"list": li, "id": id})
+
+        if(quiz.record_responses):
+            li = quiz.usersgivingtest_set.prefetch_related(
+                'recordedresponses_set')
+            res = []
+            for x in li:
+                r = [r1.responses for r1 in x.recordedresponses_set.all().order_by(
+                    'question_num')]
+                res.append(r)
+            # List of all users who gave this quiz
+            print(res)
+            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": True, "responses": res})
+        else:
+            li = quiz.usersgivingtest_set.all()
+            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": False})
+
         pass
     else:
         return HttpResponse(400)
