@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['quizoo.pythonanywhere.com', 'localhost']
 
