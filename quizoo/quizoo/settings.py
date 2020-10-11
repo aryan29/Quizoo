@@ -149,12 +149,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'quizer/static/')
 MEDIA_ROOT = BASE_DIR
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST_USER = "ctrlaltelitesih2020@gmail.com"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", '')
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
-EMAIL_HOST_PASSWORD = "passwordispassword"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_PASSWORD", '')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
