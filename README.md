@@ -95,3 +95,6 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
 
 ### Contribution
 Don't be lazy:smile: clone this repo ad start contributing
+
+<hr></hr>
+Do leave a star :star: if you like this repo :blush:
