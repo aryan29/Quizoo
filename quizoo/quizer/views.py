@@ -328,23 +328,37 @@ def SeeAnalytics(request, id):
         # He can view analytics for this quiz
 
         if(quiz.record_responses):
-            li = quiz.usersgivingtest_set.prefetch_related(
-                'recordedresponses_set')
-            res = []
-            for x in li:
-                r = [r1.responses for r1 in x.recordedresponses_set.all().order_by(
-                    'question_num')]
-                res.append(r)
-            # List of all users who gave this quiz
-            print(res)
-            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": True, "responses": res})
+            li = quiz.usersgivingtest_set.all()
+            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": True})
         else:
             li = quiz.usersgivingtest_set.all()
             return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": False})
-
-        pass
     else:
         return HttpResponse(400)
+
+
+@login_required(login_url='/accounts/login/')
+def CompareResponses(request, id):
+    obj = UsersGivingTest.objects.get(pk=id)
+    r1 = list(obj.recordedresponses_set.values_list(
+        "responses", flat=True).order_by('question_num'))
+    # r2 = obj.quiz.correctoptions_set.all()
+    # Get Quiz Name
+    # From that get a list of questions in that quiz
+    # From that get a list of correct responses
+    quiz = obj.quiz
+    li = quiz.questions_set.prefetch_related('correctoptions_set')
+    q = []
+    r2 = []
+    for question in li:
+        q.append(question.question_text)
+        z = [x.option for x in question.correctoptions_set.all()]
+        r2.append(z)
+    print(q)
+    print(r1)
+    print(r2)
+
+    return render(request, 'compare_res.html', {"questions": q, "user_res": r1, "correct_res": r2})
 
 
 @login_required(login_url='/accounts/login/')
