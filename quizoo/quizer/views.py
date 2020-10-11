@@ -53,7 +53,7 @@ def CreateQuizView(request):
             return redirect('/create')
         else:
             print("Getting Errors Dude", form.errors)
-            return render(request, 'create_quiz.html', {'form': form, 'errors': form.errors})
+            return render(request, 'create_quiz.html', {'form': CreatingQuizForm(), 'errors': form.errors})
     else:
         return render(request, 'create_quiz.html', {'form': CreatingQuizForm()})
 
