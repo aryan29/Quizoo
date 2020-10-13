@@ -1,25 +1,36 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+.top{
+  width:50%;
+  margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+</style>
 </head>
 <body>
-<table class="badge badge-success table">
+<table class=" table table-bordered top">
 <tr>
-<td>Students Giving Test:-</td>
+<td>Students Giving Test:- </td>
 <td>{{list|length}}</td>
 </tr>
 <tr>
-<td>Avg Score</td>
+<td>Avg Score:- </td>
 <td id="avg"></td>
 </tr>
 </div>
-<table class="table">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Score</th>
+      {% if showRes %}
+      <th scope="col">Show Responses</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -29,12 +40,20 @@
       <td>{{x.user.username}}</td>
       <td>{{x.user.email}}</td>
       <td>{{x.score}}</td>
+      {% if showRes %}
+      <td scope="col"><a href="/compareRes/{{x.id}}">Click</a></td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<button class="btn-info" onclick="window.location='download/{{id}}'">Download Analytics</button>
+<button class="btn-info" onclick="window.location='download/{{id}}/'">Download Analytics</button>
+{% if showRes %}
+{% for x in responses%}
+{{x}}
+{% endfor %}
+{% endif %}
 </body>
 </html>
 <script>

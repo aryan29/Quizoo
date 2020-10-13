@@ -22,11 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', 1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['quizoo.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -120,7 +119,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'offline',
+            'access_type': 'online',
         }
     }
 }
@@ -145,13 +144,14 @@ CRONJOBS = [
      '>> /home/aryan/Documents/quizooo/quizoo/file.log')  # Run this cron job every 10 minutes
 ]
 CRONTAB_COMMAND_SUFFIX = '2>&1'
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'quizer/static/')
-MEDIA_ROOT = BASE_DIR
+STATIC_URL = '/static/static/'
+MEDIA_URL = '/static/media/'
+STATIC_ROOT = '/vol/web/static/'
+MEDIA_ROOT = '/vol/web/media/'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST_USER = "ctrlaltelitesih2020@gmail.com"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", '')
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
-EMAIL_HOST_PASSWORD = "passwordispassword"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_PASSWORD", '')

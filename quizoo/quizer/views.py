@@ -2,7 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm
-from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest
+from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest, RecordedResponses
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
@@ -14,6 +14,8 @@ import json
 
 
 # Create your views here.
+def RedirectionPage(request):
+    return redirect('/create/')
 
 
 @login_required(login_url='/accounts/login/')
@@ -51,7 +53,12 @@ def CreateQuizView(request):
             return redirect('/create')
         else:
             print("Getting Errors Dude", form.errors)
-            return render(request, 'create_quiz.html', {'form': form, 'errors': form.errors})
+            li = form.errors.as_data()
+            for x in li:
+                z = list(li.get(x)[0])
+                print(z[0])
+                print()
+            return render(request, 'create_quiz.html', {'form': CreatingQuizForm(), 'errors': form.errors.as_data()})
     else:
         return render(request, 'create_quiz.html', {'form': CreatingQuizForm()})
 
@@ -255,6 +262,17 @@ def GetQuestions(request, id):
         print(list(display_question.correctoptions_set.values_list("option", flat=True)))
         x = checkResponse(res.getlist('response[]'), list(
             display_question.correctoptions_set.values_list("option", flat=True)))
+
+        if(quiz.record_responses):
+            # Recording responses if record response setting is true
+            RecordedResponses.objects.create(
+                whom=obj,
+                question_num=int(li[0]),
+                responses=res.getlist('response[]')
+            )
+            # Now we can access responses of this particular user
+            # obj.recordresponses_set.all().order_by('question_num')
+            # We will get a list of all questions with the reponse he marked for them
         print("Done till here")
         new_li = li[1:]
         s = ','.join([str(i) for i in new_li])
@@ -315,12 +333,41 @@ def SeeAnalytics(request, id):
     quiz = Quiz.objects.get(pk=id)
     if(quiz.admin == request.user):
         # He can view analytics for this quiz
-        li = quiz.usersgivingtest_set.all()
-        # List of all users who gave this quiz
-        return render(request, 'quiz_results.html', {"list": li, "id": id})
-        pass
+
+        if(quiz.record_responses):
+            li = quiz.usersgivingtest_set.all()
+            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": True})
+        else:
+            li = quiz.usersgivingtest_set.all()
+            return render(request, 'quiz_results.html', {"list": li, "id": id, "showRes": False})
     else:
         return HttpResponse(400)
+
+
+@login_required(login_url='/accounts/login/')
+def CompareResponses(request, id):
+    obj = UsersGivingTest.objects.get(pk=id)
+    r1 = list(obj.recordedresponses_set.values_list(
+        "responses", flat=True).order_by('question_num'))
+    # r2 = obj.quiz.correctoptions_set.all()
+    # Get Quiz Name
+    # From that get a list of questions in that quiz
+    # From that get a list of correct responses
+    quiz = obj.quiz
+    # Only 2 db hit because  prefetching all correctoptions_set
+    li = quiz.questions_set.prefetch_related('correctoptions_set')
+    q = []
+    r2 = []
+    for question in li:
+        q.append(question.question_text)
+        z = [x.option for x in question.correctoptions_set.all()]
+        r2.append(z)
+
+    print(q)
+    print(r1)
+    print(r2)
+
+    return render(request, 'compare_res.html', {"questions": q, "user_res": r1, "correct_res": r2})
 
 
 @login_required(login_url='/accounts/login/')

@@ -6,6 +6,7 @@ from django.utils import timezone
 
 
 class CreatingQuizForm(ModelForm):
+
     class Meta:
         model = Quiz
         fields = [
