@@ -99,7 +99,7 @@ git checkout dev
 sudo docker-compose -f docker-compose-deploy.yml up --build
 
 ### Contribution
-Don't be lazy:smile: clone this repo ad start contributing
+Don't be lazy:smile: clone this repo and start contributing
 
 <hr></hr>
 Do leave a star :star: if you like this repo :blush:
