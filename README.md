@@ -93,10 +93,12 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
 </table>
 
 ### Get Started
-git clone https://github.com/aryan29/Quizoo.git
-cd Quizoo
-git checkout dev
-sudo docker-compose -f docker-compose-deploy.yml up --build
+```
+git clone https://github.com/aryan29/Quizoo.git    
+cd Quizoo    
+git checkout dev    
+sudo docker-compose -f docker-compose-deploy.yml up --build  
+```  
 
 ### Contribution
 Don't be lazy:smile: clone this repo and start contributing
