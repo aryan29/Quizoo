@@ -93,6 +93,18 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
 </table>
 
 ### Get Started
+##### Django Development Server
+```
+git clone https://github.com/aryan29/Quizoo.git    
+cd Quizoo    
+git checkout dev  
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd quizoo
+python manage.py runserver
+```  
+##### Nginx Deployment Server
 ```
 git clone https://github.com/aryan29/Quizoo.git    
 cd Quizoo    
