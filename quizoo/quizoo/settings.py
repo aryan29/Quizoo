@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django_crontab',
     'django_extensions',
+    'ckeditor',
+
 
 ]
 SITE_ID = 1
@@ -123,6 +125,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
