@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import validate_comma_separated_integer_list
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -32,7 +32,7 @@ class Quiz(models.Model):
 class Questions(models.Model):
     # To which quiz this question belongs too
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    question_text = RichTextField()  # Question Text
+    question_text = RichTextUploadingField()  # Question Text
 
 
 class Options(models.Model):

@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     'django_crontab',
     'django_extensions',
     'ckeditor',
-
-
+    'ckeditor_uploader'
 ]
+
 SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -160,3 +161,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_PASSWORD", 'passwordispassword')
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
