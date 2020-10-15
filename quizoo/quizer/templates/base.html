@@ -256,10 +256,10 @@
 					</div>
 					<div class="content-buttons">
 						<div class="create-test">
-							<h6>Create Test</h6>
+							<h6><a href="/create/">Create Test</a></h6>
 						</div>
 						<div class="take-test">
-							<h6>Take Test</h6>
+							<h6><a href="/give-quiz/">Take Test</a></h6>
 						</div>
 					</div>
 				</div>
@@ -331,7 +331,7 @@
 			</div>
 		</section>
 
-		{% block all %} {% endblock %}
+
 
 		<footer class="page-footer font-small teal pt-4">
 			<!-- Footer Text -->
@@ -390,15 +390,6 @@
 	</body>
 	<html>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-		{% block scripts%} {% endblock %}
 
-		<script>
-			function toggle() {
-				f = document.getElementById("form");
-				if (f.style.display == "none") f.style.display = "block";
-				else f.style.display = "none";
-				document.getElementById("toggler").style.display = "none";
-			}
-		</script>
 	</html>
 </html>

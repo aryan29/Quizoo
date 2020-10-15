@@ -14,8 +14,9 @@ import json
 
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def RedirectionPage(request):
-    return redirect('/create/')
+    return render(request, 'base.html')
 
 
 @login_required(login_url='/accounts/login/')

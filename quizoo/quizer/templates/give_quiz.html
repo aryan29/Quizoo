@@ -1,5 +1,4 @@
-{%extends "navbar.html"%}
-{% block all%}
+
 
 <div id="all">
 <div class="btn-container">
@@ -18,10 +17,6 @@
     </div>
  <span class="text-muted footer-text">Made by Aryan Khandelwal</span>
 
-
-{% endblock %}
-
-{% block scripts%}
 <script>
 
     function checkAndRedirect(){
@@ -49,6 +44,11 @@
             }
         });
     }
+    	function toggle() {
+		f = document.getElementById("form");
+		if (f.style.display == "none") f.style.display = "block";
+		else f.style.display = "none";
+		document.getElementById("toggler").style.display = "none";
+	}
 	</script>
-	
-{% endblock %}
+

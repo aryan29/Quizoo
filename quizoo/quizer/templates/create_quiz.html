@@ -1,4 +1,3 @@
-{% extends "base.html"%}
 
 <div>
 	<div class="btn-container">
@@ -47,3 +46,11 @@
 		</div>
 	</div>
 </div>
+<script>
+	function toggle() {
+		f = document.getElementById("form");
+		if (f.style.display == "none") f.style.display = "block";
+		else f.style.display = "none";
+		document.getElementById("toggler").style.display = "none";
+	}
+</script>
