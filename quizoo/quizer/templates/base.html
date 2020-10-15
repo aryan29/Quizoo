@@ -1,162 +1,404 @@
 {% load static %}
 <html>
-<head>
-<title>Create Quiz</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<head>
+		<title>Create Quiz</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Overpass:wght@600&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<style>
-label{
-    color:white !important;
-}
-.background-image{
-    position:fixed;
-    left:0;
-    right:0;
-    width:100%;
-    height:100%;
-    z-index:-1;
-    background-image: url('{%static "images/bg3.jpg" %}');
-      background-repeat: no-repeat;
-    background-size:cover;
-    overflow: hidden;   /*  hide scrollbars */
-    filter:blur(3px);
-    text-align:center
-}
-body{
-    text-align:center;
-}
-#all{
-    position:absolute;
-    margin:0;
-    top:35%;
-    left:50%;
-    height:100px;
-    width:50%;
-    transform:translate(-50%,-50%)
-}
-.btn{
-  background-color: #4CAF50; 
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 30px;
-  margin-bottom:10px
-    margin: auto 
-}
-    h1{
-        text-align: center;
-        color: snow;
-        font-family: 'Cinzel', serif;
-    }
-    .btn-container{
-        text-align: center;
-    }
-            .navbar-nav { 
-           
-            margin-left: auto; 
-        } 
-        .footer-text{
-            width:100%;
-            color:white;
-            font-size: 2em;
-            font-weight:bold;
-            font-family: 'Sansita Swashed', cursive;
-        }
-    .icon-list{
-        text-decoration: none;
-    }
-    .fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 50px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-  margin-left: auto;
-  margin-right: auto;
-    }
-    .fa:hover {
-    color: white;
-        text-decoration: none;
-}
+		<style>
+			label {
+				color: white !important;
+			}
 
-.fa-linkedin {
+			body {
+				overflow-x: hidden;
+			}
+			#all {
+				position: absolute;
+				margin: 0;
+				top: 35%;
+				left: 50%;
+				height: 100px;
+				width: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.btn {
+				background-color: #4caf50;
+				border: none;
+				color: white;
+				padding: 15px 32px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+				border-radius: 30px;
+				margin-bottom: 10px;
+				margin: auto;
+			}
+			h1 {
+				text-align: center;
+				color: snow;
+				font-family: "Cinzel", serif;
+			}
+			.btn-container {
+				text-align: center;
+			}
+			.navbar-nav {
+				margin-left: auto;
+			}
+			.footer-text {
+				width: 100%;
+				color: white;
+				font-size: 2em;
+				font-weight: bold;
+				font-family: "Sansita Swashed", cursive;
+			}
+			.icon-list {
+				text-decoration: none;
+			}
+			.fa {
+				padding: 20px;
+				font-size: 30px;
+				width: 50px;
+				text-align: center;
+				text-decoration: none;
+				margin: 5px 2px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.fa:hover {
+				color: white;
+				text-decoration: none;
+			}
 
-  color: white;
-}
+			.fa-linkedin {
+				color: white;
+			}
 
-.fa-instagram{
-color: white;
-    }
-.fa-github{
-  color: white;
-    } 
-.margin{
-        margin: 0%
-        padding-top: 10%;
-    }
-@media only screen and (max-width: 600px) {
-    .margin{
-       
-        margin-left: 0%;
-        padding-top: 15%;
-    }
-    }
-    .fixed-bottom{
-        display: none;
-    }
-}
-ul{
-    list-style-type:none !important;
-}
+			.fa-instagram {
+				color: white;
+			}
+			.fa-github {
+				color: white;
+			}
+			.margin {
+				margin: 0%;
+				padding-top: 10%;
+			}
+			@media only screen and (max-width: 600px) {
+				.margin {
+					margin-left: 0%;
+					padding-top: 15%;
+				}
 
+				.fixed-bottom {
+					display: none;
+				}
+			}
+			ul {
+				list-style-type: none !important;
+			}
+		</style>
 
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			.page-main {
+				display: flex;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+			}
 
+			.page-content,
+			.page-image {
+				width: 50%;
+				border-radius: 10px;
+			}
+			.page-content {
+				margin: 20px;
+				margin-left: 30px;
+				box-shadow: inset 0px 0px 15px 5px rgba(100, 100, 100, 0.466);
+			}
 
-</style>
+			.create-test,
+			.take-test {
+				width: 120px;
+				height: 70px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				box-shadow: 5px 2px 13px 4px rgba(128, 128, 128, 0.233);
+				border-radius: 13px;
+				transition: all 0.2s ease-in;
+			}
+			.create-test {
+				background: linear-gradient(45deg, #ffc551, rgb(255, 255, 0));
+			}
+			.take-test {
+				background: linear-gradient(45deg, #7085ff, rgb(2, 0, 138));
+				color: white;
+			}
+			.create-test:hover,
+			.take-test:hover {
+				transform: scale(1.07);
+				cursor: pointer;
+			}
+			.content-divider {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+			.content-text {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				font-family: "Overpass", sans-serif;
+			}
+			.content-text-span {
+				font-size: 120px;
+				color: #475edf;
+			}
+			.content-buttons {
+				display: flex;
+				width: 100%;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+			/* ABOUT SECTION */
+			.about-section {
+				height: 100vh;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+			.left-section,
+			.right-section {
+				width: 50%;
+				margin: 20px;
+			}
+			.left-section h1 {
+				color: black;
+			}
+			.left-subsection {
+				height: 400px;
+				border: 1px solid black;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 
+			/* ENGAGE SECTION */
+			.engage-section {
+				margin-top: 150px;
+			}
+			.engage-row {
+				margin-top: 100px;
+			}
+			.engage-col {
+				height: 200px;
+				box-shadow: 5px 2px 13px 4px rgba(128, 128, 128, 0.233);
+				margin: 15px;
+				display: flex;
+				flex-direction: column;
+				border-radius: 10px;
+				justify-content: space-evenly;
+				align-items: center;
+				transition: all 0.2s ease;
+				color: #475edf;
+				cursor: pointer;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+			}
+			.engage-col:hover {
+				transform: scale(1.07);
+			}
+		</style>
+	</head>
+	{% include "navbar.html"%}
+	<body>
+		<div class="page-main">
+			<div class="page-content">
+				<div class="content-divider">
+					<div class="content-text">
+						<h3 style="color: #f6b32e">CREATE A</h3>
 
-<head>
-{% include "navbar.html"%}
-<body>
-<div class="background-image"></div>
-<br>
+						<span class="content-text-span">TEST</span>
+						<h3 style="color: #f6b32e">NOW</h3>
+					</div>
+					<div class="content-buttons">
+						<div class="create-test">
+							<h6>Create Test</h6>
+						</div>
+						<div class="take-test">
+							<h6>Take Test</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-image">
+				<img src="{%static "images/base-image.svg" %}" alt="quiz image">
+			</div>
+		</div>
 
-<br>
-{% block all %}
-{% endblock %}
+		<section class="engage-section">
+			<div class="container engage-container">
+				<h1
+					class="engage-header"
+					style="color: #475edf; font-family: 'Overpass', sans-serif"
+				>
+					<span style="color: #f6b32e">ENGAGE</span> With The Students
+				</h1>
+				<div class="row engage-row">
+					<div class="col-sm engage-col">
+						<i
+							class="fas fa-mug-hot"
+							style="color: #a0a0a0; font-size: 25px"
+						></i>
+						<h5 style="color: #f6b32e">Easy Quiz Creation</h5>
+						<p>
+							Creating tests has never been easier. Add questions, add answers,
+							set the time limit and you are good to go.
+						</p>
+					</div>
+					<div class="col-sm engage-col">
+						<i class="fas fa-boxes" style="color: #a0a0a0; font-size: 25px"></i>
+						<h5 style="color: #f6b32e">Multiple Variations</h5>
+						<p>
+							Creating tests has never been easier. Add questions, add answers,
+							set the time limit and you are good to go.
+						</p>
+					</div>
+					<div class="col-sm engage-col">
+						<i class="far fa-clock" style="color: #a0a0a0; font-size: 25px"></i>
+						<h5 style="color: #f6b32e">Instant Results</h5>
+						<p>
+							Creating tests has never been easier. Add questions, add answers,
+							set the time limit and you are good to go.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-<!--
-    <footer class="navbar fixed-bottom">
-       
-    </footer>
--->
-     
-<body>
-<html>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-<script>
-{% block scripts%}
-{% endblock %}
-function toggle(){
-    f=document.getElementById("form");
-    if(f.style.display=="none")
-    f.style.display="block";
-    else
-    f.style.display="none";
-    document.getElementById("toggler").style.display="none";
+		<section class="about-section">
+			<div class="left-section">
+				<div class="left-subsection">
+					<h1 class="about-heading">ABOUT</h1>
+				</div>
+			</div>
+			<div class="right-section">
+				<p>
+					Quizoo is a project created with close reference to the current
+					academic situation of schools and colleges due to the Covid-19
+					pandemic. We have have found that the current available platforms are
+					not yet ready for conducting examinations as they crash or run into
+					errors minutes before the it starts.
+				</p>
+				<p>
+					With Quizoo, creating tests becomes easy. It is a great tool and
+					extremely user friendly. Teachers can create objective type questions,
+					set time limits, submission dates etc.
+				</p>
+			</div>
+		</section>
 
-}
-</script>
+		{% block all %} {% endblock %}
+
+		<footer class="page-footer font-small teal pt-4">
+			<!-- Footer Text -->
+			<div class="container-fluid text-center text-md-left">
+				<!-- Grid row -->
+				<div class="row">
+					<!-- Grid column -->
+					<div class="col-md-6 mt-md-0 mt-3">
+						<!-- Content -->
+						<h5 class="text-uppercase font-weight-bold">LINKS</h5>
+						<ul class="list-unstyled">
+							<li>
+								<a href="#!">Very long link 1</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 2</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 3</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 4</a>
+							</li>
+						</ul>
+					</div>
+					<!-- Grid column -->
+
+					<hr class="clearfix w-100 d-md-none pb-3" />
+
+					<!-- Grid column -->
+					<div class="col-md-6 mb-md-0 mb-3">
+						<!-- Content -->
+						<h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
+						<ul class="list-unstyled">
+							<li>
+								<a href="#!">Very long link 1</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 2</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 3</a>
+							</li>
+							<li>
+								<a href="#!">Very long link 4</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright text-center py-3">
+				© 2020 Copyright:
+				<a href="https://mdbootstrap.com/"> quizoo.com</a>
+			</div>
+		</footer>
+	</body>
+	<html>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+		{% block scripts%} {% endblock %}
+
+		<script>
+			function toggle() {
+				f = document.getElementById("form");
+				if (f.style.display == "none") f.style.display = "block";
+				else f.style.display = "none";
+				document.getElementById("toggler").style.display = "none";
+			}
+		</script>
+	</html>
+</html>

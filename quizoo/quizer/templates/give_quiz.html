@@ -1,5 +1,6 @@
-{% extends "base.html"%}
+{%extends "navbar.html"%}
 {% block all%}
+
 <div id="all">
 <div class="btn-container">
 <button class="btn" onclick="toggle()" id="toggler">Give Quiz</button>
@@ -21,29 +22,33 @@
 {% endblock %}
 
 {% block scripts%}
-function checkAndRedirect(){
-    let val=document.getElementById("quiz-code").value;
-$.ajax({
-    type:"post",
-    url:"/checkValid/",
-    headers: {
-        "X-CSRFToken": '{{ csrf_token }}'
-                },
-    data:{
-        "quiz_no":val
-    },
-    
-    success:function(res){
-        if(res==200)
-        {
-            //Quiz Exist
-            window.location="/quiz/"+val;
-        }
-        else{
-            //Quiz doesnt exist
-            Swal.fire("No Such Quiz Exist")
-        }
+<script>
+
+    function checkAndRedirect(){
+        let val=document.getElementById("quiz-code").value;
+        $.ajax({
+            type:"post",
+            url:"/checkValid/",
+            headers: {
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+            data:{
+                "quiz_no":val
+            },
+            
+            success:function(res){
+                if(res==200)
+                {
+                    //Quiz Exist
+                    window.location="/quiz/"+val;
+                }
+                else{
+                    //Quiz doesnt exist
+                    Swal.fire("No Such Quiz Exist")
+                }
+            }
+        });
     }
-});
-}
+	</script>
+	
 {% endblock %}
