@@ -1,38 +1,49 @@
 {% extends "base.html"%}
-{% block all%}
 
-<div  >
-<div class="btn-container" >
-<button class="btn" onclick="toggle()" id="toggler">Create New Quiz</button>
-    </div>
-<br>
-<div id="form" style="display: none">
-<form action="" method="post" style="text-align: center;width:50%;margin: auto;">
-    {% csrf_token %}
-    {{ form }}
-        <div class="btn-container" style="padding-top: 30px;">
-    <input type="submit" value="Submit" class="btn">
-    </div>
-</form>
-</div>
-<div style="color:white;">
-{% load get_item %}
-{% for e in errors%}
-<p>{{errors|get_item:e}}</p>
-
-{% endfor %}
 <div>
-<div class="btn-container">
-<button class="btn" onclick="window.location='/show/'">Edit Quiz</button>
-<br/><br/>
-<button class="btn" onclick="window.location='/completed/'">Completed Quiz</button>
-</div>
-<div class="margin">
-    <a href="https://www.instagram.com/_crazy__anyone/?hl=en" class="fa fa-instagram" ></a>
-    <a href="https://github.com/aryan29/" class="fa fa-github" ></a>
-     <a href="https://www.linkedin.com/in/aryan-khandelwal-467339178/" class="fa fa-linkedin"  ></a>
-    </div>
- <span class="text-muted footer-text">Made by Aryan Khandelwal</span>
-</div>
-{% endblock %}
+	<div class="btn-container">
+		<button class="btn" onclick="toggle()" id="toggler">Create New Quiz</button>
+	</div>
+	<br />
+	<div id="form" style="display: none">
+		<form
+			action=""
+			method="post"
+			style="text-align: center; width: 50%; margin: auto"
+		>
+			{% csrf_token %} {{ form }}
+			<div class="btn-container" style="padding-top: 30px">
+				<input type="submit" value="Submit" class="btn" />
+			</div>
+		</form>
+	</div>
+	<div style="color: white">
+		{% load get_item %} {% for e in errors%}
+		<p>{{errors|get_item:e}}</p>
 
+		{% endfor %}
+		<div>
+			<div class="btn-container">
+				<button class="btn" onclick="window.location='/show/'">
+					Edit Quiz
+				</button>
+				<br /><br />
+				<button class="btn" onclick="window.location='/completed/'">
+					Completed Quiz
+				</button>
+			</div>
+			<div class="margin">
+				<a
+					href="https://www.instagram.com/_crazy__anyone/?hl=en"
+					class="fa fa-instagram"
+				></a>
+				<a href="https://github.com/aryan29/" class="fa fa-github"></a>
+				<a
+					href="https://www.linkedin.com/in/aryan-khandelwal-467339178/"
+					class="fa fa-linkedin"
+				></a>
+			</div>
+			<span class="text-muted footer-text">Made by Aryan Khandelwal</span>
+		</div>
+	</div>
+</div>
