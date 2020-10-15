@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    
 
     <style>
         body {
@@ -93,7 +95,7 @@
                 <span id="close" onclick="deleteobj({{x.question.id}})"></span>
 
                 {{forloop.counter}}
-                <span class="badge badge-info question-text">{{x.question.question_text}}</span>
+                <span class="badge badge-info question-text">{{x.question.question_text | safe}}</span>
                 <br>
                 {% for op in x.options%}
                 <br>
@@ -119,10 +121,12 @@
             <ol id="questions_list">
             </ol>
         </div>
+        <div id="editor"></div>
     </body>
     <html>
     <script>
-
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) );
         function createquestions() {
 
             // alert("ok");
