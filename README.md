@@ -27,6 +27,7 @@ Free Online Quiz Platform for conducting quizes with lots of security features t
   * Give x amount of questions to each user from a pool of n questions
 
  * A nice good looking and user friendly frontend is must
+ * Allow addition of images and formatted text in questions and options
  
 ### :camera: Screenshots
 Enter Quiz Code to Start Quiz    
