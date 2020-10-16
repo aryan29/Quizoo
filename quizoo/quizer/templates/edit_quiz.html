@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     
 
     <style>
@@ -116,49 +115,41 @@
         </div>
         <br>
         <br />
-        <button onclick="createquestions()" class="btn btn-primary">Add Questions</button>
-        <div>
-            <ol id="questions_list">
-            </ol>
+        <button id="addquestion" onclick="createquestions()" class="btn btn-primary">Add Questions</button>
+        <div id="editor" style="display:none">
+        <form id="quesion" method="post">
+        {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+        </form>
         </div>
-        <div id="editor"></div>
+        <div id="options">
+        <ol>
+        </ol>
+        </div>
+        <div id="twobuttons">
+        </div>
     </body>
     <html>
     <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) );
+  
         function createquestions() {
-
-            // alert("ok");
-            var d = document.createElement('div')
-            d.className = "question"
-            var text = document.createElement('textarea');
+            document.getElementById("addquestion").style.display="none";
+            document.getElementById("editor").style.display="block";
             
-            var opt = document.createElement('ol')
-            opt.class = "options"
-            text.style.height = "200px"
-            text.style.fontSize = "15px";
-            text.style.width = "50%"
-            text.style.display = "inline";
-            text.placeholder = "Question here";
-            text.className = "form-control"
+
+            d=document.getElementById("twobuttons");
             var button1 = document.createElement("button")
             var button2 = document.createElement("button")
             button1.innerHTML = "Add Options"
             button1.className = "btn btn-info"
             button2.innerHTML = "Submit"
             button2.className = "btn btn-success"
-            d.appendChild(text)
-            d.appendChild(opt)
-            d.appendChild(document.createElement("br"))
-            d.appendChild(button1)
-            d.appendChild(button2)
-            var list = document.getElementById("questions_list")
-            var elem = document.createElement("LI");
-            elem.appendChild(d);
-            list.appendChild(elem);
+            d.appendChild(button1);
+            d.appendChild(button2);
+            opt=document.getElementById("options");
             button1.addEventListener("click", function (e) {
-                var sel = d.getElementsByTagName("ol")
+                var sel = opt.getElementsByTagName("ol")
                 var elemli = document.createElement("li");
                 elemli.className = "wrong";
                 var text = document.createElement('textarea');
@@ -187,7 +178,7 @@
 
             })
             button2.addEventListener("click", function (e) {
-                validateAndAdd(d);
+                validateAndAdd(opt);
             })
         }
         function deleteobj(id) {
@@ -212,12 +203,7 @@
 
         }
         function validateAndAdd(obj) {
-            //Check if question is not empty
-            //Atleast 2 options are added in total
-            //Atleast 1 options is selected for correct response
-            //If all these things holds good make an ajax post request
-            //and refresh page using ajax
-            var question_text = obj.getElementsByTagName("textarea")[0].value
+            var question_text = CKEDITOR.instances['id_question_text'].getData()
             if (question_text.length >= 10) //Question Minimum length
             {
                 var li = obj.getElementsByTagName("ol")[0].getElementsByTagName("li");

@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import CreatingQuizForm
+from .forms import CreatingQuizForm,QuestionViewForm
 from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest, RecordedResponses
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -128,8 +128,8 @@ def EditQuiz(request, id):
                     "correct_options": corr
                 }
                 li.append(di)
-
-            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id})
+            form=QuestionViewForm()
+            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id,"form":form})
         elif(request.method == "POST"):
             data = request.POST
             print(data)

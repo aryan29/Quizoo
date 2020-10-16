@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from .models import Quiz
+from .models import Questions, Quiz
 from django.utils import timezone
+from ckeditor.widgets import CKEditorWidget
 
 
 class CreatingQuizForm(ModelForm):
@@ -38,3 +39,9 @@ class CreatingQuizForm(ModelForm):
                 print(e)
         except Exception as e:
             print("Raising exception", e)
+
+
+class QuestionViewForm(forms.ModelForm):
+    class Meta:
+        model = Questions
+        fields = ('question_text',)
