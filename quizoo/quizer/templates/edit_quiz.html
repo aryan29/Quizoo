@@ -68,6 +68,8 @@
 
         ol {
             list-style-type: none;
+              justify-content: center;
+  display: inline-table;
 
         }
 
@@ -94,19 +96,20 @@
                 <span id="close" onclick="deleteobj({{x.question.id}})"></span>
 
                 {{forloop.counter}}
-                <span class="badge badge-info question-text">{{x.question.question_text | safe}}</span>
-                <br>
+                <span class=" question-text">{{x.question.question_text | safe}}</span>
+                <br/>
+                <hr></hr>
                 {% for op in x.options%}
                 <br>
                 {{forloop.counter}}
-                <span class="badge badge-warning options-text">{{op.option}}</span>
+                <span class="badge badge-warning options-text">{{op.option | safe}}</span>
                 {% endfor %}
                 <br>
                 <br>
                 {% for op in x.correct_options%}
                 <br>
                 {{forloop.counter}}
-                <span class="badge badge-success options-text">{{op.option}}</span>
+                <span class="badge badge-success options-text">{{op.option | safe}}</span>
                 {% endfor %}
                 <br>
                 <br>
@@ -121,18 +124,30 @@
         {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
+
         </form>
         </div>
         <div id="options">
         <ol>
+        {% for i in '0123456789'|make_list %}
+       <li style="display:none" class="wrong django-ckeditor-widget" data-field-id="id_question_text{{i}}">
+        <textarea cols="20" id="id_question_text{{i}}" name="question_text" rows="2" required="" data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 100, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_question_text{{i}}" data-type="ckeditortype"></textarea>
+        </li>
+
+        {% endfor %}
+ 
         </ol>
         </div>
         <div id="twobuttons">
         </div>
+
+
+
+       
     </body>
     <html>
     <script>
-  
+        let val=0;
         function createquestions() {
             document.getElementById("addquestion").style.display="none";
             document.getElementById("editor").style.display="block";
@@ -150,31 +165,31 @@
             opt=document.getElementById("options");
             button1.addEventListener("click", function (e) {
                 var sel = opt.getElementsByTagName("ol")
-                var elemli = document.createElement("li");
-                elemli.className = "wrong";
-                var text = document.createElement('textarea');
-                text.className = "form-control";
-                text.style.width = "50%";
-                text.placeholder = "Option";
+                
+                //Find first "style:none"element and make it style 
+                if(val<=9)
+                {
+                var elem=document.getElementById("options").getElementsByTagName("ol")[0].getElementsByTagName("li")[val];
+                elem.style.display="inline-block";
+                elem.style.margin="10px";
+                val+=1;
                 var ch = document.createElement('input');
                 ch.type = "checkbox";
                 ch.addEventListener("click", function (e1) {
                     if (ch.checked == true) {
-                        elemli.className = "correct";
+                        elem.className = "correct";
                     }
                     else {
-                        elemli.className = "wrong";
+                        elem.className = "wrong";
                     }
                 });
-
-                text.style.height = "50px"
-                text.style.width = "20%"
-                text.style.display = "inline-block";
-                text.style.marginRight = "20px";
-
-                elemli.appendChild(text)
-                elemli.appendChild(ch)
-                sel[0].appendChild(elemli)
+                elem.appendChild(ch);
+                
+                }
+                else
+                {
+                    Swal.fire("You can't add more than 10 options for 1 question");
+                }
 
             })
             button2.addEventListener("click", function (e) {
@@ -214,18 +229,23 @@
                     fl = 0;
                     l1 = []
                     l2 = []
-                    for (let x = 0; x < li.length; x++) {
-                        console.log(li[x].getElementsByTagName("textarea")[0]);
-                        if (li[x].getElementsByTagName("textarea")[0].value == "") {
+                    for (let x = 0; x < val; x++) //Val signifies the current list of visible options
+                     {
+                        let opt_val=CKEDITOR.instances['id_question_text'+x].getData();
+                        console.log(opt_val);
+                        if (opt_val == "") {
                             fl = 1;
                         }
-                        l1.push(li[x].getElementsByTagName("textarea")[0].value)
+                        l1.push(opt_val)
                     }
                     for (let x = 0; x < corr.length; x++) {
-                        l2.push(corr[x].getElementsByTagName("textarea")[0].value)
+                        let opt_val=CKEDITOR.instances['id_question_text'+x].getData();
+                        l2.push(opt_val)
                     }
 
                     if (fl == 0) {
+                        console.log(l1);
+                        console.log(l2);
                         //Make an ajax request
                         $.post(
                             "",

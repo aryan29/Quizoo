@@ -38,12 +38,12 @@ class Questions(models.Model):
 class Options(models.Model):
     # This is an Option of which Question
     question = models.ForeignKey(Questions, on_delete=models.CASCADE)
-    option = models.CharField(max_length=100)  # Option Text
+    option = RichTextUploadingField()  # Option Text
 
 
 class CorrectOptions(models.Model):
     question = models.ForeignKey(Questions, on_delete=models.CASCADE)
-    option = models.CharField(max_length=100)
+    option = RichTextUploadingField()
 
 
 class UsersGivingTest(models.Model):

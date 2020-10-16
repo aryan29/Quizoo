@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import CreatingQuizForm,QuestionViewForm
+from .forms import CreatingQuizForm, QuestionViewForm
 from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest, RecordedResponses
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -128,8 +128,8 @@ def EditQuiz(request, id):
                     "correct_options": corr
                 }
                 li.append(di)
-            form=QuestionViewForm()
-            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id,"form":form})
+            form = QuestionViewForm()
+            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id, "form": form})
         elif(request.method == "POST"):
             data = request.POST
             print(data)
@@ -139,22 +139,29 @@ def EditQuiz(request, id):
             # Add entry into db from post data
             # and return the response to append it if added in db successfully
             try:
-                q = Questions.objects.create(
-                    question_text=data['question_text'],
-                    quiz=quiz
-                )
-                for option in data.getlist('options[]'):
-                    Options.objects.create(
-                        option=option,
-                        question=q
-                    )
-                for correct_option in data.getlist('correct_options[]'):
-                    CorrectOptions.objects.create(
-                        option=correct_option,
-                        question=q
-                    )
-                return HttpResponse(200)
+                form = QuestionViewForm(data)
+                print(form)
+                if(form.is_valid()):
+                    q = form.save(commit=False)
+                    q.quiz = quiz
+                    q.save()
+                    print(q)
+                    for option in data.getlist('options[]'):
+                        Options.objects.create(
+                            option=option,
+                            question=q
+                        )
+                    for correct_option in data.getlist('correct_options[]'):
+                        CorrectOptions.objects.create(
+                            option=correct_option,
+                            question=q
+                        )
+                    return HttpResponse(200)
+                else:
+                    return HttpResponse(500)
+
             except Exception as e:
+                print("Exception")
                 print(e)
                 return HttpResponse(500)
     else:

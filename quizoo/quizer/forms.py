@@ -42,6 +42,7 @@ class CreatingQuizForm(ModelForm):
 
 
 class QuestionViewForm(forms.ModelForm):
+    
     class Meta:
         model = Questions
         fields = ('question_text',)
