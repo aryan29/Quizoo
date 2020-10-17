@@ -108,6 +108,14 @@
 				margin: 0%;
 				padding-top: 10%;
 			}
+			.features-list{
+				list-style: none;
+			}
+			.features-list li::before{
+				content: "\00BB";
+				margin-right: 20px;
+				color:#ffb114;
+			}
 			@media only screen and (max-width: 600px) {
 			
 				.page-image{
@@ -151,12 +159,12 @@
 			.page-content,
 			.page-image {
 				width: 50%;
-				border-radius: 10px;
+				border-radius: 20px;
 			}
 			.page-content {
 				margin: 20px;
 				margin-left: 30px;
-				box-shadow: inset 0px 0px 15px 5px rgba(100, 100, 100, 0.466);
+				box-shadow: inset 0px 0px 15px 5px rgba(195, 195, 195, 0.466);
 			}
 
 			.create-test,
@@ -223,6 +231,7 @@
 			/* ENGAGE SECTION */
 			.engage-section {
 				margin-top: 150px;
+				margin-bottom: 120px;
 			}
 			.engage-row {
 				margin-top: 100px;
@@ -244,6 +253,15 @@
 			}
 			.engage-col:hover {
 				transform: scale(1.07);
+			}
+
+			/* ABOUT SECTION */
+			.about-section{
+				margin-top: 150px; 
+				margin: 20px;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				box-shadow: 0px 0px 5px 5px rgb(212, 212, 212);
+				border-radius: 20px;
 			}
 		</style>
 	</head>
@@ -297,61 +315,56 @@
 						<i class="fas fa-boxes" style="color: #a0a0a0; font-size: 25px"></i>
 						<h5 style="color: #f6b32e">Multiple Variations</h5>
 						<p>
-							Creating tests has never been easier. Add questions, add answers,
-							set the time limit and you are good to go.
+							A huge number of permutations in which tests could be taken and evaluated. Details down below
 						</p>
 					</div>
 					<div class="col-sm engage-col">
 						<i class="far fa-clock" style="color: #a0a0a0; font-size: 25px"></i>
 						<h5 style="color: #f6b32e">Instant Results</h5>
 						<p>
-							Creating tests has never been easier. Add questions, add answers,
-							set the time limit and you are good to go.
+							Tests get evaluated on the fly, no sitting and checking question papers. Results could be individually mailed, or be shown at the end of each test.
 						</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="about-section" style="margin-top: 100px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+		<section class="about-section">
 			<div class="container about-container">
 				<div class="row about-row">
 					
-					<div class="col-sm about-col">
+					<div class="col-sm about-col" style="border-left: 4px solid #475edf;">
 						<p>
-							Quizoo is a project created with close reference to the current
+							Quizoo is a platform created with close reference to the current
 							academic situation of schools and colleges due to the Covid-19
-							pandemic. We have have found that the current available platforms
+							pandemic. We have have found that the currently available platforms
 							are not yet ready for conducting examinations as they crash or run
-							into errors minutes before the it starts.
+							into errors minutes before it starts.
 						</p>
 						<p>
 							With Quizoo, creating tests becomes easy. It is a great tool and
 							extremely user friendly. We provide multiple features like:
-							<ul class="features-list" style="list-style:disc !important; margin-left: 40px; ">
+							<ul class="features-list">
 								<li>
-									Auto email students there score after test got over
+									Auto email students their scores after the test gets over
 								</li>
 								<li>
-									Show questions in random order
-								</li>
-								<li>
-									Shuffle options
+									Show questions in random order and shuffle options
 								</li>
 								<li>	
-									Show students their score during the test itself
+									Show students their scores during the test itself
 								</li>
 								<li>
-									a student reattempt test after its end time
+									Reattempt a test if missed by any chance and admin permits
 								</li>
 								<li>
 									Allow admin to retake a previous quiz
 								</li>
 								<li>
-									Allowing multiple admins for a quiz
+									Multiple admins for a quiz
 								</li>
 								<li>
-									Camera On mode or not
+									Camera mode On or Off
 								</li>
 								<li>
 									Generating a Random Quiz from Previously owned question set
@@ -363,13 +376,13 @@
 						</p>
 					</div>
 					<div class="col-sm about-image-col" style="margin-left: 90px;">
-						<img src="{%static "images/about-us.svg" %}" style="width: 100%; box-shadow: inset 0px 0px 15px 5px rgba(100, 100, 100, 0.466);">
+						<img src="{%static "images/about-us.svg" %}" style="width: 100%;">
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<footer class="page-footer font-small teal pt-4">
+		<footer style="background-color: rgb(0, 141, 141);" class="page-footer font-small pt-4">
 			<!-- Footer Text -->
 			<div class="container-fluid text-center text-md-left">
 				<!-- Grid row -->
