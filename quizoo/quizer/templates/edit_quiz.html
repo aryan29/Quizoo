@@ -126,10 +126,9 @@
                         {% endfor %}
                         
                 </div>
-                
-                {% for op in x.correct_options%}
                 <br>
-                <p> CORRECT ANSWER: </p>
+                <p> CORRECT ANSWER: </p>  
+                {% for op in x.correct_options%}
                 <span class="badge options-text options-text-correct">{{op.option | safe}}</span>
                 {% endfor %}
                 <br>
