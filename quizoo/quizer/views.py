@@ -78,12 +78,14 @@ def QuizSettings(request, id):
     quiz = Quiz.objects.get(pk=id)
     if(quiz.admin == request.user):
         if(request.method == 'GET'):
-            return render(request, 'settings.html', {"quiz": quiz})
+            return render(request, 'settings.html', {"quiz": quiz, "start": quiz.start_time, "end": quiz.end_time})
         elif(request.method == 'POST'):
             try:
                 print(request.POST)
                 ne = request.POST.getlist("list[]")
                 quiz.quiz_instructions = ne[11]
+                quiz.start_time = ne[12]
+                quiz.end_time = ne[13]
                 ne = [True if x == 'true' else False for x in ne]
                 print(ne)
                 quiz.randomizer = ne[0]
@@ -130,9 +132,9 @@ def EditQuiz(request, id):
                     "correct_options": corr
                 }
                 li.append(di)
-                
+
             form = QuestionViewForm()
-            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id, "form": form, "start": quiz.start_time, "end": quiz.end_time})
+            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id, "form": form})
         elif(request.method == "POST"):
             data = request.POST
             print(data)

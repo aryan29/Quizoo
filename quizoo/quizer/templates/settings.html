@@ -85,13 +85,21 @@ table{
         #instructions{
           height:200px
         }
+        #timings{
+          margin-top:20px;
+        }
     
     </style>
       </head>
       <body>
     <h3 style="align-content: center;display: inline-block;text-decoration: underline;">Quiz Settings</h3>
-  <div id="saving" class="savings"><button onclick="update()" class="btn btn-success">Save</button></div>
 
+  <div id="saving" class="savings"><button onclick="update()" class="btn btn-success">Save</button></div>
+  <div id="timings">
+  <p>Start Time <input type="datetime-local" id="start_time" name="start_time"></p>
+  <br/>
+  <p>End Time <input type="datetime-local" id="end_time" name="end_time"></p> 
+  </div>
   <textarea class="form-control" placeholder="Instructions" id="instructions">{{quiz.quiz_instructions}}</textarea>
   <table class="table table-hover" style="margin-top: 5%;">
     <thead>
@@ -231,6 +239,9 @@ for(let i=0;i<l.length;i++)
     l1.push(li[i].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked);
 }
 l1.push(document.getElementById("instructions").value)//Instructions of quiz
+l1.push(document.getElementById("start_time").value);
+l1.push(document.getElementById("end_time").value);
+console.log(document.getElementById("end_time").value);
 $.ajax({
     type:"POST",
     url:"",
@@ -249,6 +260,39 @@ $.ajax({
     }
 }) 
 //Grab Values of whole settings and update them
-
 }
+window.addEventListener("load", function() {
+    var now = new Date();
+    var utcString = now.toISOString().substring(0,19);
+    
+    var year = parseInt("{{start.year}}")
+    var month = parseInt("{{start.month}}")
+    var day = parseInt("{{start.day}}")
+    var hour =parseInt("{{start.hour}}")
+    var minute = parseInt("{{start.minute}}")
+    var second = parseInt("{{start.second}}")
+    var localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+    datetimeField = document.getElementById("start_time");
+    console.log(localDatetime);
+    datetimeField.value = localDatetime;
+    year = parseInt("{{end.year}}")
+    month = parseInt("{{end.month}}")
+    day = parseInt("{{end.day}}")
+    hour =parseInt("{{end.hour}}")
+    minute = parseInt("{{end.minute}}")
+    second = parseInt("{{end.second}}")
+    localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+    var datetimeField = document.getElementById("end_time");
+    datetimeField.value = localDatetime;
+});
 </script>

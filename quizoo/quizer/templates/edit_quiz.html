@@ -109,9 +109,6 @@
         <h1 style="font-family:'Cinzel', serif">{{name}}</h1>
         <br>
         <br>
-        <p>Start Time <input type="datetime-local" id="start_time" name="start_time"></p>
-        <br/>
-        <p>End Time <input type="datetime-local" id="end_time" name="end_time"></p> 
         <div id="all">
             
 
@@ -312,36 +309,5 @@
                 //Fnon.Alert.Light('Question must be atleast of length 10','Alert Title','Submit',()=>{});
                 Swal.fire("Question must be atleast of length 10")
         }
-window.addEventListener("load", function() {
-    var now = new Date();
-    var utcString = now.toISOString().substring(0,19);
-    var year = parseInt("{{start.year}}")
-    var month = parseInt("{{start.month}}")
-    var day = parseInt("{{start.day}}")
-    var hour =parseInt("{{start.hour}}")
-    var minute = parseInt("{{start.minute}}")
-    var second = parseInt("{{start.second}}")
-    var localDatetime = year + "-" +
-                      (month < 10 ? "0" + month.toString() : month) + "-" +
-                      (day < 10 ? "0" + day.toString() : day) + "T" +
-                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-                      (minute < 10 ? "0" + minute.toString() : minute) +
-                      utcString.substring(16,19);
-    datetimeField = document.getElementById("start_time");
-    datetimeField.value = localDatetime;
-    year = parseInt("{{end.year}}")
-    month = parseInt("{{end.month}}")
-    day = parseInt("{{end.day}}")
-    hour =parseInt("{{end.hour}}")
-    minute = parseInt("{{end.minute}}")
-    second = parseInt("{{end.second}}")
-    localDatetime = year + "-" +
-                      (month < 10 ? "0" + month.toString() : month) + "-" +
-                      (day < 10 ? "0" + day.toString() : day) + "T" +
-                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-                      (minute < 10 ? "0" + minute.toString() : minute) +
-                      utcString.substring(16,19);
-    var datetimeField = document.getElementById("end_time");
-    datetimeField.value = localDatetime;
-});
+
     </script>
