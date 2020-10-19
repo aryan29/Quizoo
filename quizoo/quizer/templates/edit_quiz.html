@@ -126,7 +126,7 @@
                 {% for op in x.options%}
                 
                 {{forloop.counter}}
-                        <span class="options-text">{{op.option | safe}}</span>
+                <span class="options-text">{{op.option | safe}}</span>
                         {% endfor %}
                         
                     </div>
@@ -249,6 +249,9 @@
             {
                 var li = obj.getElementsByTagName("ol")[0].getElementsByTagName("li");
                 var corr = obj.getElementsByTagName("ol")[0].getElementsByClassName("correct");
+                console.log("Printing");
+                console.log(li);
+                console.log(corr);
                 if (li.length >= 2 && corr.length >= 1) //Minimum number of options & min number of correct options
                 {
                     //Now check if no options is empty if thats true we can make an ajax request
@@ -264,13 +267,18 @@
                         }
                         l1.push(opt_val)
                     }
+                    console.log("Now printing correct ones");
                     for (let x = 0; x < corr.length; x++) {
-                        let opt_val=CKEDITOR.instances['id_question_text'+x].getData();
+                        //get id of this element in li
+
+                        let obj_id=corr[x].getElementsByTagName("textarea")[0].id;
+                        let opt_val=CKEDITOR.instances[obj_id].getData();
+                        console.log(opt_val)
                         l2.push(opt_val)
                     }
 
                     if (fl == 0) {
-                        console.log(l1);
+                       console.log(l1);
                         console.log(l2);
                         //Make an ajax request
                         $.post(

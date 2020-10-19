@@ -66,6 +66,7 @@ def CreateQuizView(request):
 # def CreateQuizEnpoint(request):
 
 
+@login_required(login_url='/accounts/login/')
 def ShowAllQuizToBeHeld(request):
     # Quiz hasnt started yet
     li = Quiz.objects.filter(admin=request.user, start_time__gt=timezone.now())
@@ -105,8 +106,8 @@ def QuizSettings(request, id):
                 return HttpResponse(400)
 
 
-@login_required(login_url='/accounts/login/')
 @csrf_exempt
+@login_required(login_url='/accounts/login/')
 def EditQuiz(request, id):
     quiz = Quiz.objects.select_related('admin').get(pk=id)
     # Quiz belongs to this user and it hasnt started yet
