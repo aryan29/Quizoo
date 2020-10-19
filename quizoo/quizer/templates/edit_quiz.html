@@ -125,7 +125,7 @@
                 <span class="options-text">{{op.option | safe}}</span>
                         {% endfor %}
                         
-                    </div>
+                </div>
                 
                 {% for op in x.correct_options%}
                 <br>
@@ -285,9 +285,10 @@
                             function (data, status) {
                                 console.log("Data Added in DB");
                                 if (data == 200 && status == "success") {
-                                    location.reload();
+                                    //location.reload();
                                     //console.log("Add it dynamically here as it is added in db");
-                                    //appenddata(question_text,l1,l2)
+                                    appenddata(question_text,l1,l2)
+                                
                                 }
                                 else {
                                     console.log("Something went wrong");
@@ -308,6 +309,28 @@
             else
                 //Fnon.Alert.Light('Question must be atleast of length 10','Alert Title','Submit',()=>{});
                 Swal.fire("Question must be atleast of length 10")
+        }
+        function appenddata(q,x,y){
+            l=document.getElementById("all");
+            d=document.createElement('div');
+            var it=`
+               <h5 style="margin-bottom: 10px;background-color: #475edf; text-align: center; color: #475edf; ">:</h5>
+                <span id="close" onclick="deleteobj({{x.question.id}})"> <i class="far fa-trash-alt"></i> </span>
+                <span class=" question-text">`+q+`</span>
+                <hr></hr>
+                <h4 style="display: inline-block; margin-top: 10px;margin-bottom: 40px;background-color: #bff5ff; text-align: center; border-radius: 10px;padding: 10px; ">OPTIONS:</h4>
+                <div class="options-list"> `;
+                for(let x=0;x<a.length;x++)
+                it+=`<span class="options-text">`+a[x]+`</span>`;
+                it+=`</div><br>
+                <p> CORRECT ANSWER: </p>`
+                for(let x=0;x<b.length;x++)
+                it+=`<span class="badge options-text options-text-correct">`+b[x]+`</span>`;
+                it+=`<br><br>`
+                d.className="already-made-questions";
+                d.innerHTML=it;
+
+            l.appendChild(d);
         }
 
     </script>
