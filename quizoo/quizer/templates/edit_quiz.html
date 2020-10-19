@@ -109,6 +109,9 @@
         <h1 style="font-family:'Cinzel', serif">{{name}}</h1>
         <br>
         <br>
+        <p>Start Time <input type="datetime-local" id="start_time" name="start_time"></p>
+        <br/>
+        <p>End Time <input type="datetime-local" id="end_time" name="end_time"></p> 
         <div id="all">
             
 
@@ -116,16 +119,12 @@
             <div class="already-made-questions">
                 <h5 style="margin-bottom: 10px;background-color: #475edf; text-align: center; color: #475edf; ">:</h5>
                 <span id="close" onclick="deleteobj({{x.question.id}})"> <i class="far fa-trash-alt"></i> </span>
-
-                {{forloop.counter}}
                 <span class=" question-text">{{x.question.question_text | safe}}</span>
                 
                 <hr></hr>
                 <h4 style="display: inline-block; margin-top: 10px;margin-bottom: 40px;background-color: #bff5ff; text-align: center; border-radius: 10px;padding: 10px; ">OPTIONS:</h4>
                 <div class="options-list">   
                 {% for op in x.options%}
-                
-                {{forloop.counter}}
                 <span class="options-text">{{op.option | safe}}</span>
                         {% endfor %}
                         
@@ -134,8 +133,6 @@
                 {% for op in x.correct_options%}
                 <br>
                 <p> CORRECT ANSWER: </p>
-                {{forloop.counter}}
-                
                 <span class="badge options-text options-text-correct">{{op.option | safe}}</span>
                 {% endfor %}
                 <br>
@@ -315,5 +312,36 @@
                 //Fnon.Alert.Light('Question must be atleast of length 10','Alert Title','Submit',()=>{});
                 Swal.fire("Question must be atleast of length 10")
         }
-
+window.addEventListener("load", function() {
+    var now = new Date();
+    var utcString = now.toISOString().substring(0,19);
+    var year = parseInt("{{start.year}}")
+    var month = parseInt("{{start.month}}")
+    var day = parseInt("{{start.day}}")
+    var hour =parseInt("{{start.hour}}")
+    var minute = parseInt("{{start.minute}}")
+    var second = parseInt("{{start.second}}")
+    var localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+    datetimeField = document.getElementById("start_time");
+    datetimeField.value = localDatetime;
+    year = parseInt("{{end.year}}")
+    month = parseInt("{{end.month}}")
+    day = parseInt("{{end.day}}")
+    hour =parseInt("{{end.hour}}")
+    minute = parseInt("{{end.minute}}")
+    second = parseInt("{{end.second}}")
+    localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+    var datetimeField = document.getElementById("end_time");
+    datetimeField.value = localDatetime;
+});
     </script>

@@ -130,8 +130,9 @@ def EditQuiz(request, id):
                     "correct_options": corr
                 }
                 li.append(di)
+                
             form = QuestionViewForm()
-            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id, "form": form})
+            return render(request, 'edit_quiz.html', {"list": li, "name": quiz.quiz_name, "id": quiz.id, "form": form, "start": quiz.start_time, "end": quiz.end_time})
         elif(request.method == "POST"):
             data = request.POST
             print(data)
