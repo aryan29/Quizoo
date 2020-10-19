@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_crontab',
-    'django_extensions',
+    'debug_toolbar',
     'ckeditor',
     'ckeditor_uploader'
 ]
@@ -54,6 +54,7 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'quizoo.urls'
@@ -127,7 +129,11 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

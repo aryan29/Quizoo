@@ -108,20 +108,21 @@ def QuizSettings(request, id):
 @login_required(login_url='/accounts/login/')
 @csrf_exempt
 def EditQuiz(request, id):
-    quiz = Quiz.objects.get(pk=id)
+    quiz = Quiz.objects.select_related('admin').get(pk=id)
     # Quiz belongs to this user and it hasnt started yet
 
     if(quiz.admin == request.user and quiz.start_time > timezone.now()):
         # Get All questions of this quiz
         if(request.method == "GET"):
-            questions = quiz.questions_set.all()
-            print(questions)
+            questions = quiz.questions_set.prefetch_related(
+                "options_set", "correctoptions_set").all()
+            # print(questions)
             li = []
             for q in questions:
                 op = q.options_set.all()
                 corr = q.correctoptions_set.all()
-                print(op)
-                print(corr)
+                # print(op)
+                # print(corr)
                 di = {
                     "question": q,
                     "options": op,
@@ -330,10 +331,8 @@ def checkResponse(r1, r2):
 def SeeCompletedQuiz(request):
     obj = Quiz.objects.filter(
         end_time__lt=timezone.now(), admin=request.user).order_by('-end_time')
-    print(obj)
     return render(request, 'completed_quiz.html', {"list": obj})
     # List of completed quizes
-    pass
 
 
 @login_required(login_url='/accounts/login/')
