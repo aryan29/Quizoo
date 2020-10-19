@@ -310,9 +310,10 @@
                 //Fnon.Alert.Light('Question must be atleast of length 10','Alert Title','Submit',()=>{});
                 Swal.fire("Question must be atleast of length 10")
         }
-        function appenddata(q,x,y){
+        function appenddata(q,a,b){
             l=document.getElementById("all");
             d=document.createElement('div');
+            console.log("Well till here");
             var it=`
                <h5 style="margin-bottom: 10px;background-color: #475edf; text-align: center; color: #475edf; ">:</h5>
                 <span id="close" onclick="deleteobj({{x.question.id}})"> <i class="far fa-trash-alt"></i> </span>
@@ -327,10 +328,13 @@
                 for(let x=0;x<b.length;x++)
                 it+=`<span class="badge options-text options-text-correct">`+b[x]+`</span>`;
                 it+=`<br><br>`
+                console.log("got it");
+                console.log(it)
                 d.className="already-made-questions";
                 d.innerHTML=it;
-
             l.appendChild(d);
+            //Dynamically added now hide everything unhided
+            
         }
 
     </script>

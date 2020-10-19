@@ -26,7 +26,8 @@ SECRET_KEY = '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', 1))
 
-ALLOWED_HOSTS = ['quizoo.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['quizoo.pythonanywhere.com',
+                 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -171,3 +172,10 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_PASSWORD", 'passwordispassword')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_THUMBNAIL_SIZE = 'pillow'
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+LOGIN_REIDRECT_URL = '/'
+ACCOUNT_EMAIL_REQUIRES = True
+ACCCOUNT_UNIQUE_EMAIL = True
