@@ -38,7 +38,7 @@
 </div>
 <div id="whole">
 {% csrf_token %}
-<span id="question_text"><h5>{{question_text|safe}}</span>
+<span id="question_text"><h5>{{question_text|safe}}</h5></span>
 <br>
 
 <br>
@@ -107,7 +107,7 @@ for(let i=0;i<x.length;i++)
     if(x[i].getElementsByClassName("check_box")[0].checked==true)
     {
         console.log(x[i])
-        li.push(x[i].getElementsByTagName("h3")[0].textContent)
+        li.push(x[i].getElementsByTagName("h3")[0].innerHTML)
     }
 }
 //Send this question reponse to the server
@@ -125,7 +125,7 @@ $.ajax({
         {
         console.log("Data Successfully posted")
         console.log(res)
-        document.getElementById("question_text").innerText=res['question']
+        document.getElementById("question_text").getElementsByTagName("h5")[0].innerHTML=res['question'];
         var z=document.getElementById("all_options");
         z.innerHTML="";
         for(let i=0;i<res['options'].length;i++)
@@ -133,7 +133,7 @@ $.ajax({
             let d=document.createElement("div");
             d.className='option';
             let opt=document.createElement("h3");
-            opt.innerText=res['options'][i];
+           
             opt.className="badge badge-warning option-text";
             let ch=document.createElement("input");
             ch.type="checkbox";
@@ -141,6 +141,8 @@ $.ajax({
             d.appendChild(opt);
             d.appendChild(ch);
             z.appendChild(d);
+            
+             opt.innerHTML=res['options'][i];
         }
         }
     },
