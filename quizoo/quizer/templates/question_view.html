@@ -1,155 +1,211 @@
 <html>
-<head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<style>
-.question-text{
-    font-size:20px;
-    white-space:pre-line;
-}
-.option-text{
-    margin-top:5px;
-    font-size:15px;
-    white-space:pre-line;
-}
-#whole{
-    width:80%;
-    position:absolute;
-    box-shadow: 0px 0px 15px 9px rgb(236, 236, 236) ;
-    border-radius: 10px;
-    padding-top: 5px;
-    margin-top: 40px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-}
-#timer{
-    margin:40px 0;
-    font-size:25px;
-    font-weight:bold;
-    text-align:center;
-}
-</style>
-</head>
-<body>
-<div id="timer">
-<p id="demo"></p>
-</div>
-<div id="whole">
-{% csrf_token %}
-<span id="question_text"><h5>{{question_text|safe}}</h5></span>
-<br>
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<style>
+			.question-text {
+				font-size: 20px;
+			}
+			.option-text {
+				display: inline;
+				font-size: 15px;
+			}
+			.option-text p {
+				font-size: 16px;
+				background: linear-gradient(45deg, #e6e6e6, rgb(255, 255, 255));
+				padding: 8px;
+				border-radius: 5px;
+				display: inline;
+				margin-left: 10px;
+			}
+			.background-image {
+				position: fixed;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+			.all-questions {
+				width: 80%;
+				margin: auto;
+				text-align: center;
+				box-shadow: 0px 0px 15px 9px rgb(236, 236, 236);
+				padding-top: 5px;
+				margin-top: 40px;
+				border-radius: 10px;
+			}
+			#timer {
+				margin: 40px 0;
+				font-size: 40px;
+				font-weight: bold;
+				text-align: center;
+			}
+			#all_options {
+				display: flex !important;
+				justify-content: space-evenly;
+				padding-bottom: 50px !important;
+				padding-top: 50px;
+			}
+			input > .check_box {
+				display: inline !important;
+			}
+			#whole {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.next-button {
+				width: 150px;
+				border-radius: 8px;
+				margin: auto !important;
+				outline: 0;
+				border: 0;
+				padding: 5px;
+				background: linear-gradient(
+					45deg,
+					rgb(182, 255, 204),
+					rgb(10, 255, 141)
+				);
+				transition: all 0.2s ease;
+			}
+			.next-button:hover {
+				transform: scale(1.08);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="timer">
+			<p id="demo"></p>
+		</div>
+		<div id="whole">
+			<div class="background-image"></div>
+			<div class="all-questions">
+				<h6
+					style="
+						margin-bottom: 30px;
+						background-color: #475edf;
+						text-align: center;
+						color: #475edf;
+					"
+				>
+					:
+				</h6>
+				{% csrf_token %}
+				<span id="question_text"><h5>{{question_text|safe}}</h5></span>
 
-<br>
-<br>
-<div id="all_options">
-{% for x in options%}
-<div class="option">
-<h3 class='badge badge-warning option-text'>{{x|safe}}</h3>
-<input type="checkbox" class="check_box"/>
-</div>
-{% endfor %}
-</div>
-<div id="timer">
-
-</div>
-<button onclick="get_next_question()">Next</button>
-</div>
-</body>
+				<div id="all_options">
+					{% for x in options%}
+					<div class="option">
+						<input type="checkbox" class="check_box" />
+						<h3 class="option-text">{{x|safe}}</h3>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div id="timer"></div>
+			<button class="next-button" onclick="get_next_question()">NEXT</button>
+		</div>
+	</body>
 </html>
 <script>
-var mode="{{quiz.strict_mode}}";
-if(mode=="True")
-{
-    //Turn off right click
-    document.addEventListener('contextmenu', event => event.preventDefault());
+	var mode = "{{quiz.strict_mode}}";
+	if (mode == "True") {
+		//Turn off right click
+		document.addEventListener("contextmenu", (event) => event.preventDefault());
 
-window.onblur = function() {
-    console.log("You are caught doing tab changes quiz epired");
-    $.ajax({
-    type:'POST',
-    url:"",
-    data:{
-        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-        "cheating":true
-    },
-    success:function(res){
-    location.reload();
-        }
-    });
+		window.onblur = function () {
+			console.log("You are caught doing tab changes quiz epired");
+			$.ajax({
+				type: "POST",
+				url: "",
+				data: {
+					csrfmiddlewaretoken: document.getElementsByName(
+						"csrfmiddlewaretoken"
+					)[0].value,
+					cheating: true,
+				},
+				success: function (res) {
+					location.reload();
+				},
+			});
+		};
+	}
+	var countDownDate = "{{end_time}}" * 1000; //To get international standard time
+	console.log(countDownDate);
+	var x = setInterval(function () {
+		var now = new Date().getTime();
+		var distance = countDownDate - now;
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor(
+			(distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+		);
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		document.getElementById("demo").innerHTML =
+			days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+		if (distance < 0) {
+			clearInterval(x);
+			location.reload();
+		}
+	}, 1000);
+	function get_next_question() {
+		var x = document.getElementsByClassName("option");
+		li = [];
+		for (let i = 0; i < x.length; i++) {
+			//console.log(x[i].getElementsByClassName("check_box")[0])
+			if (x[i].getElementsByClassName("check_box")[0].checked == true) {
+				console.log(x[i]);
+				li.push(x[i].getElementsByTagName("h3")[0].innerHTML);
+			}
+		}
+		//Send this question reponse to the server
+		$.ajax({
+			type: "POST",
+			url: "",
+			data: {
+				csrfmiddlewaretoken: document.getElementsByName(
+					"csrfmiddlewaretoken"
+				)[0].value,
+				response: li,
+			},
+			success: function (res) {
+				if (res == "500") location.reload();
+				else {
+					console.log("Data Successfully posted");
+					console.log(res);
+					document
+						.getElementById("question_text")
+						.getElementsByTagName("h5")[0].innerHTML = res["question"];
+					var z = document.getElementById("all_options");
+					z.innerHTML = "";
+					for (let i = 0; i < res["options"].length; i++) {
+						let d = document.createElement("div");
+						d.className = "option";
+						let opt = document.createElement("h3");
 
+						opt.className = "badge badge-warning option-text";
+						let ch = document.createElement("input");
+						ch.type = "checkbox";
+						ch.className = "check_box";
+						d.appendChild(opt);
+						d.appendChild(ch);
+						z.appendChild(d);
 
-};
-}
-var countDownDate = "{{end_time}}"*1000//To get international standard time
-  console.log(countDownDate)
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-  if (distance < 0) {
-    clearInterval(x);
-    location.reload();
-  }
-}, 1000);
-function get_next_question(){
-var x=document.getElementsByClassName("option")
-li=[]
-for(let i=0;i<x.length;i++)
-{
-    //console.log(x[i].getElementsByClassName("check_box")[0])
-    if(x[i].getElementsByClassName("check_box")[0].checked==true)
-    {
-        console.log(x[i])
-        li.push(x[i].getElementsByTagName("h3")[0].innerHTML)
-    }
-}
-//Send this question reponse to the server
-$.ajax({
-    type:'POST',
-    url:"",
-    data:{
-        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-        "response":li
-    },
-    success:function(res){
-        if(res=="500")
-            location.reload();
-        else
-        {
-        console.log("Data Successfully posted")
-        console.log(res)
-        document.getElementById("question_text").getElementsByTagName("h5")[0].innerHTML=res['question'];
-        var z=document.getElementById("all_options");
-        z.innerHTML="";
-        for(let i=0;i<res['options'].length;i++)
-        {
-            let d=document.createElement("div");
-            d.className='option';
-            let opt=document.createElement("h3");
-           
-            opt.className="badge badge-warning option-text";
-            let ch=document.createElement("input");
-            ch.type="checkbox";
-            ch.className="check_box";
-            d.appendChild(opt);
-            d.appendChild(ch);
-            z.appendChild(d);
-            
-             opt.innerHTML=res['options'][i];
-        }
-        }
-    },
-    failure:function(res){
-        Swal.fire('Something went wrong try again')
-    }
-})
-console.log(li);
-}
+						opt.innerHTML = res["options"][i];
+					}
+				}
+			},
+			failure: function (res) {
+				Swal.fire("Something went wrong try again");
+			},
+		});
+		console.log(li);
+	}
 </script>
