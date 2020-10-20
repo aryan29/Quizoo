@@ -25,12 +25,15 @@ The app is hosted using uWSGI Server and make use of NGINX for hosting static fi
 Here is how the database design looks like for the Django App
 <img src="ReadmeAssets/model.png">
 </img>    
-Database used is sqlite3 for current moment but will shift to postgresql in future      
+Database used is sqlite3 at current moment but will shift to postgresql in future  if database grew 
+
+It makes use of Redis for storing session on backend
 
 ##  Futures Coming
 * Automated Image Poctoring 
 * Live Anouncements during online test from admin panel
 * View the candidate’s screen- live
+* Allow user to select questions of particular categories from the already avilable question set
 
 ## :camera_flash: ScreenShots   
 | 1 | 2|

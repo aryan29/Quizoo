@@ -100,7 +100,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '/var/run/redis/redis-server.sock',
+        'OPTIONS': {
+            'DB': 1,
+        },
+    },
+}
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
