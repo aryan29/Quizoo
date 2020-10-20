@@ -1,4 +1,4 @@
-# Quizoo :green_book::closed_book:
+# Quizoo
  
 
 <img src="ReadmeAssets/7.png">
