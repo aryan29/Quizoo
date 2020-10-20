@@ -36,7 +36,7 @@
 </div>
 <div id="whole">
 {% csrf_token %}
-<span class="badge badge-info question-text" id="question_text">{{question_text}}</span>
+<span class="badge badge-info question-text" id="question_text">{{question_text|safe}}</span>
 <br>
 
 <br>
@@ -44,7 +44,7 @@
 <div id="all_options">
 {% for x in options%}
 <div class="option">
-<h3 class='badge badge-warning option-text'>{{x}}</h3>
+<h3 class='badge badge-warning option-text'>{{x|safe}}</h3>
 <input type="checkbox" class="check_box"/>
 </div>
 {% endfor %}
