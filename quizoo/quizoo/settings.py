@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'ckeditor',
     'ckeditor_uploader'
+
 ]
 
 SITE_ID = 1

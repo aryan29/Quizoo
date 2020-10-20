@@ -232,7 +232,6 @@ def GetQuestions(request, id):
         obj = obj[0]
     st = obj.questions_not_attempted
     score = -1
-    print(quiz.show_score_after_test)
     if(quiz.show_score_after_test):
         score = obj.score
 
@@ -243,8 +242,6 @@ def GetQuestions(request, id):
             return render(request, 'end_quiz.html', {"score": score, "show": False})
 
     li = st.split(",")
-    print(len(li))
-    print(li[0])
     if(request.method == "GET"):
         # person is just reloading the url show topmost question in list
         display_question = Questions.objects.get(id=int(li[0]))
