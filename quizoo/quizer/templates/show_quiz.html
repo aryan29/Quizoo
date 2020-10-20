@@ -21,7 +21,7 @@ body {
 }
 
 h1 {
-	background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+	background-image: url('https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif');
 	background-size: cover;
 	color: transparent;
 	-moz-background-clip: text;
@@ -50,24 +50,45 @@ h1 {
 	background-color: #FFF;
 	color: #122;
 }
+.btn-success, .btn-warning{
+	border: 0 ;
+	outline: 0 ;
+	border-radius: 7px;
+	transition: all 0.2s ease-in;
+	margin-right: 20px;
+	padding: 5px;
+}
+.btn-success:hover, .btn-warning:hover{
+	transform: scale(1.07);
+	color: black;
+}
+.btn-success{
+	background: linear-gradient(45deg, rgb(241, 241, 241), rgb(219, 219, 219));
+	color: black;
+}
+.btn-warning{
+	background: linear-gradient(-45deg, rgb(232, 255, 253), rgb(0, 255, 255));
+}
+.list-container{
+	margin: 30px;
+}
 
 </style>
 <body>
-<br>
+<div class="list-container">
 
-<br>
-<br>
-<ul class="list-group">
-{% for x in list %}
-<li class="list-group-item d-flex justify-content-between">
-{{x.quiz_name}}
-<span>
-<button class="btn-success" onclick="location.href='/edit/{{x.id}}/';">Edit This Quiz</button>
-<button class="btn-warning" onclick="copyToClipboard('https://quizoo.pythonanywhere.com/quiz/{{x.id}}/');">Copy Share Link</button>
-<span>
-</li>
-{% endfor %}
-</ul>
+	<ul class="list-group">
+		{% for x in list %}
+		<li class="list-group-item d-flex justify-content-between">
+			{{x.quiz_name}}
+			<span>
+				<button class="btn-success" onclick="location.href='/edit/{{x.id}}/';">Edit This Quiz</button>
+				<button class="btn-warning" onclick="copyToClipboard('https://quizoo.pythonanywhere.com/quiz/{{x.id}}/');">Copy Share Link</button>
+			<span>
+		</li>
+				{% endfor %}
+	</ul>
+</div>
 </body>
 </html>
 
