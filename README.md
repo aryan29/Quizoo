@@ -32,6 +32,19 @@ Database used is sqlite3 for current moment but will shift to postgresql in futu
 * Live Anouncements during online test from admin panel
 * View the candidate’s screen- live
 
+## :camera_flash: ScreenShots   
+| 1 | 2|
+|------|-------|
+|<img src="ReadmeAssets/7.png" width="400"/>|<img src="ReadmeAssets/8.png" width="400"/>|
+
+
+| 3 | 4|
+|------|-------|
+|<img src="ReadmeAssets/9.png" width="400"/>|<img src="ReadmeAssets/10.png" width="400"/>|
+
+| 5 | 6 |
+|------|-------|
+|<img src="ReadmeAssets/11.png" width="400"/>|<img src="ReadmeAssets/5.png" width="400"/>|
 
 ## Contributors
 [Aryan Khandelwal](https://github.com/aryan29)    
