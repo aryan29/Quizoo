@@ -27,6 +27,8 @@ class CreatingQuizForm(ModelForm):
             cleaned_data = super(CreatingQuizForm, self).clean()
             start_time = cleaned_data.get("start_time")
             end_time = cleaned_data.get("end_time")
+            print(start_time)
+            print(end_time)
             try:
                 if(start_time < timezone.now()):
                     self.add_error(
