@@ -21,11 +21,13 @@ from django.contrib.auth.views import LoginView
 from django.conf.urls.static import static
 from django.conf import settings
 from quizer.views import CreateQuizView, ShowAllQuizToBeHeld, EditQuiz, QuizStart, GetQuestions, SeeCompletedQuiz, SeeAnalytics, export_users_xls, DeleteQuestion, GiveQuiz, CheckValid, QuizSettings, CompareResponses, HomePage
+from django_otp.admin import OTPAdminSite
 
+admin.site.__class__ = OTPAdminSite
 urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('', HomePage, name='redirect'),
-    path('admin/', admin.site.urls),
+    path('helloadmin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('login/', LoginView.as_view(), name='login-view'),

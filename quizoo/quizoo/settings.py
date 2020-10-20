@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django_crontab',
     'debug_toolbar',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
     'ckeditor',
     'ckeditor_uploader'
 ]
@@ -61,11 +63,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-
+OTP_TOTP_ISSUER = 'Quizoo'
 ROOT_URLCONF = 'quizoo.urls'
 
 TEMPLATES = [
