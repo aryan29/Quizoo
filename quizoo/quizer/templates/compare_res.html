@@ -26,9 +26,9 @@
   {% for x in questions%}
     <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{x}}</td>
-      <td>{{user_res|index:forloop.counter0}}</td>
-      <td>{{correct_res|index:forloop.counter0}}</td>
+      <td>{{x|safe}}</td>
+      <td>{{user_res|index:forloop.counter0|safe}}</td>
+      <td>{{correct_res|index:forloop.counter0|safe}}</td>
 
     </tr>
     {% endfor %}

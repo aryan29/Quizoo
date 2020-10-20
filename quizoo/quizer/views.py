@@ -357,9 +357,10 @@ def SeeAnalytics(request, id):
 
 @login_required(login_url='/accounts/login/')
 def CompareResponses(request, id):
-    obj = UsersGivingTest.objects.get(pk=id)
+    obj = UsersGivingTest.objects.select_related('quiz').get(pk=id)
     r1 = list(obj.recordedresponses_set.values_list(
         "responses", flat=True).order_by('question_num'))
+    # print(r1)
     # r2 = obj.quiz.correctoptions_set.all()
     # Get Quiz Name
     # From that get a list of questions in that quiz
@@ -374,9 +375,9 @@ def CompareResponses(request, id):
         z = [x.option for x in question.correctoptions_set.all()]
         r2.append(z)
 
-    print(q)
-    print(r1)
-    print(r2)
+    # print(q)
+    # print(r1)
+    # print(r2)
 
     return render(request, 'compare_res.html', {"questions": q, "user_res": r1, "correct_res": r2})
 
