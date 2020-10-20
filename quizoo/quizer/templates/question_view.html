@@ -1,62 +1,134 @@
 <html>
-<head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<style>
-.question-text{
-    font-size:20px;
-    white-space:pre-line;
-}
-.option-text{
-    margin-top:5px;
-    font-size:15px;
-    white-space:pre-line;
-}
-#whole{
-    width:80%;
-    position:absolute;
-    box-shadow: 0px 0px 15px 9px rgb(236, 236, 236) ;
-    border-radius: 10px;
-    padding-top: 5px;
-    margin-top: 40px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-}
-#timer{
-    margin:40px 0;
-    font-size:25px;
-    font-weight:bold;
-    text-align:center;
-}
-</style>
-</head>
-<body>
-<div id="timer">
-<p id="demo"></p>
-</div>
-<div id="whole">
-{% csrf_token %}
-<span id="question_text"><h5>{{question_text|safe}}</h5></span>
-<br>
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<style>
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+				background-color: rgb(250, 250, 250);
+			}
+			.question-text {
+				font-size: 20px;
+			}
+			.option-text {
+				display: inline;
+				font-size: 15px;
+			}
+			.option-text p {
+				font-size: 16px;
+				background: linear-gradient(45deg, #e6e6e6, rgb(255, 255, 255));
+				padding: 8px;
+				border-radius: 5px;
+				display: inline;
+				margin-left: 10px;
+			}
+			.background-image {
+				position: fixed;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+			.all-questions {
+				width: 80%;
+				margin: auto;
+				text-align: center;
+				box-shadow: 0px 0px 15px 9px rgb(228, 228, 228);
+				padding-top: 5px;
+				margin-top: 40px;
+				border-radius: 10px;
+			}
+			#timer {
+				margin: 40px 0;
+				font-size: 40px;
+				font-weight: bold;
+				text-align: center;
+			}
+			#all_options {
+				display: flex !important;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+				padding-bottom: 50px !important;
+				padding-top: 50px;
+			}
+			input > .check_box {
+				display: inline !important;
+			}
+			#whole {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.next-button {
+				width: 150px;
+				border-radius: 8px;
+				margin: auto !important;
+				outline: 0;
+				border: 0;
+				padding: 5px;
+				background: linear-gradient(45deg, rgb(0, 255, 76), rgb(0, 219, 117));
+				transition: all 0.2s ease;
+			}
+			.next-button:hover {
+				transform: scale(1.08);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="timer">
+			<p id="demo"></p>
+		</div>
+		<div id="whole">
+			<div class="background-image"></div>
+			<div class="all-questions">
+				<h6
+					style="
+						margin-bottom: 30px;
+						background-color: #475edf;
+						text-align: center;
+						color: #475edf;
+					"
+				>
+					:
+				</h6>
+				{% csrf_token %}
+				<span id="question_text"><h5>{{question_text|safe}}</h5></span>
 
-<br>
-<br>
-<div id="all_options">
-{% for x in options%}
-<div class="option">
-<h3 class='badge badge-warning option-text'>{{x|safe}}</h3>
-<input type="checkbox" class="check_box"/>
-</div>
-{% endfor %}
-</div>
-<div id="timer">
-
-</div>
-<button onclick="get_next_question()">Next</button>
-</div>
-</body>
+				<div id="all_options">
+					{% for x in options%}
+					<div class="option">
+						<input type="checkbox" class="check_box" />
+						<h3 class="option-text">{{x|safe}}</h3>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div id="timer"></div>
+			<button
+				class="next-button"
+				onclick="get_next_question()"
+				style="font-size: 20px"
+			>
+				NEXT<i
+					class="fas fa-angle-double-right"
+					style="margin-left: 10px; color: rgb(0, 0, 0)"
+				></i>
+			</button>
+		</div>
+	</body>
 </html>
 <script>
 var mode="{{quiz.strict_mode}}";
@@ -88,6 +160,13 @@ window.onblur = function() {
         }
     });
 
+						opt.className = "badge badge-warning option-text";
+						let ch = document.createElement("input");
+						ch.type = "checkbox";
+						ch.className = "check_box";
+						d.appendChild(opt);
+						d.appendChild(ch);
+						z.appendChild(d);
 
 };
 }
