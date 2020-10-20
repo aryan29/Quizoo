@@ -135,7 +135,7 @@ var mode="{{quiz.strict_mode}}";
 if(mode=="True")
 {
     //Turn off right click
-    document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', event => event.preventDefault());
 window.onblur = function() {
    setTimeout(function()
   {
@@ -145,9 +145,6 @@ window.onblur = function() {
     console.log(target.outerHTML)
     console.log('<button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;">OK</button>')
     console.log("You are caught doing tab changes quiz epired");
-    }
-  }, 1);
-    
     $.ajax({
     type:'POST',
     url:"",
@@ -159,15 +156,8 @@ window.onblur = function() {
     location.reload();
         }
     });
-
-						opt.className = "badge badge-warning option-text";
-						let ch = document.createElement("input");
-						ch.type = "checkbox";
-						ch.className = "check_box";
-						d.appendChild(opt);
-						d.appendChild(ch);
-						z.appendChild(d);
-
+    }
+  }, 1);
 };
 }
 window.onpaint=checkForCamera()
@@ -286,8 +276,7 @@ $.ajax({
             let d=document.createElement("div");
             d.className='option';
             let opt=document.createElement("h3");
-           
-            opt.className="badge badge-warning option-text";
+            opt.className="option-text";
             let ch=document.createElement("input");
             ch.type="checkbox";
             ch.className="check_box";
