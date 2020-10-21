@@ -103,7 +103,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '/var/run/redis/redis-server.sock',
+        'LOCATION': 'redis:6379',
         'OPTIONS': {
             'DB': 1,
         },

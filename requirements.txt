@@ -9,6 +9,7 @@ django-extensions==3.0.9
 django-ckeditor==6.0.0
 django-debug-toolbar==3.1.1
 django-otp==1.0.1
+django-redis-cache==3.0.0
 idna==2.10
 oauthlib==3.1.0
 python3-openid==3.2.0
