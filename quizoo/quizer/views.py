@@ -45,21 +45,17 @@ def CreateQuizView(request):
 
     # print(request.method)
     if(request.method == 'POST'):
+        print(request.POST)
         form = CreatingQuizForm(request.POST)
         print(form.is_valid())
         if(form.is_valid()):
             obj = form.save(commit=False)
             obj.admin = request.user
             obj.save()
-            return redirect('/create')
+            return HttpResponse(200)
         else:
             print("Getting Errors Dude", form.errors)
-            li = form.errors.as_data()
-            for x in li:
-                z = list(li.get(x)[0])
-                print(z[0])
-                print()
-            return render(request, 'create_quiz.html', {'form': CreatingQuizForm(), 'errors': form.errors.as_data()})
+            return JsonResponse({"error": form.errors.as_text()})
     else:
         return render(request, 'create_quiz.html', {'form': CreatingQuizForm()})
 

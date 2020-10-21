@@ -2,10 +2,11 @@
 <!-- WAVVVESSSSS HEREEEEE -->
 <html>
 <head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap"
-	rel="stylesheet"
-/>
+	rel="stylesheet"/>
 
 <style>
 	* {
@@ -244,7 +245,7 @@ c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3
 		<br />
 
 		<div class="form-container" id="form" style="display: none">
-			<form action="" method="post">
+			<form>
 				{% csrf_token %} {{ form }}
 				<div class="btn-container" style="padding-top: 30px">
 					<input
@@ -257,10 +258,6 @@ c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3
 			</form>
 		</div>
 		<div>
-			{% load get_item %} {% for e in errors%}
-			<p  style="color: red;margin-bottom:10px;">{{errors|get_item:e}}</p>
-
-			{% endfor %}
 			<div>
 				<div class="btn-container">
 					<button class="btn" onclick="window.location='/show/'">
@@ -295,4 +292,38 @@ c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3
 		else f.style.display = "none";
 		document.getElementById("toggler").style.display = "none";
 	}
+	$('form').submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			type:"POST",
+			url:"",
+            headers: {
+                    "X-CSRFToken": '{{ csrf_token }}'
+                },
+			dataType: 'json',
+			data:$('form').serialize(),
+			success:function(data)
+			{
+				console.log("Request sent successfully");
+				console.log(data);
+				if(data==200)
+				{
+
+					Swal.fire("Quiz Created find it in Edit Section");
+				}
+				else
+				{
+					//console.log(data);
+					Swal.fire(data['error']);
+				}
+			},
+			error:function (data,e) {
+            console.log("There was an error.");
+            console.log(data);
+			console.log(e);
+        }
+
+			
+		})
+	})
 </script>

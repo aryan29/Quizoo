@@ -103,7 +103,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': 'redis:6379',
+        'LOCATION': '/var/run/redis/redis-server.sock',
         'OPTIONS': {
             'DB': 1,
         },
@@ -145,7 +145,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 INTERNAL_IPS = [
     # ...
-    '127.0.0.1',
+    '127.0.0.1'
     # ...
 ]
 
