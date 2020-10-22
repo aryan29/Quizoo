@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 	<head>
 		<link
@@ -12,6 +13,8 @@
 		/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script src="{% static 'js/face-api.min.js'%}">
+		<script src="{% static 'js/script.js'%}">
 		<style>
 			body {
 				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -128,6 +131,7 @@
 				></i>
 			</button>
 		</div>
+		<video id="video" width="500" height="300" style="display:none" autoplay></video>
 	</body>
 </html>
 <script>
@@ -137,7 +141,7 @@ if(mode=="True")
     //Turn off right click
 document.addEventListener('contextmenu', event => event.preventDefault());
 window.onblur = function() {
-   setTimeout(function()
+setTimeout(function()
   {
     var target = document.activeElement;
     if(target.outerHTML!='<button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;">OK</button>')
@@ -147,10 +151,11 @@ window.onblur = function() {
     console.log("You are caught doing tab changes quiz epired");
     $.ajax({
     type:'POST',
-    url:"",
+    url:"/regular-checks/",
     data:{
         csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-        "cheating":true
+		"type":"tabChange",
+		"id":"{{quiz.id}}"
     },
     success:function(res){
     location.reload();
@@ -160,7 +165,8 @@ window.onblur = function() {
   }, 1);
 };
 }
-window.onpaint=checkForCamera()
+window.onpaint=checkForCamera();
+
 function checkForCamera(){
 var cam="{{quiz.camera_mode}}";
 if(cam=="True")
@@ -172,33 +178,21 @@ function dowork(){
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
    console.log('getUserMedia supported.');
    navigator.mediaDevices.getUserMedia (
-      // constraints - only audio needed for this app
       {
-         audio: true,
          video:true
       })
-
-      // Success callback
       .then(function(stream) {
-           sendStream(stream);
-          //Take ss for screen
-        
+           videoPoctoring();
       })
-
-      // Error callback
       .catch(function(err) {
          Swal.fire("Provide camera and audio permissions or test will not start").then(
              function(){
-            //Warning succeefully given
             navigator.mediaDevices.getUserMedia (
-            // constraints - only audio needed for this app
             {
-                audio: true,
                 video:true
             })
-            // Success callback
             .then(function(stream) {
-                sendStream(stream);
+               videoPoctoring();
                 
             })
             .catch(function(err){
@@ -206,7 +200,6 @@ function dowork(){
             })
             }
          );
-        //window.close()
       }
    );
 } else {
@@ -215,16 +208,6 @@ function dowork(){
     })
 }
 }
-function sendStream(stream){
-     if(stream.getVideoTracks().length > 0 && stream.getAudioTracks().length > 0){
-         //code for when none of the devices are available  
-         console.log("Getting stream"); 
-         setTimeout(dowork,10000);                    
-     }else{
-         console.log("Permission denied by fool again");
-     }
-}
-
 var countDownDate = "{{end_time}}"*1000//To get international standard time
   console.log(countDownDate)
 var x = setInterval(function() {

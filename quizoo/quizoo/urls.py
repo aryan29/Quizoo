@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from django.conf.urls.static import static
 from django.conf import settings
-from quizer.views import CreateQuizView, ShowAllQuizToBeHeld, EditQuiz, QuizStart, GetQuestions, SeeCompletedQuiz, SeeAnalytics, export_users_xls, DeleteQuestion, GiveQuiz, CheckValid, QuizSettings, CompareResponses, HomePage
+from quizer.views import CreateQuizView, ShowAllQuizToBeHeld, EditQuiz, QuizStart, GetQuestions, SeeCompletedQuiz, SeeAnalytics, export_users_xls, DeleteQuestion, GiveQuiz, CheckValid, QuizSettings, CompareResponses, HomePage, CheatingDetector
 from django_otp.admin import OTPAdminSite
 
 admin.site.__class__ = OTPAdminSite
@@ -42,6 +42,7 @@ urlpatterns = [
     path('completed/', SeeCompletedQuiz, name='completed-quizes'),
     path('analytics/<int:id>/', SeeAnalytics, name='analytics'),
     path('compareRes/<int:id>/', CompareResponses, name='compare-responses'),
+    path('regular-checks/', CheatingDetector, name='cheating-detector'),
     path('analytics/download/<int:id>/',
          export_users_xls, name='download-excel-sheet'),
     path('delete/<int:id>/', DeleteQuestion, name='deleting question')

@@ -1,8 +1,8 @@
-from datetime import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm, QuestionViewForm
-from .models import Quiz, Questions, Options, CorrectOptions, UsersGivingTest, RecordedResponses
+from .models import Quiz, Questions, Options, CorrectOptions, TestLogs, UsersGivingTest, RecordedResponses
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.cache import cache
@@ -11,6 +11,8 @@ from django.db.models import Q
 from django.utils import timezone
 import xlwt
 import json
+import base64
+from django.core.files.base import ContentFile
 
 
 # Create your views here.
@@ -253,14 +255,6 @@ def GetQuestions(request, id):
         # person is submitting the question
         # check for his response remove start ques from list
         res = request.POST
-        print(res)
-        try:
-            if(res['cheating'] == 'true'):
-                obj.questions_not_attempted = ""
-                obj.save()
-                return HttpResponse(200)
-        except:
-            pass
         print("Here we are")
         display_question = Questions.objects.get(id=int(li[0]))
         # increase score of this person if correct res
@@ -410,3 +404,33 @@ def export_users_xls(request, id):
 
         wb.save(response)
         return response
+
+
+@login_required(login_url='/accounts/login/')
+def CheatingDetector(request):
+    data = request.POST
+    # Make an object of cheating attempt by this user
+    user = request.user
+    obj = UsersGivingTest.objects.filter(
+        quiz__id=data['id'], user=user)
+    # Save Image of this User Under his UsersGivingTest folder
+
+    img_data = data['imgBase64']
+    format, imgstr = img_data.split(';base64,')
+    ext = format.split('/')[-1]
+    file_name = "Cheat"+obj.id+ext
+    data = ContentFile(base64.b64decode(imgstr), name=file_name)
+    print("Cheating detected by "+user.username+"in quiz" +
+          data['id']+" at time "+timezone.now())
+    try:
+        TestLogs.objects.create(
+            whom=obj,
+            type=data["type"],
+            img=data,
+            time=timezone.now(),
+        )
+    except Exception as e:
+        print(e)
+        return HttpResponse(500)
+
+    return HttpResponse(200)
