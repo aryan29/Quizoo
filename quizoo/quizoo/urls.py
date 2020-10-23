@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-import debug_toolbar
+# import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
@@ -25,7 +25,7 @@ from django_otp.admin import OTPAdminSite
 
 admin.site.__class__ = OTPAdminSite
 urlpatterns = [
-    path('__debug__/', include(debug_toolbar.urls)),
+    # path('__debug__/', include(debug_toolbar.urls)),
     path('', HomePage, name='redirect'),
     path('helloadmin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -46,4 +46,4 @@ urlpatterns = [
     path('analytics/download/<int:id>/',
          export_users_xls, name='download-excel-sheet'),
     path('delete/<int:id>/', DeleteQuestion, name='deleting question')
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

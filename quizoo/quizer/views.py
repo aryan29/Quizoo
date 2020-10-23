@@ -409,24 +409,25 @@ def export_users_xls(request, id):
 @login_required(login_url='/accounts/login/')
 def CheatingDetector(request):
     data = request.POST
+    # print(data)
     # Make an object of cheating attempt by this user
     user = request.user
     obj = UsersGivingTest.objects.filter(
-        quiz__id=data['id'], user=user)
-    # Save Image of this User Under his UsersGivingTest folder
+        quiz__id=data['id'], user=user)[0]
+    # # Save Image of this User Under his UsersGivingTest folder
 
     img_data = data['imgBase64']
     format, imgstr = img_data.split(';base64,')
     ext = format.split('/')[-1]
-    file_name = "Cheat"+obj.id+ext
-    data = ContentFile(base64.b64decode(imgstr), name=file_name)
+    file_name = "Cheat"+str(obj.id)+"."+ext
+    file = ContentFile(base64.b64decode(imgstr), name=file_name)
     print("Cheating detected by "+user.username+"in quiz" +
-          data['id']+" at time "+timezone.now())
+          data['id']+" at time "+str(timezone.now()))
     try:
         TestLogs.objects.create(
             whom=obj,
             type=data["type"],
-            img=data,
+            img=file,
             time=timezone.now(),
         )
     except Exception as e:

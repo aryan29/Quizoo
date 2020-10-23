@@ -11,10 +11,10 @@
 			rel="stylesheet"
 			href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
 		/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-		<script src="{% static 'js/face-api.min.js'%}">
-		<script src="{% static 'js/script.js'%}">
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script src="{% static 'js/face-api.min.js'%}" defer></script>
 		<style>
 			body {
 				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -131,7 +131,7 @@
 				></i>
 			</button>
 		</div>
-		<video id="video" width="500" height="300" style="display:none" autoplay></video>
+		<video id="video" width="1024" height="768"  autoplay></video>
 	</body>
 </html>
 <script>
@@ -179,10 +179,11 @@ function dowork(){
    console.log('getUserMedia supported.');
    navigator.mediaDevices.getUserMedia (
       {
-         video:true
+         video:true,
       })
       .then(function(stream) {
-           videoPoctoring();
+		  console.log("Coming to videoPocctoring")
+          videoPoctoring();
       })
       .catch(function(err) {
          Swal.fire("Provide camera and audio permissions or test will not start").then(
@@ -192,7 +193,8 @@ function dowork(){
                 video:true
             })
             .then(function(stream) {
-               videoPoctoring();
+				console.log("Coming to video poctoring")
+              videoPoctoring();
                 
             })
             .catch(function(err){
@@ -276,4 +278,93 @@ $.ajax({
 })
 console.log(li);
 }
+
+
+
+
+function videoPoctoring() {
+    const video = document.getElementById('video');
+    console.log("Coming to script")
+    let v = "{% static 'models/'%}"
+    console.log(v)
+    Promise.all([
+        faceapi.nets.mtcnn.loadFromUri(v),
+		faceapi.nets.ssdMobilenetv1.loadFromUri(v)
+
+    ]).then(
+        startVideo
+    )
+
+function startVideo() {
+        console.log('coming to start video');
+        navigator.getUserMedia(
+            {
+                video: {
+					height:768,
+					width:1024
+				}
+            },
+            stream => video.srcObject = stream,
+            err => console.log(err)
+        )
+    }
+    let notHere = 0, twoPerson = 0;
+    const canvas = document.createElement('canvas');
+    canvas.height = 768;
+    canvas.width = 1024;
+    video.addEventListener('play', () => {
+        setInterval(async () => {
+            if (video.srcObject.active == false) {
+                window.close();
+            }
+			const d1 = await faceapi.detectAllFaces(video);
+            const d2 = await faceapi.detectAllFaces(video, new faceapi.MtcnnOptions());
+			console.log(d2.length)
+            if (d1.length == 0 && d2.length==0) {
+                notHere += 1;
+                if (notHere > 60) {
+                    notHere = 0;
+                    //Capture image now and send it to server
+					console.log("we detected that candidate is not present")
+                    canvas.getContext('2d').drawImage(video, 0, 0);
+                    let dataUrl = canvas.toDataURL();
+                    $.ajax({
+                        url: "/regular-checks/",
+                        type: "POST",
+                        data: {
+                            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                            "type": "NotHere",
+                            "id": "{{quiz.id}}",
+                            "imgBase64": dataUrl
+                        },
+                    })
+
+                }
+            }
+            else if (d1.length >= 2 && d2.length>=2) {
+                twoPerson += 1;
+                if (twoPerson > 10) {
+                    twoPerson = 0;
+                    //Capture image now and send it to server
+					console.log("muliple faces detected");
+                    $.ajax({
+                        url: "/regular-checks/",
+                        type: "POST",
+                        data: {
+                            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                            "type": "TwoPerson",
+                            "id": "{{quiz.id}}",
+                            "imgBase64": dataUrl
+                        },
+                    })
+                }
+            }
+            else {
+                twoPerson = 0;
+                notHere = 0;
+            }
+        }, 1000)
+    })
+}
+
 </script>
