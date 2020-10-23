@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', 1))
 
@@ -46,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_crontab',
-    'debug_toolbar',
     'django_otp',
     'django_otp.plugins.otp_totp',
     'ckeditor',
@@ -58,7 +58,6 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -100,10 +99,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == 1):
+    redis_path = 'redis:6379'
+else:
+    redis_path = 'localhost:6379'
+
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '/var/run/redis/redis-server.sock',
+        'LOCATION': redis_path,
         'OPTIONS': {
             'DB': 1,
         },
