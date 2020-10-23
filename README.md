@@ -16,6 +16,7 @@ It’s a custom browser window that adds more security to the exam environment b
 Most of the time participants tend to cheat because they can view all questions at once or move back to the previous questions , it becomes very difficult for the participants to cheat in limitted time if every person will get questions in different order and they are not allowed to move back to the previous question     
 ### Automated Image Poctoring(In Development)
 This tool allows test creator to enable camera & microphone mode which sends audio-video and screen share feeds and makes use of advanced audio and video analytics to monitor any suspicious activities during the test
+Currenly this tool only detect if particpant is looking towards screen or not and if there aren't multiple people present on screen, and much more to come
 
 Beside all that Quizoo makes it easy to send results to each candidate's email address or downloading excel sheet of cadidate's responses  by just enabling few setting from the quiz panel  
 
