@@ -1,4 +1,5 @@
 
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatingQuizForm, QuestionViewForm
@@ -13,6 +14,7 @@ import xlwt
 import json
 import base64
 from django.core.files.base import ContentFile
+from django.db.models import Avg
 
 
 # Create your views here.
@@ -262,17 +264,11 @@ def GetQuestions(request, id):
         print(list(display_question.correctoptions_set.values_list("option", flat=True)))
         x = checkResponse(res.getlist('response[]'), list(
             display_question.correctoptions_set.values_list("option", flat=True)))
-
-        if(quiz.record_responses):
-            # Recording responses if record response setting is true
-            RecordedResponses.objects.create(
-                whom=obj,
-                question_num=int(li[0]),
-                responses=res.getlist('response[]')
-            )
-            # Now we can access responses of this particular user
-            # obj.recordresponses_set.all().order_by('question_num')
-            # We will get a list of all questions with the reponse he marked for them
+        RecordedResponses.objects.create(
+            whom=obj,
+            question_num=int(li[0]),
+            responses=res.getlist('response[]')
+        )
         print("Done till here")
         new_li = li[1:]
         s = ','.join([str(i) for i in new_li])
@@ -430,10 +426,29 @@ def CheatingDetector(request):
             whom=obj,
             type=data["type"],
             img=file,
-            time=timezone.now(),
         )
     except Exception as e:
         print(e)
         return HttpResponse(500)
 
     return HttpResponse(200)
+
+
+@login_required(login_url='/accounts/login/')
+def PrepareLogs(request, id):
+    logs = TestLogs.objects.filter(
+        whom__id=id).order_by('time')
+    user = UsersGivingTest.objects.select_related(
+        'quiz').select_related('user').get(id=id)
+    # get avg of all users giving this quiz
+    quiz = user.quiz
+    avg_score = quiz.usersgivingtest_set.aggregate(Avg('score'))
+    score = user.score
+    res = user.recordedresponses_set.values_list(
+        "time", flat=True).order_by('time')
+    print(avg_score)
+    if(len(res) != 0):
+        complete_time = res[len(res)-1]-quiz.start_time
+    else:
+        complete_time = 0
+    return render(request, 'log_page.html', {"name": user.user.username, "cheat_logs": logs, "score": score, "avg_score": avg_score['score__avg'], "res_logs": res, "complete_time": complete_time})

@@ -28,9 +28,11 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Score</th>
+      <th scope="col">Logs</th>
       {% if showRes %}
       <th scope="col">Show Responses</th>
       {% endif %}
+
     </tr>
   </thead>
   <tbody>
@@ -40,6 +42,7 @@
       <td>{{x.user.username}}</td>
       <td>{{x.user.email}}</td>
       <td>{{x.score}}</td>
+      <td><a href="/logs/{{x.id}}">View Logs</a></td>
       {% if showRes %}
       <td scope="col"><a href="/compareRes/{{x.id}}">Click</a></td>
       {% endif %}

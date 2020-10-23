@@ -1,6 +1,8 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import validate_comma_separated_integer_list
+from django.forms.fields import DateTimeField
 from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
@@ -62,6 +64,7 @@ class RecordedResponses(models.Model):
     # it should be one to one field btw
     whom = models.ForeignKey(UsersGivingTest, on_delete=models.CASCADE)
     question_num = models.SmallIntegerField()
+    time = models.DateTimeField(auto_now_add=True)
     responses = models.CharField(
         max_length=2000,
     )
@@ -69,6 +72,6 @@ class RecordedResponses(models.Model):
 
 class TestLogs(models.Model):
     whom = models.ForeignKey(UsersGivingTest, on_delete=models.CASCADE)
-    time = models.DateTimeField()
+    time = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=100)
     img = models.ImageField(upload_to='logs')

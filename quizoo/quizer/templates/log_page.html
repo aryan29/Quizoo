@@ -1,0 +1,99 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+.table{
+    
+    margin:auto;
+    margin-top:30px;
+    height:500px;
+    width:500px;
+    overflow-y: auto;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: calc(1vw + 1vh);
+    color: black;
+    border: 2px solid grey;
+    background-color: whitesmoke;
+    margin-top:30px;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+<center><h2>Test Logs</h2></center>
+<div id="stats" class="container">
+<div class="row"> 
+<div class="column">
+<p>Name </p>
+<p>Your Score </p>
+<p>Avg Class Score </p>
+<p>Time taken to complete test </p>
+</div>
+<div class="column">
+<p>{{name}}</p>
+<p>{{score}}</p>
+<p>{{avg_score}}</p>
+<p>{{complete_time}}</p>
+</div>
+
+</div>
+</div>
+<div class="table">
+<h3>Cheating Logs</h3>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+<th scope="col">Time</th>
+<th scope="col">Type</th>
+<th scope="col">Link</th>
+</tr>
+</thead>
+<tbody>
+
+{% for x in cheat_logs%}
+<tr>
+<td>{{x.time}}</td>
+<td>{{x.type}}</td>
+<td><a href="{{x.img.url}}">Click</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="table">
+<h3>Test Logs</h3>
+<table class="table table-bordered table-hover">
+<thead>
+<tr>
+<th scope="col">Q. Num</th>
+<th scope="col">Time</th>
+</tr>
+</thead>
+<tbody>
+
+{% for x in res_logs%}
+<tr>
+<td>{{forloop.counter}}</td>
+<td>{{x}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</body>
+</html>

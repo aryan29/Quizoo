@@ -14,18 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-# import debug_toolbar
+import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from django.conf.urls.static import static
 from django.conf import settings
-from quizer.views import CreateQuizView, ShowAllQuizToBeHeld, EditQuiz, QuizStart, GetQuestions, SeeCompletedQuiz, SeeAnalytics, export_users_xls, DeleteQuestion, GiveQuiz, CheckValid, QuizSettings, CompareResponses, HomePage, CheatingDetector
+from quizer.views import CreateQuizView, ShowAllQuizToBeHeld, EditQuiz, QuizStart, GetQuestions, SeeCompletedQuiz, SeeAnalytics, export_users_xls, DeleteQuestion, GiveQuiz, CheckValid, QuizSettings, CompareResponses, HomePage, CheatingDetector, PrepareLogs
 from django_otp.admin import OTPAdminSite
 
 admin.site.__class__ = OTPAdminSite
 urlpatterns = [
-    # path('__debug__/', include(debug_toolbar.urls)),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('', HomePage, name='redirect'),
     path('helloadmin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
@@ -42,6 +42,7 @@ urlpatterns = [
     path('completed/', SeeCompletedQuiz, name='completed-quizes'),
     path('analytics/<int:id>/', SeeAnalytics, name='analytics'),
     path('compareRes/<int:id>/', CompareResponses, name='compare-responses'),
+    path('logs/<int:id>/', PrepareLogs, name='prepare-logs'),
     path('regular-checks/', CheatingDetector, name='cheating-detector'),
     path('analytics/download/<int:id>/',
          export_users_xls, name='download-excel-sheet'),

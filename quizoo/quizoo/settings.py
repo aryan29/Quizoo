@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_crontab',
-    # 'debug_toolbar',
+    'debug_toolbar',
     'django_otp',
     'django_otp.plugins.otp_totp',
     'ckeditor',
@@ -58,7 +58,7 @@ SITE_ID = 1
 
 
 MIDDLEWARE = [
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
