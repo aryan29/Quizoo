@@ -1,6 +1,6 @@
 # Quizoo
  
-
+[![GitHub issues](https://img.shields.io/github/issues/aryan29/Quizoo)](https://github.com/aryan29/Quizoo/issues)   [![GitHub forks](https://img.shields.io/github/forks/aryan29/Quizoo)](https://github.com/aryan29/Quizoo/network)   [![GitHub stars](https://img.shields.io/github/stars/aryan29/Quizoo)](https://github.com/aryan29/Quizoo/stargazers)     
 Do leave a star :star: if you like this repo :blush:   
 <hr></hr>
 <img src="ReadmeAssets/7.png">
@@ -79,10 +79,4 @@ Don't be lazy:smile: clone this repo and start contributing
 [Aryan Khandelwal](https://github.com/aryan29)    
 [Mukul Choudhury](https://github.com/Mukul-9)    
 [Vibhu Bhatia](https://github.com/vibhubhatia007)    
-
-
-
-
-
-
 
