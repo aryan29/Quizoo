@@ -1,6 +1,8 @@
 # Quizoo
  
 
+Do leave a star :star: if you like this repo :blush:   
+<hr></hr>
 <img src="ReadmeAssets/7.png">
 </img>     
 Free Online Quiz Platform for conducting quizes with lots of security features to avoid cheating and completely free    
@@ -49,6 +51,29 @@ It makes use of Redis for storing session on backend
 | 5 | 6 |
 |------|-------|
 |<img src="ReadmeAssets/11.png" width="400"/>|<img src="ReadmeAssets/5.png" width="400"/>|
+
+### Get Started
+##### Django Development Server
+```
+git clone https://github.com/aryan29/Quizoo.git    
+cd Quizoo    
+git checkout dev  
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd quizoo
+python manage.py runserver
+```  
+##### Nginx Deployment Server
+```
+git clone https://github.com/aryan29/Quizoo.git    
+cd Quizoo    
+git checkout dev    
+sudo docker-compose -f docker-compose-deploy.yml up --build  
+```  
+
+### Contribution
+Don't be lazy:smile: clone this repo and start contributing     
 
 ## Contributors
 [Aryan Khandelwal](https://github.com/aryan29)    
