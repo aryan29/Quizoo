@@ -246,7 +246,8 @@ def GetQuestions(request, id):
         # person is just reloading the url show topmost question in list
         display_question = Questions.objects.get(id=int(li[0]))
 
-        opt = display_question.options_set.values_list("option", flat=True)
+        opt = display_question.options_set.values("id", "option")
+        print(opt)
         return render(request, 'question_view.html', {
             "quiz": quiz,
             "question_text": display_question.question_text,
@@ -260,14 +261,16 @@ def GetQuestions(request, id):
         print("Here we are")
         display_question = Questions.objects.get(id=int(li[0]))
         # increase score of this person if correct res
-        print(res.getlist('response[]'))
-        print(list(display_question.correctoptions_set.values_list("option", flat=True)))
-        x = checkResponse(res.getlist('response[]'), list(
+        # user_res = [int(x) for x in res.getlist('response[]')]
+        user_res = res.getlist('response[]')
+        zz = list(Options.objects.filter(
+            pk__in=user_res).values_list("option", flat=True))
+        x = checkResponse(zz, list(
             display_question.correctoptions_set.values_list("option", flat=True)))
         RecordedResponses.objects.create(
             whom=obj,
             question_num=int(li[0]),
-            responses=res.getlist('response[]')
+            responses=zz
         )
         print("Done till here")
         new_li = li[1:]
@@ -279,7 +282,8 @@ def GetQuestions(request, id):
         if(len(new_li) > 0):
             new_ques = Questions.objects.get(id=int(new_li[0]))
             new_opt = list(
-                new_ques.options_set.values_list("option", flat=True))
+                new_ques.options_set.values("id", "option"))
+            print(new_opt)
             return JsonResponse({
                 "question": new_ques.question_text,
                 "options": new_opt

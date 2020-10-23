@@ -61,7 +61,6 @@ class UsersGivingTest(models.Model):
 
 
 class RecordedResponses(models.Model):
-    # it should be one to one field btw
     whom = models.ForeignKey(UsersGivingTest, on_delete=models.CASCADE)
     question_num = models.SmallIntegerField()
     time = models.DateTimeField(auto_now_add=True)

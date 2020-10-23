@@ -114,7 +114,7 @@
 					{% for x in options%}
 					<div class="option">
 						<input type="checkbox" class="check_box" />
-						<h3 class="option-text">{{x|safe}}</h3>
+						<h3 class="option-text" id="{{x.id}}">{{x.option|safe}}</h3>
 					</div>
 					{% endfor %}
 				</div>
@@ -131,7 +131,7 @@
 				></i>
 			</button>
 		</div>
-		<video id="video" width="600" height="400"  autoplay></video>
+		<video id="video" width="600" height="400"  style="display:none" autoplay></video>
 	</body>
 </html>
 <script>
@@ -235,7 +235,7 @@ for(let i=0;i<x.length;i++)
     if(x[i].getElementsByClassName("check_box")[0].checked==true)
     {
         console.log(x[i])
-        li.push(x[i].getElementsByTagName("h3")[0].innerHTML)
+        li.push(x[i].getElementsByTagName("h3")[0].id)
     }
 }
 //Send this question reponse to the server
@@ -268,7 +268,8 @@ $.ajax({
             d.appendChild(opt);
             d.appendChild(ch);
             z.appendChild(d);
-            opt.innerHTML=res['options'][i];
+            opt.id=res['options'][i].id;
+            opt.innerHTML=res['options'][i].option;
         }
         }
     },
