@@ -415,12 +415,14 @@ def CheatingDetector(request):
     obj = UsersGivingTest.objects.filter(
         quiz__id=data['id'], user=user)[0]
     # # Save Image of this User Under his UsersGivingTest folder
-
-    img_data = data['imgBase64']
-    format, imgstr = img_data.split(';base64,')
-    ext = format.split('/')[-1]
-    file_name = "Cheat"+str(obj.id)+"."+ext
-    file = ContentFile(base64.b64decode(imgstr), name=file_name)
+    try:
+        img_data = data['imgBase64']
+        format, imgstr = img_data.split(';base64,')
+        ext = format.split('/')[-1]
+        file_name = "Cheat"+str(obj.id)+"."+ext
+        file = ContentFile(base64.b64decode(imgstr), name=file_name)
+    except:
+        file = "#"  # No file attached
     print("Cheating detected by "+user.username+"in quiz" +
           data['id']+" at time "+str(timezone.now()))
     try:

@@ -131,7 +131,7 @@
 				></i>
 			</button>
 		</div>
-		<video id="video" width="1024" height="768"  autoplay></video>
+		<video id="video" width="600" height="400"  autoplay></video>
 	</body>
 </html>
 <script>
@@ -300,8 +300,8 @@ function startVideo() {
         navigator.getUserMedia(
             {
                 video: {
-					height:768,
-					width:1024
+					height:400,
+					width:600
 				}
             },
             stream => video.srcObject = stream,
@@ -310,8 +310,8 @@ function startVideo() {
     }
     let notHere = 0, twoPerson = 0;
     const canvas = document.createElement('canvas');
-    canvas.height = 768;
-    canvas.width = 1024;
+    canvas.height = 400;
+    canvas.width = 600;
     video.addEventListener('play', () => {
         setInterval(async () => {
             if (video.srcObject.active == false) {
