@@ -77,6 +77,7 @@ sudo docker-compose -f docker-compose-deploy.yml up --build
 ### Contribution
 Don't be lazy:smile: clone this repo and start contributing     
 
+Hosted [here](quizoo.cf)  
 ## Contributors
 [Aryan Khandelwal](https://github.com/aryan29)    
 [Mukul Choudhury](https://github.com/Mukul-9)    
