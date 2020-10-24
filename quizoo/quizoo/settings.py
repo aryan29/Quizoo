@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = int(os.environ.get('DEBUG', 1))
 
 ALLOWED_HOSTS = ['quizoo.pythonanywhere.com',
-                 'localhost', '127.0.0.1', '0.0.0.0']
+                 'localhost', '127.0.0.1', '0.0.0.0','52.188.49.120','52.188.49.120.xip.io','quizoo.cf']
 
 
 # Application definition
@@ -99,11 +99,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == 1):
+if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == '1'):
     redis_path = 'redis:6379'
 else:
     redis_path = 'localhost:6379'
-
+print(redis_path)
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
@@ -149,7 +149,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 INTERNAL_IPS = [
     # ...
-    '127.0.0.1'
+    '127.0.0.1',
+    '52.188.49.120'
     # ...
 ]
 
@@ -189,9 +190,9 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_PASSWORD", 'passwordispassword')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_THUMBNAIL_SIZE = 'pillow'
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 LOGIN_REIDRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRES = True
