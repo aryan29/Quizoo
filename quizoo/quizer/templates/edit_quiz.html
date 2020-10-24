@@ -226,8 +226,8 @@
             })
         }
         function deleteobj(id) {
-            console.log('{{csrf_token}}')
-            console.log(id);
+            //console.log('{{csrf_token}}')
+            //console.log(id);
             $.ajax({
                 type: 'DELETE',
                 url: "/delete/" + id,
@@ -239,7 +239,7 @@
                     id: id,
                 },
                 success: function (res) {
-                    console.log(res);
+                    //console.log(res);
                     if (res == 200)
                         location.reload();
                 }
@@ -261,25 +261,25 @@
                     for (let x = 0; x < val; x++) //Val signifies the current list of visible options
                      {
                         let opt_val=CKEDITOR.instances['id_question_text'+x].getData();
-                        console.log(opt_val);
+                       // console.log(opt_val);
                         if (opt_val == "") {
                             fl = 1;
                         }
                         l1.push(opt_val)
                     }
-                    console.log("Now printing correct ones");
+                    //console.log("Now printing correct ones");
                     for (let x = 0; x < corr.length; x++) {
                         //get id of this element in li
 
                         let obj_id=corr[x].getElementsByTagName("textarea")[0].id;
                         let opt_val=CKEDITOR.instances[obj_id].getData();
-                        console.log(opt_val)
+                        //console.log(opt_val)
                         l2.push(opt_val)
                     }
 
                     if (fl == 0) {
-                       console.log(l1);
-                        console.log(l2);
+                       //console.log(l1);
+                        //console.log(l2);
                         //Make an ajax request
                         $.post(
                             "",
@@ -289,7 +289,7 @@
                                 "correct_options": l2
                             },
                             function (data, status) {
-                                console.log("Data Added in DB");
+                               // console.log("Data Added in DB");
                                 if (data == 200 && status == "success") {
                                     //location.reload();
                                     //console.log("Add it dynamically here as it is added in db");
@@ -298,12 +298,12 @@
                                 
                                 }
                                 else {
-                                    console.log("Something went wrong");
+                                   // console.log("Something went wrong");
                                 }
                             }
 
                         )
-                        console.log("Making an ajax request");
+                        //console.log("Making an ajax request");
                     }
                     else
                         //Fnon.Alert.Light("Options can't be empty",'Alert Title','Submit',()=>{});
@@ -320,7 +320,7 @@
         function appenddata(q,a,b){
             l=document.getElementById("all");
             d=document.createElement('div');
-            console.log("Well till here");
+           // console.log("Well till here");
             var it=`
                <h5 style="margin-bottom: 10px;background-color: #475edf; text-align: center; color: #475edf; ">:</h5>
                 <span id="close" onclick="deleteobj({{x.question.id}})"> <i class="far fa-trash-alt"></i> </span>
@@ -335,8 +335,8 @@
                 for(let x=0;x<b.length;x++)
                 it+=`<span class="badge options-text options-text-correct">`+b[x]+`</span>`;
                 it+=`<br><br>`
-                console.log("got it");
-                console.log(it)
+                //console.log("got it");
+                //console.log(it)
                 d.className="already-made-questions";
                 d.innerHTML=it;
             l.appendChild(d);
@@ -350,7 +350,7 @@
             {
                 CKEDITOR.instances['id_question_text'+i].setData("");
                 let elem=li[i];
-                console.log(elem);
+                //console.log(elem);
                 elem.style.display="none";
                 elem.className="wrong django-ckeditor-widget";
                 elem.removeChild(elem.lastElementChild);

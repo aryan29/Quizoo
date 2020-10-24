@@ -216,9 +216,9 @@ table{
 
 </html>
 <script>
-console.log("{{quiz.strict_mode|yesno:'true,false'}}");
+//console.log("{{quiz.strict_mode|yesno:'true,false'}}");
 let li=document.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-console.log("{{quiz.strict_mode}}");
+//console.log("{{quiz.strict_mode}}");
 li[0].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.randomizer|yesno:'true,false'}};
 li[1].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.one_question_per_page|yesno:'true,false'}};
 li[2].getElementsByTagName("label")[0].getElementsByTagName("input")[0].checked={{quiz.resume_later|yesno:'true,false'}};
@@ -241,7 +241,7 @@ for(let i=0;i<l.length;i++)
 l1.push(document.getElementById("instructions").value)//Instructions of quiz
 l1.push(document.getElementById("start_time").value);
 l1.push(document.getElementById("end_time").value);
-console.log(document.getElementById("end_time").value);
+//console.log(document.getElementById("end_time").value);
 $.ajax({
     type:"POST",
     url:"",
@@ -278,7 +278,7 @@ window.addEventListener("load", function() {
                       (minute < 10 ? "0" + minute.toString() : minute) +
                       utcString.substring(16,19);
     datetimeField = document.getElementById("start_time");
-    console.log(localDatetime);
+    //console.log(localDatetime);
     datetimeField.value = localDatetime;
     year = parseInt("{{end.year}}")
     month = parseInt("{{end.month}}")

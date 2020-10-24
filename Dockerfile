@@ -15,5 +15,8 @@ RUN mkdir -p /vol/web/static
 RUN adduser -D user
 RUN chown -R user:user /vol
 RUN chmod -R 777 /vol/web
+RUN apk add --no-cache tzdata
+ENV TZ Asia/Kolkata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 USER user
 CMD ["entrypoint.sh"]

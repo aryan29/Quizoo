@@ -64,7 +64,7 @@ let sum=0;
 {% for x in list%}
 sum+={{x.score}};
 {% endfor %}
-console.log(sum)
+//console.log(sum)
 let avgScore=sum/("{{list|length}}");
 document.getElementById("avg").innerText=avgScore
 

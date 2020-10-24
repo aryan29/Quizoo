@@ -94,7 +94,7 @@ h1 {
 
 <script>
   function copyToClipboard(text) {
-      console.log("Comign in here")
+      //console.log("Comign in here")
     var input = document.createElement('input');
     input.setAttribute('value', text);
     document.body.appendChild(input);
@@ -105,11 +105,11 @@ h1 {
   }
   window.onload = function() {
   //your script here
-    console.log("{{list|length}}")
+   // console.log("{{list|length}}")
   if("{{list | length}}"==0)
   {
-    console.log("Inside here");
-    console.log(document.getElementsByTagName("BODY")[0]);
+    //console.log("Inside here");
+    //console.log(document.getElementsByTagName("BODY")[0]);
     document.getElementsByTagName("BODY")[0].innerHTML="";
     document.getElementsByTagName("BODY")[0].innerHTML=`<div class="title"><h1>You haven't created any quiz yet</h1></div>`
   }
