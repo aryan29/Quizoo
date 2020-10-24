@@ -54,4 +54,4 @@ coverage.xml
 docs/_build/
 
 #database
-# *.sqlite3
+*.sqlite3
