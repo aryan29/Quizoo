@@ -163,7 +163,7 @@ INTERNAL_IPS = [
 
 # USE_L10N = True
 
-USE_TZ = True
+# USE_TZ = True
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
