@@ -173,7 +173,7 @@ TIME_ZONE = 'Asia/Kolkata'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 CRONJOBS = [
     ('*/10 * * * *', 'quizer.cron.my_scheduled_job',
-     '>> /home/aryan/Documents/quizooo/quizoo/file.log')  # Run this cron job every 10 minutes
+     '>> file.log')  # Run this cron job every 10 minutes
 ]
 CRONTAB_COMMAND_SUFFIX = '2>&1'
 STATIC_URL = '/static/static/'

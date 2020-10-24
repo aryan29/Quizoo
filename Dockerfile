@@ -2,6 +2,7 @@ FROM python:3.7.4-alpine
 ENV PATH="/scripts:${PATH}"
 COPY ./requirements.txt /requirements.txt
 RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
+RUN apk --update add build-base jpeg-dev zlib-dev
 RUN pip install -r /requirements.txt
 RUN apk del .tmp
 RUN mkdir quizoo

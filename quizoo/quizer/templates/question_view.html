@@ -290,7 +290,7 @@ function videoPoctoring() {
    // console.log(v)
     Promise.all([
         faceapi.nets.mtcnn.loadFromUri(v),
-		faceapi.nets.ssdMobilenetv1.loadFromUri(v)
+		//faceapi.nets.ssdMobilenetv1.loadFromUri(v)
 
     ]).then(
         startVideo
@@ -318,10 +318,10 @@ function startVideo() {
             if (video.srcObject.active == false) {
                 window.close();
             }
-			const d1 = await faceapi.detectAllFaces(video);
+			//const d1 = await faceapi.detectAllFaces(video);
             const d2 = await faceapi.detectAllFaces(video, new faceapi.MtcnnOptions());
 			//console.log(d2.length)
-            if (d1.length == 0 && d2.length==0) {
+            if (d2.length==0) {
                 notHere += 1;
                 if (notHere > 60) {
                     notHere = 0;
@@ -342,7 +342,7 @@ function startVideo() {
 
                 }
             }
-            else if (d1.length >= 2 && d2.length>=2) {
+            else if (d2.length>=2) {
                 twoPerson += 1;
                 if (twoPerson > 10) {
                     twoPerson = 0;
