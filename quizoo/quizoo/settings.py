@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == 1):
+if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == '1'):
     redis_path = 'redis:6379'
 else:
     redis_path = 'localhost:6379'
