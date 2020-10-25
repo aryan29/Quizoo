@@ -31,14 +31,14 @@ def sendmail(mails):
 
 def send_email_creator(mail):
     subject = "Quiz Result"
-    sender_mail = "ctrlaltelitesih2020@gmail.com"
+    sender_mail = "Quizoo <Quizoo@em9637.quizoo.cf>"
     body = "The test you conducted is over check the results at "+"url"
     sendmail([(subject, body, sender_mail, [mail])])
 
 
 def send_email_testTakers(mails):
     subject = "Quiz Results"
-    sender_mail = "ctrlaltelitesih2020@gmail.com"
+    sender_mail = "Quizoo <Quizoo@em9637.quizoo.cf>"
     li = []
     for mail in mails:
         # Body consist of score of this student
