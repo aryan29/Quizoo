@@ -8,7 +8,7 @@ services:
             - static_data:/vol/web
         environment:
             - SECRET_KEY=8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*
-            - DEBUG=1
+            - DEBUG=0
             - EMAIL_HOST_USER=apikey
             - EMAIL_HOST_PASSWORD=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
             - AM_I_IN_A_DOCKER_CONTAINER=1

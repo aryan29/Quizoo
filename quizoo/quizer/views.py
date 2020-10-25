@@ -184,7 +184,7 @@ def QuizStart(request, id):
         # for user giving particular test
         print("Allowing user to give test")
         # Setting all questions for particular quiz in cache for 3hours
-        questions = cache.get(f'quiz{quiz}')
+        # questions = cache.get(f'quiz{quiz}')
         if questions is None:
             print("Storing in cache")
             questions = list(quiz.questions_set.all())

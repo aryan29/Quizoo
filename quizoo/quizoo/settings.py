@@ -25,10 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get(
     'SECRET_KEY', '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG', 1))
+print(os.environ.get('SECRET_KEY',
+                     '8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*'))
+DEBUG = int(os.environ.get('DEBUG', 0))
 
 ALLOWED_HOSTS = ['quizoo.pythonanywhere.com',
-                 'localhost', '127.0.0.1', '0.0.0.0','52.188.49.120','52.188.49.120.xip.io','quizoo.cf']
+                 'localhost', '127.0.0.1', '0.0.0.0', '52.188.49.120', '52.188.49.120.xip.io', 'quizoo.cf']
 
 
 # Application definition
@@ -99,11 +101,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == '1'):
     redis_path = 'redis:6379'
 else:
     redis_path = 'localhost:6379'
+print(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0))
 print(redis_path)
+redis_path = 'redis:6379'
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
@@ -158,7 +163,6 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 
-
 # USE_I18N = True
 
 # USE_L10N = True
@@ -172,8 +176,8 @@ TIME_ZONE = 'Asia/Kolkata'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 CRONJOBS = [
-    ('*/10 * * * *', 'quizer.cron.my_scheduled_job',
-     '>> file.log')  # Run this cron job every 10 minutes
+    ('*/1 * * * *', 'quizer.cron.my_scheduled_job',
+     '>> /quizoo/file.log')  # Run this cron job every 10 minutes
 ]
 CRONTAB_COMMAND_SUFFIX = '2>&1'
 STATIC_URL = '/static/static/'
@@ -182,12 +186,15 @@ STATIC_ROOT = '/vol/web/static/'
 MEDIA_ROOT = '/vol/web/media/'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST_USER = os.environ.get(
-    "EMAIL_HOST_USER", 'ctrlaltelitesih2020@gmail.com')
+    "EMAIL_HOST_USER", 'apikey')
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", 'passwordispassword')
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "EMAIL_HOST_PASSWORD", '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')
+print(EMAIL_HOST_USER)
+print(EMAIL_HOST_PASSWORD)
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_THUMBNAIL_SIZE = 'pillow'
