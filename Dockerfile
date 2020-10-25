@@ -1,10 +1,9 @@
-FROM python:3.7.4-alpine
+FROM ubuntu:18.04
 ENV PATH="/scripts:${PATH}"
 COPY ./requirements.txt /requirements.txt
-RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
-RUN apk --update add build-base jpeg-dev zlib-dev
-RUN pip install -r /requirements.txt
-RUN apk del .tmp
+RUN apt-get update
+RUN apt-get -y install python3-pip
+RUN pip3 install -r /requirements.txt
 RUN mkdir quizoo
 COPY ./quizoo /quizoo
 RUN chmod -R 777 /quizoo
@@ -13,11 +12,16 @@ COPY ./scripts /scripts
 RUN chmod +x /scripts/*
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
-RUN adduser -D user
+RUN adduser user
 RUN chown -R user:user /vol
 RUN chmod -R 777 /vol/web
-RUN apk add --no-cache tzdata
-ENV TZ Asia/Kolkata
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -qq install tzdata
+RUN apt-get -qq install systemd
+ENV TZ=Asia/Kolkata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-USER user
+RUN apt-get -qq install apt-utils
+RUN apt-get update
+RUN apt-get install cron
+RUN apt-get install nano
 CMD ["entrypoint.sh"]

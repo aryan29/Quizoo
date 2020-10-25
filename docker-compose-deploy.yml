@@ -9,7 +9,7 @@ services:
         environment:
             - SECRET_KEY=8ahn89dub6$ak#5c(m--#m7vqzhfhvm5h+uq05t@mx*j9n(j8*
             - DEBUG=1
-            - EMAIL_HOST_USER=ctrlalteliteshi2020@gmail.com
+            - EMAIL_HOST_USER=ctrlaltelitesih2020@gmail.com
             - EMAIL_HOST_PASSWORD=passwordispassword
             - AM_I_IN_A_DOCKER_CONTAINER=1
         links:
