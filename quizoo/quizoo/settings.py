@@ -183,7 +183,7 @@ MEDIA_ROOT = '/vol/web/media/'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST_USER = os.environ.get(
     "EMAIL_HOST_USER", 'ctrlaltelitesih2020@gmail.com')
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Put your password here and ensure no double verification on gmail account & less secured apps allowed
