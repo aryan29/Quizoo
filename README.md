@@ -77,7 +77,7 @@ sudo docker-compose -f docker-compose-deploy.yml up --build
 ### Contribution
 Don't be lazy:smile: clone this repo and start contributing     
 
-
+Video Demo [here](https://www.dailymotion.com/video/x7x63hk)
 ## Contributors
 [Aryan Khandelwal](https://github.com/aryan29)    
 [Mukul Choudhury](https://github.com/Mukul-9)    
