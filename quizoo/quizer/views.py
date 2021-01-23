@@ -185,14 +185,15 @@ def QuizStart(request, id):
         print("Allowing user to give test")
         # Setting all questions for particular quiz in cache for 3hours
         # questions = cache.get(f'quiz{quiz}')
-        if questions is None:
-            print("Storing in cache")
-            questions = list(quiz.questions_set.all())
-            cache.set(
-                f"quiz{quiz}",
-                questions,
-                60*60*3
-            )
+        # if questions is None:
+        #     print("Storing in cache")
+        #     questions = list(quiz.questions_set.all())
+        #     cache.set(
+        #         f"quiz{quiz}",
+        #         questions,
+        #         60*60*3
+        #     )
+        questions = list(quiz.questions_set.all())
 
         # If randomizer is on shuffle questions
         if(quiz.randomizer):
