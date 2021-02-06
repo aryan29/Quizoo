@@ -99,20 +99,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-if(os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', 0) == '1'):
-    redis_path = 'redis:6379'
-else:
-    redis_path = 'localhost:6379'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': redis_path,
-        'OPTIONS': {
-            'DB': 1,
-        },
-    },
-}
+
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
