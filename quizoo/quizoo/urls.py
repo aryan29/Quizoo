@@ -25,7 +25,7 @@ from django_otp.admin import OTPAdminSite
 admin.site.__class__ = OTPAdminSite
 urlpatterns = [
     path('', HomePage, name='redirect'),
-    path('helloadmin/', admin.site.urls),
+    path('helloadmin/', admin.site.urls,name='admin-panel'),
     path('accounts/', include('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('login/', LoginView.as_view(), name='login-view'),
@@ -35,8 +35,8 @@ urlpatterns = [
     path('edit/<int:id>/', EditQuiz, name='edit-quiz'),
     path('settings/<int:id>/', QuizSettings, name='quiz-settings'),
     path('quiz/<int:id>/', QuizStart, name='quiz-start'),
-    path('give-quiz/', GiveQuiz, name='give quiz'),
-    path('quiz/start/<int:id>/', GetQuestions, name='get-questions'),
+    path('give-quiz/', GiveQuiz, name='give-quiz'),
+    path('quiz/start/<int:id>/give', GetQuestions, name='get-questions'),
     path('completed/', SeeCompletedQuiz, name='completed-quizes'),
     path('analytics/<int:id>/', SeeAnalytics, name='analytics'),
     path('compareRes/<int:id>/', CompareResponses, name='compare-responses'),
